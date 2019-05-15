@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LSX.PCService", "LSX.PCService\LSX.PCService.csproj", "{9AFA72A4-7414-462C-9200-B316ACC8864E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HenkTcp", "HenkTcp\HenkTcp.csproj", "{DF5BC137-AFCB-482F-8ADD-D3F0E99FE772}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9AFA72A4-7414-462C-9200-B316ACC8864E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AFA72A4-7414-462C-9200-B316ACC8864E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AFA72A4-7414-462C-9200-B316ACC8864E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AFA72A4-7414-462C-9200-B316ACC8864E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF5BC137-AFCB-482F-8ADD-D3F0E99FE772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF5BC137-AFCB-482F-8ADD-D3F0E99FE772}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF5BC137-AFCB-482F-8ADD-D3F0E99FE772}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF5BC137-AFCB-482F-8ADD-D3F0E99FE772}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

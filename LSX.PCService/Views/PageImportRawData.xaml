@@ -1,0 +1,94 @@
+﻿<Page x:Class="LSX.PCService.Views.PageImportRawData"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      
+      xmlns:prism="http://prismlibrary.com/"
+    xmlns:local="clr-namespace:LSX.PCService.VeiwModels"
+      xmlns:Views="clr-namespace:LSX.PCService.Views"
+      prism:ViewModelLocator.AutoWireViewModel="True"
+      mc:Ignorable="d" 
+      ShowsNavigationUI="False"
+      d:DesignHeight="300" d:DesignWidth="600"
+	Title="订单导入">
+    <Page.Resources>
+        <local:ConverterCurPageItems x:Key="converterCurPageItems"/>
+    </Page.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--标题栏-->
+        <Border BorderBrush="Lavender" BorderThickness="3" CornerRadius="5" Background="Orange">
+            <TextBlock FontSize="40" Text="{Binding RelativeSource={RelativeSource AncestorType=Page},Path=Title}" HorizontalAlignment="Center"/>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.ColumnSpan="2">
+                <ToolBar MinHeight="30" ToolBarTray.IsLocked="True">
+                    <Button Content="1.导入总捡单" Command="{Binding ImportRawOrderCmd}" FontSize="20"/>
+                    <Button Content="2.导入质检单" Margin="10,0" Command="{Binding ImportRawCheckCmd}" FontSize="20"/>
+                </ToolBar>
+            </StackPanel>
+            <!--总捡单-->
+            <Expander  Grid.Row="1" IsExpanded="True">
+                <Expander.Header>
+                    <Border>
+                        <!--BorderThickness="2" CornerRadius="6" BorderBrush="Orange">-->
+                        <TextBlock Text="总捡单" TextWrapping="Wrap"  Padding="0" LineHeight="0.1" FontSize="20" />
+                        <!--<Button Content="Hiden" Background="Aqua" BorderBrush="Blue" BorderThickness="10"/>-->
+                    </Border>
+                </Expander.Header>
+                <Grid >
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Border BorderBrush="AliceBlue" BorderThickness="3" CornerRadius="4" Background="Beige">
+                        <ToolBarPanel Orientation="Horizontal" >
+                            <TextBlock Text="总记录数量" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding RawTotalCount}" VerticalAlignment="Center" Margin="5,0"/>
+                            <TextBlock Text="每页显示数量" VerticalAlignment="Center" Margin="5,0"/>
+                            <TextBox Text="{Binding RawPageSize,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Margin="5,0,5,0"/>
+                            <Button Content=" 刷新" Command="{Binding RawViewRefreshCmd}" Margin="10,0"/>
+                            <TextBlock Text="当前页" Margin="5,0" VerticalAlignment="Center" />
+                            <ComboBox ItemsSource="{Binding RawTotalPages,Converter={StaticResource ResourceKey=converterCurPageItems}}" SelectedItem="{Binding RawCurPageId}" >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="SelectionChanged">
+                                        <i:InvokeCommandAction Command="{Binding RawCurPageSelectItemChangedCmd}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ComboBox>
+                            <TextBlock Text="/" Margin="1,0,5,0" VerticalAlignment="Center" />
+                            <TextBlock Text="{Binding RawTotalPages}" VerticalAlignment="Center" />
+                        </ToolBarPanel>
+                    </Border>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding RawList}" Margin="1"   IsReadOnly="True" MaxHeight="{Binding RelativeSource={RelativeSource AncestorType=Grid,AncestorLevel=1},Path=ActualHeight}"/>
+                </Grid>
+            </Expander>
+            <ToolBar Grid.Row="2" ToolBarTray.IsLocked="True" Grid.ColumnSpan="2">
+                <Border BorderBrush="AliceBlue" BorderThickness="2" CornerRadius="4" Background="Azure">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="进度" Margin="2,0"/>
+                        <TextBlock Text="{Binding CurrentProgress}" FontSize="12"/>
+                        <TextBlock Text="/" Margin="1,0" />
+                        <TextBlock Text="{Binding MaxProgress}" FontSize="12"/>
+                    </StackPanel>
+                </Border>
+                <ProgressBar Width="120"  Value="{Binding CurrentProgress}" Maximum="{Binding MaxProgress}" />
+            </ToolBar>
+        </Grid>
+    </Grid>
+    
+</Page>
