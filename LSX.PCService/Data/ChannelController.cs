@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using LSX.PCService.Models;
-using HenkTcp;
 using HenkTcp;
 using System.Net.Sockets;
 namespace LSX.PCService.Data
@@ -97,7 +92,7 @@ namespace LSX.PCService.Data
 
             //发送 ch对应的通道消息
             SendToChannel(ch.Id);
-
+            
             this.order.Final_channel = ch.Id;
             this.order.State_id = (int)EnumOrderStatus.已发送;
             Db.Context.Update<OrderRunning>(this.order);
@@ -129,6 +124,7 @@ namespace LSX.PCService.Data
                 State_id = (int)EnumOrderStatus.创建订单
             });
             AddLogToDb("CreateOrder");
+            this.order = run;
             return run;
         }
 

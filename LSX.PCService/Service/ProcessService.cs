@@ -78,6 +78,7 @@ namespace LSX.PCService.Service
                     //发送亮灯消息
                     lightQueue.Send(new LightMessage()
                     {
+                        channelId=2,
                         orderId = order.Id
                     });
                 }
@@ -92,6 +93,9 @@ namespace LSX.PCService.Service
             {
                 var msg = lightQueue.Receive();
                 if (null == msg) continue;
+
+                //检查数据库中 orderId 对应的订单状态
+            
 
                 lightManager.AutoSetLight(msg.channelId, msg.orderId);
 

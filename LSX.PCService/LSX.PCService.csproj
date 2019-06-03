@@ -136,6 +136,10 @@
       <HintPath>..\packages\Unity.Container.5.8.11\lib\net46\Unity.Container.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="websocket-sharp, Version=1.0.1.0, Culture=neutral, PublicKeyToken=5660b08a1845a91e, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebSocketSharp-netstandard.1.0.1\lib\net45\websocket-sharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -145,6 +149,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\CwmsOrderHelper.cs" />
     <Compile Include="Data\MainEntry.cs" />
     <Compile Include="Data\LightSender.cs" />
     <Compile Include="Data\OrderRawDataAnalyze.cs" />
@@ -155,18 +160,25 @@
     <Compile Include="Models\OrderRawAnalyzed.cs" />
     <Compile Include="Models\RawAnalyze.cs" />
     <Compile Include="Models\ViewRawAnalyzed.cs" />
+    <Compile Include="Notifications\INotificationTraffic.cs" />
+    <Compile Include="Notifications\ObservableCollection.cs" />
+    <Compile Include="Notifications\TrafficOrderNotification.cs" />
     <Compile Include="Service\ProcessService.cs" />
     <Compile Include="SingletonBase.cs" />
     <Compile Include="ViewModels\ConverterCurPageItems.cs" />
     <Compile Include="ViewModels\ConverterIsSinglePalletColor.cs" />
     <Compile Include="ViewModels\ConverterIsSinglePalletText.cs" />
+    <Compile Include="ViewModels\ConverterNeedCheckText.cs" />
     <Compile Include="ViewModels\ConverterProgress.cs" />
     <Compile Include="ViewModels\PageImportRawDataViewModel.cs" />
     <Compile Include="ViewModels\PageLpnBindingC09ViewModel.cs" />
     <Compile Include="ViewModels\PagePalletInputViewModel.cs" />
     <Compile Include="ViewModels\PageScanCarIdViewModel.cs" />
+    <Compile Include="ViewModels\PopupScanPalletViewModel.cs" />
+    <Compile Include="ViewModels\PopupScanTrafficOrderViewModel.cs" />
     <Compile Include="ViewModels\WindowMainViewModel.cs" />
     <Compile Include="ViewModels\WindowRegionMainViewModel.cs" />
+    <Compile Include="ViewModels\WindowStartupViewModel.cs" />
     <Compile Include="Views\PageChannelControl.xaml.cs">
       <DependentUpon>PageChannelControl.xaml</DependentUpon>
     </Compile>
@@ -176,17 +188,41 @@
     <Compile Include="Views\PageLpnBindingC09.xaml.cs">
       <DependentUpon>PageLpnBindingC09.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PageOnline.xaml.cs">
+      <DependentUpon>PageOnline.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PagePalletInput.xaml.cs">
       <DependentUpon>PagePalletInput.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PageScanCarId.xaml.cs">
       <DependentUpon>PageScanCarId.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PopupScanPallet.xaml.cs">
+      <DependentUpon>PopupScanPallet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopupScanTrafficOrder.xaml.cs">
+      <DependentUpon>PopupScanTrafficOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopupWindowScan.xaml.cs">
+      <DependentUpon>PopupWindowScan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowDispatch.xaml.cs">
+      <DependentUpon>WindowDispatch.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowError.xaml.cs">
+      <DependentUpon>WindowError.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WindowMain.xaml.cs">
       <DependentUpon>WindowMain.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WindowOnline.xaml.cs">
+      <DependentUpon>WindowOnline.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\WindowRegionMain.xaml.cs">
       <DependentUpon>WindowRegionMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowStartup.xaml.cs">
+      <DependentUpon>WindowStartup.xaml</DependentUpon>
     </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -235,6 +271,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\PageOnline.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PagePalletInput.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -243,11 +283,39 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\PopupScanPallet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PopupScanTrafficOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PopupWindowScan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowDispatch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowError.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WindowMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\WindowOnline.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\WindowRegionMain.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WindowStartup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -37,7 +37,7 @@
                                 <GradientStop Color="#FFFAE207" Offset="0.342"/>
                             </LinearGradientBrush>
                         </Grid.Background>
-                        <Image Source="../images/dhl_logo.gif" Height="35"/>
+                        <!--<Image Source="../images/dhl_logo.gif" Height="35"/>-->
 
                         <StackPanel  Grid.Column="1"  Orientation="Horizontal" FlowDirection="RightToLeft">
                             <Button x:Name="buttonQuit"  FontSize="20" Click="buttonQuit_Click" ToolTip="退出" Background="{x:Null}">

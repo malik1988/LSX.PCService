@@ -36,13 +36,20 @@ namespace LSX.PCService.ViewModels
         }
 
 
+        private bool? _NeedCheck;
+
+        public bool? NeedCheck
+        {
+            get { return _NeedCheck; }
+            set { SetProperty(ref _NeedCheck, value); }
+        }
 
         public PagePalletInputViewModel()
         {
             PalletIdKeyEnter = new DelegateCommand(() =>
             {
                 IsSinglePallet = DbHelper.IsSinglePallet(PalletId);
-
+               // NeedCheck=DbHelper.
             });
         }
     }

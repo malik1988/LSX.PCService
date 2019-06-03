@@ -141,7 +141,6 @@ namespace LSX.PCService.ViewModels
         }
 
 
-        ProcessService main;
 
         public PageImportRawDataViewModel()
         {

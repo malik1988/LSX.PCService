@@ -65,6 +65,7 @@ namespace LSX.PCService.Data
 
         public ErrorCode AutoSetLight(int channelId, int orderId)
         {
+            //1. 获取订单ID对应的
             return ErrorCode.成功;
         }
 

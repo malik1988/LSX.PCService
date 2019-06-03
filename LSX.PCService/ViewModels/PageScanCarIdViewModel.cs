@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Prism.Mvvm;
 using Prism.Commands;
 using LSX.PCService.Models;
+using System.Windows;
+using LSX.PCService.Data;
 
 namespace LSX.PCService.ViewModels
 {
@@ -41,9 +43,16 @@ namespace LSX.PCService.ViewModels
             OrderList = new List<OrderRawAnalyzed>();
             CarIdEnter = new DelegateCommand(() =>
             {//1.检查是否存在
-                //2.提示确认开始订单
-                //3.开始车牌对应的所有订单
+                if (DbHelper.IsCarIdExist(CarId))
+                {
+                    //2.提示确认开始订单
+                    //3.开始车牌对应的所有订单
 
+                }
+                else
+                {
+                    MessageBox.Show("无效车牌号，车牌号不存在");
+                }
             });
         }
     }

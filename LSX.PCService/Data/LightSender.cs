@@ -77,7 +77,7 @@ namespace LSX.PCService.Data
                 log = "设置" + on.ToString() + "失败" + " :按灯控制_发送灯后超时未收到应答";
                 retCode = ErrorCode.按灯控制_发送灯后超时未收到应答;
             }
-
+            logger.Info(log);
             return retCode;
         }
 

@@ -22,7 +22,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="扫描车牌号" FontSize="20" Margin="5"/>
+                    <TextBlock Text="输入车牌号" FontSize="20" Margin="5"/>
                     <TextBox Text="{Binding CarId,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" FontSize="20" Margin="5">
                         <TextBox.InputBindings>
                             <KeyBinding Key="Enter" Command="{Binding CarIdEnter}"/>

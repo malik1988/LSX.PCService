@@ -13,6 +13,7 @@
     <Page.Resources>
         <viewmodels:ConverterIsSinglePalletText x:Key="ConverterIsSinglePalletText"/>
         <viewmodels:ConverterIsSinglePalletColor x:Key="ConverterIsSinglePalletColor"/>
+        <viewmodels:ConverterNeedCheckText x:Key="ConverterNeedCheckText"/>
     </Page.Resources>
     <Grid>
         <StackPanel>
@@ -39,6 +40,8 @@
                     </TextBox>
                     <TextBlock Text="是否整托"  FontSize="20" Width="auto" Grid.Column="0" Grid.Row="1" Margin="5"/>
                     <TextBlock Text="{Binding IsSinglePallet,Converter={StaticResource ResourceKey=ConverterIsSinglePalletText}}" FontSize="30" Background="{Binding IsSinglePallet,Converter={StaticResource ResourceKey=ConverterIsSinglePalletColor}}" Grid.Column="1" Grid.Row="1"  Margin="5"/>
+                    <TextBlock Text="是否检验"  FontSize="20" Width="auto" Grid.Column="0" Grid.Row="2" Margin="5"/>
+                    <TextBlock Text="{Binding NeedCheck,Converter={StaticResource ResourceKey=ConverterNeedCheckText}}" FontSize="30" Background="{Binding NeedCheck,Converter={StaticResource ResourceKey=ConverterIsSinglePalletColor}}" Grid.Column="1" Grid.Row="2"  Margin="5"/>
                 </Grid>
             </Border>
         </StackPanel>

@@ -103,5 +103,10 @@ namespace LSX.PCService.Data
         {
             return Db.Context.Query<LpnC09>().ToList();
         }
+
+        public static bool IsCarIdExist(string carId)
+        {
+            return false;
+        }
     }
 }

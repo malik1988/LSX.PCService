@@ -9,6 +9,7 @@ using Prism.Ioc;
 using Prism.Unity;
 
 using LSX.PCService.Views;
+using LSX.PCService.Service;
 
 namespace LSX.PCService
 {
@@ -17,9 +18,17 @@ namespace LSX.PCService
     /// </summary>
     public partial class App : PrismApplication
     {
+
+        ProcessService main;
+        public App()
+            : base()
+        {
+            main = ProcessService.Instance;
+            main.Start();
+        }
         protected override Window CreateShell()
         {
-            return Container.Resolve<WindowRegionMain>(); 
+            return Container.Resolve<WindowRegionMain>();
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -30,5 +39,7 @@ namespace LSX.PCService
             containerRegistry.RegisterForNavigation<PageLpnBindingC09>();
             containerRegistry.RegisterForNavigation<PageScanCarId>();
         }
+
+
     }
 }
