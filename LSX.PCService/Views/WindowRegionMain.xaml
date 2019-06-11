@@ -21,6 +21,13 @@
                 </prism:PopupWindowAction.WindowContent>
             </prism:PopupWindowAction>
         </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding PopupBindingLpnRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowContent >
+                    <Views:PopupBindingLpn/>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
     <Grid>
         <Grid.ColumnDefinitions>
@@ -40,6 +47,7 @@
             <Button Content="5.LPN绑定09码"  Command="{Binding NavigateCommand}" CommandParameter="PageLpnBindingC09"  Margin="5"/>
             <Button Content="扫描发货单号" Command="{Binding CustomPopupCommand}"/>
             <Button Content="扫码托盘号" Command="{Binding PopupScanPalletCommand}"/>
+            <Button Content="扫码托盘号" Command="{Binding PopupBindingLpnCommand}"/>
         </StackPanel>
         <Frame Grid.Row="1" prism:RegionManager.RegionName="ContentRegion" NavigationUIVisibility="Hidden" Grid.ColumnSpan="2" Margin="0,0,-0.4,30" Grid.RowSpan="2"/>
     </Grid>

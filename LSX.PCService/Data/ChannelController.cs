@@ -36,7 +36,13 @@ namespace LSX.PCService.Data
             string str = e.MessageString;
             NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
             logger.Info("server_DataReceived:" + str);
+
             if (null == str) return;
+
+            //TODO 
+            //接收到货物到达通道消息
+            BoxInChannelInputQueue boxQueue = new BoxInChannelInputQueue();
+            boxQueue.Send(new BoxInChannelMessage() { channelId = 1 });
         }
 
         public void SendToChannel(int channelId)
@@ -94,8 +100,7 @@ namespace LSX.PCService.Data
             SendToChannel(ch.Id);
             
             this.order.Final_channel = ch.Id;
-            this.order.State_id = (int)EnumOrderStatus.已发送;
-            Db.Context.Update<OrderRunning>(this.order);
+           
 
             AddLogToDb("Set Channel " + ch.Name + errlog);
 
@@ -121,7 +126,7 @@ namespace LSX.PCService.Data
             {
                 Raw_id = raw.Id,
                 Update_time = DateTime.Now,
-                State_id = (int)EnumOrderStatus.创建订单
+                //State_id = (int)EnumOrderStatus.创建订单
             });
             AddLogToDb("CreateOrder");
             this.order = run;

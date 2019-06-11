@@ -10,103 +10,98 @@ namespace LSX.PCService.Data
 {
     enum EnumChannel : int
     {
-        道口1 = 1,
-        道口2,
+        正常道口 = 1,
         异常道口
     }
 
-    enum EnumOrderStatus : int
-    {
-        创建订单 = 1,
-        已发送,
 
-        已完成
-    }
     class DbHelper
     {
-        public static void InitLights()
-        {
-            EmptyTable("light");
-        }
-        //<summary>
-        //将枚举类型 EnumChannel写入数据库Channel表中
-        //</summary>
-        public static void InitChannel()
-        {
-            EmptyTable("Channel");
-            foreach (var x in Enum.GetValues(typeof(EnumChannel)))
-            {
-                Channel c = new Channel()
-                {
-                    Id = (int)x,
-                    Name = ((EnumChannel)x).ToString(),
-                    Special = false
-                };
-                if ((EnumChannel)x == EnumChannel.异常道口)
-                    c.Special = true;
-
-                Db.Context.Insert<Channel>(c);
-            }
-        }
-
-        public static void InitOrderStatus()
-        {
-            EmptyTable("Order_Status");
-            foreach (var x in Enum.GetValues(typeof(EnumOrderStatus)))
-            {
-                OrderStatus c = new OrderStatus()
-                {
-                    Id = (int)x,
-                    Status = ((EnumOrderStatus)x).ToString(),
-                };
-
-                Db.Context.Insert<OrderStatus>(c);
-            }
-        }
-
-        public static int EmptyTable(string name)
-        {
-            return Db.Context.Session.ExecuteNonQuery(string.Format("SET FOREIGN_KEY_CHECKS = 0;truncate {0}; SET FOREIGN_KEY_CHECKS = 1; ", name));
-        }
-
-
-
         /// <summary>
-        /// 预先分配通道
-        /// 平分原则(每个通道中箱子的总数相同)
+        /// 获取当前订单对应的通道是否是正常通道
+        /// </summary>
+        /// <param name="orderId">订单号</param>
+        /// <returns></returns>
+        public static bool GetCurrentOrderChannel(int orderId) { return true; }
+        /// <summary>
+        /// 获取订单对应的灯ID
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <returns></returns>
+        public static int? GetLightIdByOrder(int orderId) { return 0; }
+        /// <summary>
+        /// 获取未使用的灯
         /// </summary>
         /// <returns></returns>
-        public static void PreAllocateChannel()
-        {
-            var c09List = Db.Context.Query<OrderRawAnalyzed>().Where(a => a.整托 != true).Select(a => new { qz = Sql.Count(), c09 = a.C09码 }).GroupBy(a => a.c09).Select(a => a.c09).ToList();
-            //Random rnd = new Random();
-            int i = 0;
-            foreach (var c09 in c09List)
-            {
+        public static int? GetUnsedLightId() { return 0; }
 
-                Db.Context.Update<OrderRawAnalyzed>(a => a.C09码 == c09, a => new OrderRawAnalyzed()
-                {
-                    Channel_id = (i % 2 + 1)
-                    // rnd.Next(1, (int)EnumChannel.异常道口)
-                });
-                i++;
-            }
-        }
+        public static void BindLightIdToOrder(int orderId, int lightId) { }
+        /// <summary>
+        /// 设置当前灯为占用状态
+        /// </summary>
+        /// <param name="lightId"></param>
+        public static void SetLightOccupied(int lightId) { }
+        /// <summary>
+        /// 设置当前灯未占用
+        /// </summary>
+        /// <param name="lightId"></param>
+        public static void SetLightUnOccupied(int lightId) { }
+        /// <summary>
+        /// 通过OrderId获取订单绑定的灯编号
+        /// 内部必须是原子性获取
+        /// 1. 之前已经绑定过，直接返回灯ID
+        /// 2. 从未绑定过
+        ///    - 获取可用的灯编号
+        ///    - 将可用的灯编号写入订单
+        ///    - 返回灯编号
+        /// </summary>
+        /// <param name="orderId">订单编号</param>
+        /// <returns>灯编号</returns>
+        public static int? GetBindedLightByOrder(int orderId) { return 0; }
 
-        public static bool? IsSinglePallet(string palletId)
-        {
-            return Db.Context.Query<AwmsRawData>().LeftJoin<OrderRawAnalyzed>((a, o) => a.Id == o.Raw_id).Where((a, o) => a.栈板号 == palletId).Select((a, o) => o.整托).FirstOrDefault();
+        ///// <summary>
+        ///// 开启事务
+        ///// </summary>
+        //public static void BeginTransaction() { }
+        ///// <summary>
+        ///// 关闭事务
+        ///// </summary>
+        //public static void EndTransaction() { }
 
-        }
+        /// <summary>
+        /// 订单异常信息记录
+        /// </summary>
+        /// <param name="orderId">订单编号</param>
+        /// <param name="error">异常信息</param>
+        public static void OrderErrorLogAdd(int orderId, string error) { }
 
-        public static List<LpnC09> GetAllLpnC09OrderByTimeLastFirst()
-        {
-            return Db.Context.Query<LpnC09>().ToList();
-        }
 
-        public static bool IsCarIdExist(string carId)
-        {
-            return false;
-        }
+        public static void SetLightState(bool on,int color) { }
+
+        public static void AddLightOrder() { }
+        /// <summary>
+        /// 根据灯号检查当前物料是否集齐
+        /// - 灯对应的09码对应的箱对应的订单全部完成
+        /// </summary>
+        /// <param name="lightId"></param>
+        /// <returns></returns>
+        public static bool CheckIsFullByLight(int lightId) { return false; }
+
+        /// <summary>
+        /// 绑定LPN 09码 库位
+        /// </summary>
+        /// <param name="lpn">LPN码</param>
+        /// <param name="c09">09码</param>
+        /// <param name="loc">库位</param>
+        public static void BindingLpnAndC09(string lpn, string c09, string loc) { }
+        /// <summary>
+        /// 通过09码获取目标库位
+        /// - 联合订单表和目标库位表 
+        /// - 查找09码匹配的目标库位
+        /// </summary>
+        /// <param name="c09"></param>
+        /// <returns></returns>
+        public static string GetTargetLocationByC09(string c09) { return ""; }
+        
     }
 }

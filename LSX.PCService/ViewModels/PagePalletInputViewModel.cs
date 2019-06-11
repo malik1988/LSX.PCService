@@ -48,7 +48,6 @@ namespace LSX.PCService.ViewModels
         {
             PalletIdKeyEnter = new DelegateCommand(() =>
             {
-                IsSinglePallet = DbHelper.IsSinglePallet(PalletId);
                // NeedCheck=DbHelper.
             });
         }

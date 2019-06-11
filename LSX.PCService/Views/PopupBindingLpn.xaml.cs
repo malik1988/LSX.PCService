@@ -10,16 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace LSX.PCService.Views
 {
     /// <summary>
-    /// WindowError.xaml 的交互逻辑
+    /// PopupBindingLpn.xaml 的交互逻辑
     /// </summary>
-    public partial class WindowError : Window
+    public partial class PopupBindingLpn : UserControl
     {
-        public WindowError()
+        public PopupBindingLpn()
         {
             InitializeComponent();
         }

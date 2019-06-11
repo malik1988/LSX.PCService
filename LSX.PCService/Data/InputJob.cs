@@ -67,8 +67,8 @@ namespace LSX.PCService.Data
     [Serializable]
     class LightMessage
     {
-        public int channelId { get; set; }
         public int orderId { get; set; }
+        public int lightId { get; set; }
     }
     class LightMessageQueue : InputMessageQueueBase
     {
@@ -109,6 +109,73 @@ namespace LSX.PCService.Data
             return (PalletMessage)msg.Body;
         }
     }
+    [Serializable]
+    class BoxInChannelMessage
+    {
+        public int channelId { get; set; }
+    }
+    class BoxInChannelInputQueue : InputMessageQueueBase
+    {
 
+        public BoxInChannelInputQueue()
+            : base(@".\Private$\LXS.PCService.BoxInChannelInputQueue")
+        {
+        }
+        public void Send(BoxInChannelMessage msg)
+        {
+            base.Send(msg);
+        }
+        public BoxInChannelMessage Receive()
+        {
+            Message msg = base.Receive() as Message;
+            return (BoxInChannelMessage)msg.Body;
+        }
+    }
+    [Serializable]
+    class OrderMessage
+    {
+        public int orderId { get; set; }
+    }
+    class OrderMessageInputQueue : InputMessageQueueBase
+    {
 
+        public OrderMessageInputQueue()
+            : base(@".\Private$\LXS.PCService.BoxInChannelInputQueue")
+        {
+        }
+        public void Send(OrderMessage msg)
+        {
+            base.Send(msg);
+        }
+        public OrderMessage Receive()
+        {
+            Message msg = base.Receive() as Message;
+            return (OrderMessage)msg.Body;
+        }
+    }
+
+    [Serializable]
+    class BindingLocAndLpnMessage
+    {
+        public string location { get; set; }
+        public string lpn { get; set; }
+        public string c09 { get; set; }
+    }
+    class BindingLocAndLpnMessageInputQueue : InputMessageQueueBase
+    {
+
+        public BindingLocAndLpnMessageInputQueue()
+            : base(@".\Private$\LXS.PCService.BindingLocAndLpnMessageInputQueue")
+        {
+        }
+        public void Send(BindingLocAndLpnMessage msg)
+        {
+            base.Send(msg);
+        }
+        public BindingLocAndLpnMessage Receive()
+        {
+            Message msg = base.Receive() as Message;
+            return (BindingLocAndLpnMessage)msg.Body;
+        }
+    }
 }

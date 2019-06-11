@@ -8,7 +8,7 @@ using System.Configuration;
 using System.Messaging;
 namespace LSX.PCService.Data
 {
-    class InputMessageQueueBase : IDisposable
+    abstract class InputMessageQueueBase : IDisposable
     {
         public static string DefaultQueuePath = Config.QueuePath;
         protected MessageQueue queue;

@@ -134,7 +134,6 @@ namespace LSX.PCService.ViewModels
         }
         void ImportRawData()
         {
-            DbHelper.EmptyTable("order_raw");
             Microsoft.Win32.OpenFileDialog f = new Microsoft.Win32.OpenFileDialog()
             {
                 Filter = "Excel2007文件|*.xlsx|Excel2003文件|*.xls",

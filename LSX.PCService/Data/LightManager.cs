@@ -29,8 +29,15 @@ namespace LSX.PCService.Data
             server = new HenkTcpServer();
             server.ClientConnected += server_ClientConnected;
             server.ClientDisconnected += server_ClientDisconnected;
+            server.DataReceived += server_DataReceived;
             server.Start(Config.LightServerPort, 20);
 
+        }
+
+
+        void server_DataReceived(object sender, Message e)
+        {
+            //获取灯ID，结束灯ID对应的订单
         }
 
         void server_ClientDisconnected(object sender, System.Net.Sockets.TcpClient e)
@@ -62,6 +69,18 @@ namespace LSX.PCService.Data
                 }
             }
         }
+
+
+        public ErrorCode SetLight(int lightId)
+        {
+            return ErrorCode.成功;
+        }
+
+        public void WaitLightOff(int lightId)
+        {
+            //阻塞等待制定ID的灯灭
+        }
+    
 
         public ErrorCode AutoSetLight(int channelId, int orderId)
         {

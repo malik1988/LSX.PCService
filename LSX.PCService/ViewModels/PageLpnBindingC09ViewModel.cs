@@ -60,7 +60,6 @@ namespace LSX.PCService.ViewModels
 
             
             C09Enter = new DelegateCommand(() => { });
-            LpnC09List = DbHelper.GetAllLpnC09OrderByTimeLastFirst();
         }
         
     }

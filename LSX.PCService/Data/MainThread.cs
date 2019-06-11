@@ -32,11 +32,7 @@ namespace LSX.PCService.Data
         {
             if (Config.InitDataBase)
             {
-                DbHelper.PreAllocateChannel();
-                DbHelper.EmptyTable("order_running");
-                DbHelper.EmptyTable("order_log");
-                DbHelper.InitChannel();
-                DbHelper.InitOrderStatus();
+             
             }
         }
         enum EnumJobState

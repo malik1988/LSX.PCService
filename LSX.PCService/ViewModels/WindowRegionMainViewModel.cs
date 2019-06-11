@@ -58,6 +58,22 @@ namespace LSX.PCService.ViewModels
             set { SetProperty(ref _PopupScanPalletCommand, value); }
         }
 
+        private InteractionRequest<INotification> _PopupBindingLpnRequest;
+
+        public InteractionRequest<INotification> PopupBindingLpnRequest
+        {
+            get { return _PopupBindingLpnRequest; }
+            set { SetProperty(ref _PopupBindingLpnRequest, value); }
+        }
+
+        private DelegateCommand _PopupBindingLpnCommand;
+
+        public DelegateCommand PopupBindingLpnCommand
+        {
+            get { return _PopupBindingLpnCommand; }
+            set { SetProperty(ref _PopupBindingLpnCommand, value); }
+        }
+
 
 
         public WindowRegionMainViewModel(IRegionManager regionManager)
@@ -76,6 +92,10 @@ namespace LSX.PCService.ViewModels
             {
                 PopupScanPalletRequest.Raise(new Notification { Title = "扫描托盘号" });
             });
+            PopupBindingLpnRequest = new InteractionRequest<INotification>();
+            PopupBindingLpnCommand = new DelegateCommand(() => {
+                PopupBindingLpnRequest.Raise(new Notification { Title = "绑定LPN 09码" });
+            });
         }
 
 
@@ -88,7 +108,8 @@ namespace LSX.PCService.ViewModels
                     //将items对应的订单全部下载（下载API）
                     CwmsOrderHelper.DownloadOrders(r.Items);
                     //将订单添加到开启队列
-                    
+
+                    //TODO 
                 }
             });
         }

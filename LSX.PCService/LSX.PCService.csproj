@@ -149,10 +149,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Data\AgvController.cs" />
     <Compile Include="Data\CwmsOrderHelper.cs" />
     <Compile Include="Data\MainEntry.cs" />
     <Compile Include="Data\LightSender.cs" />
     <Compile Include="Data\OrderRawDataAnalyze.cs" />
+    <Compile Include="Interfaces\CallAgvApi.cs" />
     <Compile Include="Models\AwmsRawData.cs" />
     <Compile Include="Models\InputDataModel.cs" />
     <Compile Include="Models\ItemCheck.cs" />
@@ -174,6 +176,7 @@
     <Compile Include="ViewModels\PageLpnBindingC09ViewModel.cs" />
     <Compile Include="ViewModels\PagePalletInputViewModel.cs" />
     <Compile Include="ViewModels\PageScanCarIdViewModel.cs" />
+    <Compile Include="ViewModels\PopupBindingLpnViewModel.cs" />
     <Compile Include="ViewModels\PopupScanPalletViewModel.cs" />
     <Compile Include="ViewModels\PopupScanTrafficOrderViewModel.cs" />
     <Compile Include="ViewModels\WindowMainViewModel.cs" />
@@ -196,6 +199,9 @@
     </Compile>
     <Compile Include="Views\PageScanCarId.xaml.cs">
       <DependentUpon>PageScanCarId.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopupBindingLpn.xaml.cs">
+      <DependentUpon>PopupBindingLpn.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PopupScanPallet.xaml.cs">
       <DependentUpon>PopupScanPallet.xaml</DependentUpon>
@@ -280,6 +286,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PageScanCarId.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PopupBindingLpn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
