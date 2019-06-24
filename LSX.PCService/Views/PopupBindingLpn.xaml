@@ -7,7 +7,7 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             MinWidth="600" MinHeight="400">
+             MinWidth="500" MinHeight="400">
     <StackPanel>
         <Border BorderBrush="Orange" BorderThickness="3" CornerRadius="5">
         <StackPanel>

@@ -11,16 +11,21 @@ Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
+		X86|Any CPU = X86|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{9AFA72A4-7414-462C-9200-B316ACC8864E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9AFA72A4-7414-462C-9200-B316ACC8864E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AFA72A4-7414-462C-9200-B316ACC8864E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AFA72A4-7414-462C-9200-B316ACC8864E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AFA72A4-7414-462C-9200-B316ACC8864E}.X86|Any CPU.ActiveCfg = Release|Any CPU
+		{9AFA72A4-7414-462C-9200-B316ACC8864E}.X86|Any CPU.Build.0 = Release|Any CPU
 		{DF5BC137-AFCB-482F-8ADD-D3F0E99FE772}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DF5BC137-AFCB-482F-8ADD-D3F0E99FE772}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF5BC137-AFCB-482F-8ADD-D3F0E99FE772}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF5BC137-AFCB-482F-8ADD-D3F0E99FE772}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF5BC137-AFCB-482F-8ADD-D3F0E99FE772}.X86|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF5BC137-AFCB-482F-8ADD-D3F0E99FE772}.X86|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

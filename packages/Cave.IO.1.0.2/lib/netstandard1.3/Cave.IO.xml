@@ -1,0 +1,3470 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cave.IO</name>
+    </assembly>
+    <members>
+        <member name="T:Cave.IO.BinaryGuid">
+            <summary>
+            Provides a guid in binary form. This is much more memory efficient if storing a large amount of guids.
+            </summary>
+            <seealso cref="T:System.IComparable" />
+        </member>
+        <member name="M:Cave.IO.BinaryGuid.op_Implicit(System.Guid)~Cave.IO.BinaryGuid">
+            <summary>Performs an implicit conversion from <see cref="T:System.Guid" /> to <see cref="T:Cave.IO.BinaryGuid" />.</summary>
+            <param name="guid">The unique identifier.</param>
+            <returns>The result of the conversion.</returns>
+        </member>
+        <member name="M:Cave.IO.BinaryGuid.op_Implicit(Cave.IO.BinaryGuid)~System.Guid">
+            <summary>Performs an implicit conversion from <see cref="T:Cave.IO.BinaryGuid"/> to <see cref="T:System.Guid"/>.</summary>
+            <param name="guid">The unique identifier.</param>
+            <returns>The result of the conversion.</returns>
+        </member>
+        <member name="M:Cave.IO.BinaryGuid.op_Equality(Cave.IO.BinaryGuid,Cave.IO.BinaryGuid)">
+            <summary>Implements the operator ==.</summary>
+            <param name="g1">The g1.</param>
+            <param name="g2">The g2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.BinaryGuid.op_Inequality(Cave.IO.BinaryGuid,Cave.IO.BinaryGuid)">
+            <summary>Implements the operator !=.</summary>
+            <param name="g1">The g1.</param>
+            <param name="g2">The g2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.BinaryGuid.op_Equality(System.Guid,Cave.IO.BinaryGuid)">
+            <summary>Implements the operator ==.</summary>
+            <param name="g1">The g1.</param>
+            <param name="g2">The g2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.BinaryGuid.op_Inequality(System.Guid,Cave.IO.BinaryGuid)">
+            <summary>Implements the operator !=.</summary>
+            <param name="g1">The g1.</param>
+            <param name="g2">The g2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.BinaryGuid.op_Equality(Cave.IO.BinaryGuid,System.Guid)">
+            <summary>Implements the operator ==.</summary>
+            <param name="g1">The g1.</param>
+            <param name="g2">The g2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.BinaryGuid.op_Inequality(Cave.IO.BinaryGuid,System.Guid)">
+            <summary>Implements the operator !=.</summary>
+            <param name="g1">The g1.</param>
+            <param name="g2">The g2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.BinaryGuid.Parse(System.String)">
+            <summary>Parses the specified text.</summary>
+            <param name="text">The text.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BinaryGuid.TryParse(System.String,Cave.IO.BinaryGuid@)">
+            <summary>Tries to parse the specified guid.</summary>
+            <param name="text">The text.</param>
+            <param name="guid">The unique identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BinaryGuid.ToString">
+            <summary>Returns a <see cref="T:System.String" /> that represents this instance.</summary>
+            <returns>A <see cref="T:System.String" /> that represents this instance.</returns>
+        </member>
+        <member name="M:Cave.IO.BinaryGuid.GetHashCode">
+            <summary>Returns a hash code for this instance.</summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+            </returns>
+        </member>
+        <member name="M:Cave.IO.BinaryGuid.Equals(System.Object)">
+            <summary>Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.</summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Cave.IO.BinaryGuid.CompareTo(System.Object)">
+            <summary>
+            Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
+            </summary>
+            <param name="obj">An object to compare with this instance.</param>
+            <returns>
+            A value that indicates the relative order of the objects being compared. The return value has these meanings: Value Meaning Less than zero This instance precedes <paramref name="obj" /> in the sort order. Zero This instance occurs in the same position in the sort order as <paramref name="obj" />. Greater than zero This instance follows <paramref name="obj" /> in the sort order.
+            </returns>
+        </member>
+        <member name="M:Cave.IO.BinaryGuid.ToArray">
+            <summary>Converts to an byte array.</summary>
+            <returns></returns>
+        </member>
+        <member name="T:Cave.IO.BitCoder32">
+            <summary>
+            Provides 7bit encoding of 64bit values (uint, uint).
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitCoder32.GetByteCount7BitEncoded(System.UInt32)">
+            <summary>
+            Obtains the number of bytes needed for the specified value.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder32.GetByteCount7BitEncoded(System.Int32)">
+            <summary>
+            Obtains the number of bytes needed for the specified value.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder32.Get7BitEncoded(System.UInt32)">
+            <summary>
+            Obtains the data of a 7 bit encoded value.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder32.Get7BitEncoded(System.Int32)">
+            <summary>
+            Obtains the data of a 7 bit encoded value.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder32.Read7BitEncodedUInt32(System.IO.Stream)">
+            <summary>
+            Reads a 7 bit encoded value from the specified Stream.
+            </summary>
+            <param name="stream">The <see cref="T:System.IO.Stream"/> to read from.</param>
+            <returns>Returns the read value.</returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder32.Read7BitEncodedInt32(System.IO.Stream)">
+            <summary>
+            Reads a 7 bit encoded value from the specified Stream.
+            </summary>
+            <param name="stream">The <see cref="T:System.IO.Stream"/> to read from.</param>
+            <returns>Returns the read value.</returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder32.Write7BitEncoded(System.IO.Stream,System.UInt32)">
+            <summary>
+            Writes the specified value 7 bit encoded to the specified Stream.
+            </summary>
+            <param name="stream">The <see cref="T:System.IO.Stream"/> to write to.</param>
+            <param name="value">The value to write.</param>
+            <returns>Returns the number of bytes written.</returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder32.Write7BitEncoded(System.IO.Stream,System.Int32)">
+            <summary>
+            Writes the specified value 7 bit encoded to the specified Stream.
+            </summary>
+            <param name="stream">The <see cref="T:System.IO.Stream"/> to write to.</param>
+            <param name="value">The value to write.</param>
+            <returns>Returns the number of bytes written.</returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder32.Write7BitEncoded(Cave.IO.DataWriter,System.UInt32)">
+            <summary>
+            Writes the specified value 7 bit encoded to the specified Stream.
+            </summary>
+            <param name="writer">The <see cref="T:Cave.IO.DataWriter"/> to write to.</param>
+            <param name="value">The value to write.</param>
+            <returns>Returns the number of bytes written.</returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder32.Write7BitEncoded(Cave.IO.DataWriter,System.Int32)">
+            <summary>
+            Writes the specified value 7 bit encoded to the specified Stream.
+            </summary>
+            <param name="writer">The <see cref="T:Cave.IO.DataWriter"/> to write to.</param>
+            <param name="value">The value to write.</param>
+            <returns>Returns the number of bytes written.</returns>
+        </member>
+        <member name="T:Cave.IO.BitCoder64">
+            <summary>
+            Provides 7bit encoding of 64bit values (ulong, ulong).
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitCoder64.GetByteCount7BitEncoded(System.UInt64)">
+            <summary>
+            Obtains the number of bytes needed for the specified value.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder64.GetByteCount7BitEncoded(System.Int64)">
+            <summary>
+            Obtains the number of bytes needed for the specified value.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder64.Get7BitEncoded(System.UInt64)">
+            <summary>
+            Obtains the data of a 7 bit encoded value.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder64.Get7BitEncoded(System.Int64)">
+            <summary>
+            Obtains the data of a 7 bit encoded value.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder64.Read7BitEncodedUInt64(System.IO.Stream)">
+            <summary>
+            Reads a 7 bit encoded value from the specified Stream.
+            </summary>
+            <param name="stream">The <see cref="T:System.IO.Stream"/> to read from.</param>
+            <returns>Returns the read value.</returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder64.Read7BitEncodedInt64(System.IO.Stream)">
+            <summary>
+            Reads a 7 bit encoded value from the specified Stream.
+            </summary>
+            <param name="stream">The <see cref="T:System.IO.Stream"/> to read from.</param>
+            <returns>Returns the read value.</returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder64.Write7BitEncoded(System.IO.Stream,System.UInt64)">
+            <summary>
+            Writes the specified value 7 bit encoded to the specified Stream.
+            </summary>
+            <param name="stream">The <see cref="T:System.IO.Stream"/> to write to.</param>
+            <param name="value">The value to write.</param>
+            <returns>Returns the number of bytes written.</returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder64.Write7BitEncoded(System.IO.Stream,System.Int64)">
+            <summary>
+            Writes the specified value 7 bit encoded to the specified Stream.
+            </summary>
+            <param name="stream">The <see cref="T:System.IO.Stream"/> to write to.</param>
+            <param name="value">The value to write.</param>
+            <returns>Returns the number of bytes written.</returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder64.Write7BitEncoded(Cave.IO.DataWriter,System.UInt64)">
+            <summary>
+            Writes the specified value 7 bit encoded to the specified Stream.
+            </summary>
+            <param name="writer">The <see cref="T:Cave.IO.DataWriter"/> to write to.</param>
+            <param name="value">The value to write.</param>
+            <returns>Returns the number of bytes written.</returns>
+        </member>
+        <member name="M:Cave.IO.BitCoder64.Write7BitEncoded(Cave.IO.DataWriter,System.Int64)">
+            <summary>
+            Writes the specified value 7 bit encoded to the specified Stream.
+            </summary>
+            <param name="writer">The <see cref="T:Cave.IO.DataWriter"/> to write to.</param>
+            <param name="value">The value to write.</param>
+            <returns>Returns the number of bytes written.</returns>
+        </member>
+        <member name="T:Cave.IO.BitConverterBase">
+            <summary>
+            Provides a base class for bit converters.
+            </summary>
+            <seealso cref="T:Cave.IO.IBitConverter" />
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.Get7BitEncodedBytes(System.UInt64)">
+            <summary>Obtains the bytes of a 7 bit encoded integer.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.Get7BitEncodedBytes(System.Int64)">
+            <summary>
+            Obtains the bytes of a 7 bit encoded integer.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.GetBytes(System.Boolean)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.GetBytes(System.Byte)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.GetBytes(System.SByte)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.GetBytes(System.Int16)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.GetBytes(System.Int32)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.GetBytes(System.Int64)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.GetBytes(System.Single)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.GetBytes(System.Double)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.GetBytes(System.DateTime)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.GetBytes(System.TimeSpan)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.GetBytes(System.Decimal)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.ToBoolean(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.ToByte(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.ToSByte(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.ToInt16(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.ToInt32(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.ToInt64(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.ToDecimal(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.ToDateTime(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.ToTimeSpan(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.ToDouble(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.ToSingle(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.GetBytes(System.UInt16)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value">The value to convert.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.GetBytes(System.UInt32)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value">The value to convert.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.GetBytes(System.UInt64)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value">The value to convert.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.ToUInt16(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.ToUInt32(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBase.ToUInt64(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cave.IO.BitConverterBE">
+            <summary>
+            Provides an alternate <see cref="T:System.BitConverter" /> class providing additional functionality.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.BitConverterBE.Instance">
+            <summary>Gets the default instance.</summary>
+            <value>The default instance.</value>
+        </member>
+        <member name="M:Cave.IO.BitConverterBE.GetBytes(System.UInt16)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBE.GetBytes(System.UInt32)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBE.GetBytes(System.UInt64)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBE.ToUInt16(System.Byte[],System.Int32)">
+            <summary>Returns a value converted from the specified data at a specified index.</summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">data.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cave.IO.BitConverterBE.ToUInt32(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterBE.ToUInt64(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cave.IO.BitConverterLE">
+            <summary>
+            Provides an alternate <see cref="T:System.BitConverter" /> class providing additional functionality.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.BitConverterLE.Instance">
+            <summary>Gets the default instance.</summary>
+            <value>The default instance.</value>
+        </member>
+        <member name="M:Cave.IO.BitConverterLE.GetBytes(System.UInt16)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterLE.GetBytes(System.UInt32)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterLE.GetBytes(System.UInt64)">
+            <summary>
+            Retrieves the specified value as byte array with the specified endiantype.
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterLE.ToUInt16(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterLE.ToUInt32(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitConverterLE.ToUInt64(System.Byte[],System.Int32)">
+            <summary>
+            Returns a value converted from the specified data at a specified index.
+            </summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Cave.IO.Bits">
+            <summary>
+            Provides binary conversion routines.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.Bits.op_Implicit(Cave.IO.Bits)~System.Byte[]">
+            <summary>
+            Implicitly converts <see cref="T:Cave.IO.Bits"/> data to an array.
+            </summary>
+            <param name="value">The binary data.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.op_Implicit(System.Byte[])~Cave.IO.Bits">
+            <summary>
+            Implicitly converts an array to <see cref="T:Cave.IO.Bits"/> data.
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.Reflect64(System.UInt64)">
+            <summary>Reflects 64 bits.</summary>
+            <param name="x">The bits.</param>
+            <returns>Returns a center reflection.</returns>
+        </member>
+        <member name="M:Cave.IO.Bits.Reflect32(System.UInt32)">
+            <summary>Reflects 32 bits.</summary>
+            <param name="x">The bits.</param>
+            <returns>Returns a center reflection.</returns>
+        </member>
+        <member name="M:Cave.IO.Bits.Reflect8(System.Byte)">
+            <summary>Reflects 8 bits.</summary>
+            <param name="b">The bits.</param>
+            <returns>Returns a center reflection.</returns>
+        </member>
+        <member name="M:Cave.IO.Bits.ToByte(System.Int64)">
+            <summary>
+            Converts a binary value (100110101) to a "normal" value (0x135 = 309).
+            </summary>
+            <param name="binary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.ToSByte(System.Int64)">
+            <summary>
+            Converts a binary value (100110101) to a "normal" value (0x135 = 309).
+            </summary>
+            <param name="binary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.ToInt16(System.Int64)">
+            <summary>
+            Converts a binary value (100110101) to a "normal" value (0x135 = 309).
+            </summary>
+            <param name="binary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.ToUInt16(System.Int64)">
+            <summary>
+            Converts a binary value (100110101) to a "normal" value (0x135 = 309).
+            </summary>
+            <param name="binary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.ToUInt32(System.Int64)">
+            <summary>
+            Converts a binary value (100110101) to a "normal" value (0x135 = 309).
+            </summary>
+            <param name="binary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.ToInt32(System.Int64)">
+            <summary>
+            Converts a binary value (100110101) to a "normal" int (0x135 = 309).
+            </summary>
+            <param name="binary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.ToByte(System.String)">
+            <summary>
+            Converts a binary value (100110101) to a "normal" value (0x135 = 309).
+            </summary>
+            <param name="binary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.ToSByte(System.String)">
+            <summary>
+            Converts a binary value (100110101) to a "normal" value (0x135 = 309).
+            </summary>
+            <param name="binary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.ToInt16(System.String)">
+            <summary>
+            Converts a binary value (100110101) to a "normal" value (0x135 = 309).
+            </summary>
+            <param name="binary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.ToUInt16(System.String)">
+            <summary>
+            Converts a binary value (100110101) to a "normal" value (0x135 = 309).
+            </summary>
+            <param name="binary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.ToUInt32(System.String)">
+            <summary>
+            Converts a binary value (100110101) to a "normal" value (0x135 = 309).
+            </summary>
+            <param name="binary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.ToInt32(System.String)">
+            <summary>
+            Converts a binary value (100110101) to a "normal" value (0x135 = 309).
+            </summary>
+            <param name="binary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.ToInt64(System.String)">
+            <summary>
+            Converts a binary string ("100110101") to a "normal" int (0x135 = 309).
+            </summary>
+            <param name="binary"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.ToString(System.Int32)">
+            <summary>
+            Converts a value int (309 = 0x135) to a binary string ("100110101").
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.ToBinary(System.Int32)">
+            <summary>
+            Converts a value int (309 = 0x135) to a binary long (100110101).
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Bits.#ctor(System.Byte[])">
+            <summary>
+            Creates a new instance with the specified data.
+            </summary>
+            <param name="data"></param>
+        </member>
+        <member name="P:Cave.IO.Bits.Data">
+            <summary>
+            Obtains a copy of all data.
+            </summary>
+        </member>
+        <member name="T:Cave.IO.BitStreamReader">
+            <summary>
+            Bit Stream Reader Class for Bitstreams of the form: byte0[bit0,bit1,bit2,bit3,bit4,bit5,bit6,bit7] byte1[bit8,bit9,bit10,bit11,...].
+            </summary>
+        </member>
+        <member name="P:Cave.IO.BitStreamReader.BaseStream">
+            <summary>
+            Obtains the BaseStream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitStreamReader.#ctor(System.IO.Stream)">
+            <summary>
+            creates a new BitStreamReader.
+            </summary>
+            <param name="stream"></param>
+        </member>
+        <member name="M:Cave.IO.BitStreamReader.ReadBit">
+            <summary>
+            reads a bit from the buffer.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:Cave.IO.BitStreamReader.EndOfStream">
+            <summary>
+            Checks for end of stream during bit reading. This can always be called, even if the stream cannot seek.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitStreamReader.ReadBits64(System.Int32)">
+            <summary>
+            reads some bits.
+            </summary>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitStreamReader.ReadBits64(System.UInt32)">
+            <summary>
+            reads some bits.
+            </summary>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitStreamReader.ReadBits32(System.Int32)">
+            <summary>
+            reads some bits.
+            </summary>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitStreamReader.ReadBits32(System.UInt32)">
+            <summary>
+            reads some bits.
+            </summary>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Cave.IO.BitStreamReader.Position">
+            <summary>
+            Retrieves / Sets the current bitposition (Stream needs to provide Position getter and setter).
+            </summary>
+        </member>
+        <member name="P:Cave.IO.BitStreamReader.Available">
+            <summary>
+            Obtains the number of bits available (Stream needs to provide Position and Length getters!).
+            </summary>
+        </member>
+        <member name="P:Cave.IO.BitStreamReader.Length">
+            <summary>
+            Retrieves the length in bits (Stream needs to provide Length getter!).
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitStreamReader.Close">
+            <summary>
+            Closes the reader and the underlying stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitStreamReader.ToString">
+            <summary>
+            Obtains the name of the class and the current state.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitStreamReader.GetHashCode">
+            <summary>
+            Obtains a hash code for this object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Cave.IO.BitStreamReaderReverse">
+            <summary>
+            Bit Stream Reader Class for reversed bitstreams of the form: byte0[bit7,bit6,bit5,bit4,bit3,bit2,bit1,bit0] byte1[bit15,bit14,bit13,bit12,...].
+            </summary>
+        </member>
+        <member name="P:Cave.IO.BitStreamReaderReverse.BaseStream">
+            <summary>
+            Gets the BaseStream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitStreamReaderReverse.#ctor(System.IO.Stream)">
+            <summary>
+            creates a new csBitStreamReader.
+            </summary>
+            <param name="stream"></param>
+        </member>
+        <member name="M:Cave.IO.BitStreamReaderReverse.ReadBit">
+            <summary>
+            reads a bit from the buffer.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitStreamReaderReverse.ReadBits64(System.Int32)">
+            <summary>
+            reads some bits.
+            </summary>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitStreamReaderReverse.ReadBits32(System.Int32)">
+            <summary>
+            reads some bits.
+            </summary>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Cave.IO.BitStreamReaderReverse.Position">
+            <summary>
+            retrieves / sets the current bitposition.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.BitStreamReaderReverse.Length">
+            <summary>
+            retrieves the length in bits.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.BitStreamReaderReverse.EndOfStream">
+            <summary>
+            Checks for end of stream during bit reading. This can always be called, even if the stream cannot seek.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitStreamReaderReverse.ToString">
+            <summary>
+            Obtains the name of the class and the current state.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitStreamReaderReverse.GetHashCode">
+            <summary>
+            Obtains a hash code for this object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Cave.IO.BitStreamWriter">
+            <summary>
+            Bit Stream Reader Class for Bitstreams of the form: byte0[bit0,bit1,bit2,bit3,bit4,bit5,bit6,bit7] byte1[bit8,bit9,bit10,bit11,...].
+            </summary>
+        </member>
+        <member name="P:Cave.IO.BitStreamWriter.BaseStream">
+            <summary>
+            Obtains the BaseStream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriter.#ctor(System.IO.Stream)">
+            <summary>
+            creates a new csBitStreamWriter.
+            </summary>
+            <param name="stream"></param>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriter.WriteBit(System.Boolean)">
+            <summary>
+            writes a bit to the buffer.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriter.WriteBits(System.Int64,System.Int32)">
+            <summary>
+            writes some bits.
+            </summary>
+            <param name="bits"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriter.WriteBits(System.Int32,System.Int32)">
+            <summary>
+            writes some bits.
+            </summary>
+            <param name="bits"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriter.WriteBits(System.Int32,System.Boolean)">
+            <summary>
+            writes some bits (todo: optimize me).
+            </summary>
+            <param name="count"></param>
+            <param name="items"></param>
+        </member>
+        <member name="P:Cave.IO.BitStreamWriter.Position">
+            <summary>
+            retrieves / sets the current bitposition.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.BitStreamWriter.Length">
+            <summary>
+            retrieves the length in bits.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriter.Close">
+            <summary>
+            Closes the writer and the underlying stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriter.Flush">
+            <summary>
+            Flushes the buffered bits to the stream and closes the writer (not the underlying stream).
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriter.ToString">
+            <summary>
+            Obtains the name of the class and the current state.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriter.GetHashCode">
+            <summary>
+            Obtains a hash code for this object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Cave.IO.BitStreamWriterReverse">
+            <summary>
+            Bit Stream Reader Class for Bitstreams of the form: byte0[bit7,bit6,bit5,bit4,bit3,bit2,bit1,bit0] byte1[bit15,bit14,bit13,bit12,...].
+            </summary>
+        </member>
+        <member name="P:Cave.IO.BitStreamWriterReverse.BaseStream">
+            <summary>
+            Obtains the BaseStream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriterReverse.#ctor(System.IO.Stream)">
+            <summary>
+            creates a new csBitStreamWriter.
+            </summary>
+            <param name="stream"></param>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriterReverse.WriteBit(System.Boolean)">
+            <summary>
+            writes a bit to the buffer.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriterReverse.WriteBits(System.Int64,System.Int32)">
+            <summary>
+            writes some bits.
+            </summary>
+            <param name="bits"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriterReverse.WriteBits(System.Int32,System.Int32)">
+            <summary>
+            writes some bits.
+            </summary>
+            <param name="bits"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriterReverse.WriteBits(System.Int32,System.Boolean)">
+            <summary>
+            writes some bits (todo: optimize me).
+            </summary>
+            <param name="count"></param>
+            <param name="items"></param>
+        </member>
+        <member name="P:Cave.IO.BitStreamWriterReverse.Position">
+            <summary>
+            retrieves / sets the current bitposition.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.BitStreamWriterReverse.Length">
+            <summary>
+            retrieves the length in bits.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriterReverse.Close">
+            <summary>
+            Closes the writer and the underlying stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriterReverse.Flush">
+            <summary>
+            Flushes the buffered bits to the stream and closes the writer (not the underlying stream).
+            </summary>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriterReverse.ToString">
+            <summary>
+            Obtains the name of the class and the current state.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.BitStreamWriterReverse.GetHashCode">
+            <summary>
+            Obtains a hash code for this object.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Cave.IO.CheckedASCIIEncoding">
+            <summary>
+            Provides a ASCIIEncoding replacement throwing errors on invalid data.
+            The default .net class just ignores invalid characters and replaces them.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.CheckedASCIIEncoding.CodePage">
+            <summary>
+            Gets the code page identifier of the current Encoding.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.CheckedASCIIEncoding.EncodingName">
+            <summary>
+            Gets the human-readable description of the current encoding.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.CheckedASCIIEncoding.IsSingleByte">
+            <summary>
+            This is a single byte character encoding.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.CheckedASCIIEncoding.GetByteCount(System.Char[],System.Int32,System.Int32)">
+            <summary>
+            Calculates the number of bytes produced by encoding a set of characters.
+            </summary>
+            <param name="chars">The character array containing the set of characters to encode. </param>
+            <param name="index">The index of the first character to encode. </param>
+            <param name="count">The number of characters to encode. </param>
+            <returns>The number of bytes produced by encoding the specified characters.</returns>
+        </member>
+        <member name="M:Cave.IO.CheckedASCIIEncoding.GetBytes(System.Char[],System.Int32,System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            Encodes a set of characters from the specified character array into the specified byte array.
+            </summary>
+            <param name="chars">The character array containing the set of characters to encode. </param>
+            <param name="charIndex">The index of the first character to encode.</param>
+            <param name="charCount">The number of characters to encode. </param>
+            <param name="bytes">The byte array to contain the resulting sequence of bytes. </param>
+            <param name="byteIndex">The index at which to start writing the resulting sequence of bytes. </param>
+            <returns>The actual number of bytes written into bytes.</returns>
+        </member>
+        <member name="M:Cave.IO.CheckedASCIIEncoding.GetCharCount(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Calculates the number of characters produced by decoding a sequence of bytes from the specified byte array.
+            </summary>
+            <param name="bytes">The byte array containing the sequence of bytes to decode. </param>
+            <param name="index">The index of the first byte to decode. </param>
+            <param name="count">The number of bytes to decode. </param>
+            <returns>The number of characters produced by decoding the specified sequence of bytes.</returns>
+        </member>
+        <member name="M:Cave.IO.CheckedASCIIEncoding.GetChars(System.Byte[],System.Int32,System.Int32,System.Char[],System.Int32)">
+            <summary>
+            Decodes a sequence of bytes from the specified byte array into the specified character array.
+            </summary>
+            <param name="bytes">The byte array containing the sequence of bytes to decode. </param>
+            <param name="byteIndex">The index of the first byte to decode. </param>
+            <param name="byteCount">The number of bytes to decode. </param>
+            <param name="chars">The character array to contain the resulting set of characters.</param>
+            <param name="charIndex">The index at which to start writing the resulting set of characters. </param>
+            <returns>The actual number of characters written into chars.</returns>
+        </member>
+        <member name="M:Cave.IO.CheckedASCIIEncoding.GetMaxByteCount(System.Int32)">
+            <summary>
+            Calculates the maximum number of bytes produced by encoding the specified number of characters.
+            </summary>
+            <param name="charCount">The number of characters to encode. </param>
+            <returns>The maximum number of bytes produced by encoding the specified number of characters.</returns>
+        </member>
+        <member name="M:Cave.IO.CheckedASCIIEncoding.GetMaxCharCount(System.Int32)">
+            <summary>
+            Calculates the maximum number of characters produced by decoding the specified number of bytes.
+            </summary>
+            <param name="byteCount">The number of bytes to decode. </param>
+            <returns>The maximum number of characters produced by decoding the specified number of bytes.</returns>
+        </member>
+        <member name="T:Cave.IO.DataReader">
+            <summary>
+            Provides a new little endian binary reader implementation (a combination of streamreader and binaryreader).
+            This class is not threadsafe and does not buffer anything nor needs flushing.
+            You can access the basestream at any time with any mode of operation (read, write, seek, ...).
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DataReader.Encoding">
+            <summary>
+            Gets / sets the Encoding to use for characters and strings.
+            Setting this value directly sets <see cref="P:Cave.IO.DataReader.StringEncoding"/> to <see cref="F:Cave.IO.StringEncoding.Undefined"/>.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DataReader.NewLineMode">
+            <summary>
+            Provides the new line mode used.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DataReader.EndianType">
+            <summary>Gets the endian encoder type.</summary>
+            <value>The endian encoder type.</value>
+        </member>
+        <member name="P:Cave.IO.DataReader.StringEncoding">
+            <summary>
+            Gets or sets encoding to use for characters and strings.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DataReader.BaseStream">
+            <summary>
+            Provides access to the base stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.#ctor(System.IO.Stream,Cave.IO.StringEncoding,Cave.IO.NewLineMode,Cave.IO.EndianType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cave.IO.DataReader"/> class.
+            </summary>
+            <param name="input">The stream to read from.</param>
+            <param name="encoding">The encoding.</param>
+            <param name="endian">The endian type.</param>
+            <param name="newLineMode">New line mode.</param>
+            <exception cref="T:System.ArgumentNullException">output.</exception>
+            <exception cref="T:System.ArgumentException">Stream does not support writing or is already closed.;output.</exception>
+            <exception cref="T:System.NotSupportedException">StringEncoding {0} not supported!
+            or EndianType {0} not supported!.</exception>
+        </member>
+        <member name="M:Cave.IO.DataReader.#ctor(System.IO.Stream,System.Text.Encoding,Cave.IO.NewLineMode,Cave.IO.EndianType)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cave.IO.DataReader"/> class.
+            </summary>
+            <param name="input">The stream to read from.</param>
+            <param name="newLineMode">New line mode.</param>
+            <param name="encoding">Encoding to use for characters and strings.</param>
+            <param name="endian">The endian type.</param>
+            <exception cref="T:System.ArgumentNullException">output.</exception>
+            <exception cref="T:System.ArgumentException">Stream does not support writing or is already closed.;output.</exception>
+            <exception cref="T:System.NotSupportedException">StringEncoding {0} not supported!
+            or EndianType {0} not supported!.</exception>
+        </member>
+        <member name="M:Cave.IO.DataReader.Flush">
+            <summary>
+            Flushes the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            Seeks at the base stream (this requires the stream to be seekable).
+            </summary>
+            <param name="offset">Offset to seek to.</param>
+            <param name="origin">Origin to seek from.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.DataReader.Skip(System.Int64)">
+            <summary>
+            Skips some bytes at the base stream.
+            </summary>
+            <param name="count">Length to skip in bytes.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Cave.IO.DataReader.Available">
+            <summary>
+            Obtains the available bytes for reading.
+            Attention: the BaseStream has to support the Length and Position properties.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadBool">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadByte">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadBytes">
+            <summary>
+            Reads a byte buffer with length prefix from the stream.
+            </summary>
+            <exception cref="T:System.IO.InvalidDataException"></exception>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadBytes(System.Int32)">
+            <summary>
+            Reads a buffer from the stream.
+            </summary>
+            <param name="count"></param>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadChar">
+            <summary>
+            Reads a character from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadChars(System.Int32)">
+            <summary>
+            Reads characters from the stream.
+            </summary>
+            <param name="count">Number of characters (not bytes) to read.</param>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadDecimal">
+            <summary>
+            Reads a value from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadDouble">
+            <summary>
+            Reads a value from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadSingle">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadInt8">
+            <summary>
+            Reads a value directly from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadInt16">
+            <summary>
+            Reads a value directly from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadInt32">
+            <summary>
+            Reads a value directly from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadInt64">
+            <summary>
+            Reads a value directly from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadUInt8">
+            <summary>
+            Reads a value directly from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadUInt16">
+            <summary>
+            Reads a value directly from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadUInt32">
+            <summary>
+            Reads a value directly from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadUInt64">
+            <summary>
+            Reads a value directly from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadLine(System.Int32)">
+            <summary>
+            Reads a string ending with [CR]LF from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadUntil(System.Byte[],System.Int32@,System.Boolean,System.Byte[])">
+            <summary>
+            Reads bytes from the stream until one of the specified end markers are found or max count is reached.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadString(System.Int32)">
+            <summary>
+            Reads a string of the specified byte count from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadString">
+            <summary>
+            Reads a string with length prefix from the stream.
+            </summary>
+            <exception cref="T:System.IO.InvalidDataException"></exception>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadZeroTerminatedString(System.Int32)">
+            <summary>
+            Reads a zero terminated string from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadZeroTerminatedFixedLengthString(System.Int32)">
+            <summary>
+            Reads a zero terminated string from the stream.
+            </summary>
+            <param name="byteCount">Fieldlength in bytes.</param>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadTimeSpan">
+            <summary>
+            Reads a value from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadDateTime">
+            <summary>
+            Reads a DateTime value from the stream with <see cref="T:System.DateTimeKind"/>.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadEpoch32">
+            <summary>
+            Reads a 32bit linux epoch value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadEpoch64">
+            <summary>
+            Reads a 64bit linux epoch value.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadStruct``1">
+            <summary>
+            Reads the specified struct from the stream using the default marshaller.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.Read7BitEncodedInt32">
+            <summary>
+            Reads a 7 bit encoded 32 bit value from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.Read7BitEncodedUInt32">
+            <summary>
+            Reads a 7 bit encoded 32 bit value from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.Read7BitEncodedInt64">
+            <summary>
+            Reads a 7 bit encoded 64 bit value from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.Read7BitEncodedUInt64">
+            <summary>
+            Reads a 7 bit encoded 64 bit value from the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataReader.ReadArray``1">
+            <summary>
+            Reads an array of the specified struct type from the stream using the default marshaller.
+            </summary>
+            <typeparam name="T">Type of each element.</typeparam>
+        </member>
+        <member name="M:Cave.IO.DataReader.Close">
+            <summary>Closes the reader and the stream.</summary>
+        </member>
+        <member name="T:Cave.IO.DataWriter">
+            <summary>
+            Provides a new little endian binary writer implementation (a combination of streamwriter and binarywriter).
+            This class is not threadsafe and does not buffer anything nor needs flushing.
+            You can access the basestream at any time with any mode of operation (read, write, seek, ...).
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DataWriter.Encoding">
+            <summary>
+            Gets / sets the Encoding to use for characters and strings.
+            Setting this value directly sets <see cref="P:Cave.IO.DataWriter.StringEncoding"/> to <see cref="F:Cave.IO.StringEncoding.Undefined"/>.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DataWriter.EndianType">
+            <summary>Gets the endian encoder type.</summary>
+            <value>The endian encoder type.</value>
+        </member>
+        <member name="P:Cave.IO.DataWriter.StringEncoding">
+            <summary>
+            Encoding to use for characters and strings.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DataWriter.NewLineMode">
+            <summary>
+            Provides the new line mode used.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DataWriter.BaseStream">
+            <summary>
+            Provides access to the base stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataWriter.#ctor(System.IO.Stream,Cave.IO.StringEncoding,Cave.IO.NewLineMode,Cave.IO.EndianType)">
+            <summary>
+            Creates a new binary writer using the specified encoding and writing to the specified stream.
+            </summary>
+            <param name="output">The stream to write to.</param>
+            <param name="encoding">The encoding.</param>
+            <param name="endian">The endian type.</param>
+            <param name="newLineMode">New line mode.</param>
+            <exception cref="T:System.ArgumentNullException">output.</exception>
+            <exception cref="T:System.ArgumentException">Stream does not support writing or is already closed.;output.</exception>
+            <exception cref="T:System.NotSupportedException">StringEncoding {0} not supported!
+            or EndianType {0} not supported!.</exception>
+        </member>
+        <member name="M:Cave.IO.DataWriter.#ctor(System.IO.Stream,System.Text.Encoding,Cave.IO.NewLineMode,Cave.IO.EndianType)">
+            <summary>Creates a new binary writer using the specified encoding and writing to the specified stream.</summary>
+            <param name="output">The stream to write to.</param>
+            <param name="newLineMode">New line mode.</param>
+            <param name="encoding">Encoding to use for characters and strings.</param>
+            <param name="endian">The endian type.</param>
+            <exception cref="T:System.ArgumentNullException">output.</exception>
+            <exception cref="T:System.ArgumentException">Stream does not support writing or is already closed.;output.</exception>
+            <exception cref="T:System.NotSupportedException">StringEncoding {0} not supported!
+            or EndianType {0} not supported!.</exception>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Flush">
+            <summary>
+            Flushes the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Seek(System.Int32,System.IO.SeekOrigin)">
+            <summary>
+            Seeks at the base stream (this requires the stream to be seekable).
+            </summary>
+            <param name="offset">Offset to seek to.</param>
+            <param name="origin">Origin to seek from.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.Boolean)">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.Byte)">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.Byte[])">
+            <summary>
+            Writes the specified buffer directly to the stream.
+            </summary>
+            <param name="buffer"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.WritePrefixed(System.Byte[])">
+            <summary>
+            Writes the specified buffer to the stream with length prefix.
+            </summary>
+            <param name="buffer"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes a part of the specified buffer directly to the stream.
+            </summary>
+            <param name="buffer"></param>
+            <param name="index"></param>
+            <param name="count"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.WritePrefixed(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes a part of the specified buffer to the stream with length prefix.
+            </summary>
+            <param name="buffer"></param>
+            <param name="index"></param>
+            <param name="count"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.Char)">
+            <summary>
+            Writes the specified character directly to the stream.
+            </summary>
+            <param name="c"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.Char[])">
+            <summary>
+            Writes the specified characters directly to the stream.
+            </summary>
+            <param name="chars"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.Char[],System.Int32,System.Int32)">
+            <summary>
+            Writes a part of the specified character array directly to the stream.
+            </summary>
+            <param name="chars"></param>
+            <param name="index"></param>
+            <param name="count"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.Decimal)">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.Double)">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.Int16)">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.Int32)">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.Int64)">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.SByte)">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.Single)">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.String)">
+            <summary>
+            Writes the specified string directly to the stream.
+            </summary>
+            <param name="text">String to write.</param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.WritePrefixed(System.String)">
+            <summary>
+            Writes the specified string (with/out length prefix) directly to the stream.
+            </summary>
+            <param name="text">String to write.</param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.WriteLine">
+            <summary>
+            Writes the "new line" marking to the stream. This depends on the chosen <see cref="P:Cave.IO.DataWriter.NewLineMode"/>.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DataWriter.WriteLine(System.String)">
+            <summary>
+            Writes the specified string followed by a "new line" marking to the stream. This depends on the chosen <see cref="P:Cave.IO.DataWriter.NewLineMode"/>.
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.WriteZeroTerminated(System.String,System.Int32)">
+            <summary>
+            Writes the specified string zero terminated directly to the stream.
+            </summary>
+            <param name="text"></param>
+            <param name="fieldLength">Fixed field length to use (1..x).</param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.UInt16)">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.UInt32)">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.UInt64)">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.TimeSpan)">
+            <summary>
+            Writes the specified value directly to the stream.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write(System.DateTime)">
+            <summary>
+            Writes the specified datetime value with <see cref="T:System.DateTimeKind"/>.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.WriteEpoch32(System.DateTime)">
+            <summary>
+            Writes a 32bit linux epoch value.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.WriteEpoch64(System.DateTime)">
+            <summary>
+            Writes a 64bit linux epoch value.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.WriteStruct``1(``0)">
+            <summary>
+            Writes the specified struct directly to the stream using the default marshaller.
+            </summary>
+            <param name="item"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write7BitEncoded64(System.Int64)">
+            <summary>
+            Writes the specified 64 bit value to the stream 7 bit encoded (1-10 bytes).
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write7BitEncoded64(System.UInt64)">
+            <summary>
+            Writes the specified 64 bit value to the stream 7 bit encoded (1-10 bytes).
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write7BitEncoded32(System.Int32)">
+            <summary>
+            Writes the specified 32 bit value to the stream 7 bit encoded (1-5 bytes).
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Write7BitEncoded32(System.UInt32)">
+            <summary>
+            Writes the specified 32 bit value to the stream 7 bit encoded (1-5 bytes).
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.WriteArray``1(``0[])">
+            <summary>
+            Writes an array of the specified struct type to the stream using the default marshaller prefixed by array length.
+            </summary>
+            <typeparam name="T">Type of each element.</typeparam>
+            <param name="array">Array of elements.</param>
+        </member>
+        <member name="M:Cave.IO.DataWriter.Close">
+            <summary>Closes the writer and the stream.</summary>
+        </member>
+        <member name="T:Cave.IO.DefaultRNG">
+            <summary>
+            Provides a globally used random number generator instance.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DefaultRNG.Generator">
+            <summary>
+            Returns the currently used generator.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DefaultRNG.Fill(System.Byte[])">
+            <summary>
+            Fills the specified array with random data.
+            </summary>
+            <param name="array">The byte array to fill.</param>
+        </member>
+        <member name="M:Cave.IO.DefaultRNG.Get(System.Int32)">
+            <summary>
+            Obtains a byte array containing secure random bytes with the specified size.
+            </summary>
+            <param name="size">The size in bytes.</param>
+            <returns>Returns a new randomized byte array.</returns>
+        </member>
+        <member name="P:Cave.IO.DefaultRNG.Int8">
+            <summary>
+            Obtains a random 8 bit signed integer.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DefaultRNG.UInt8">
+            <summary>
+            Obtains a random 8 bit unsigned integer.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DefaultRNG.Int16">
+            <summary>
+            Obtains a random 16 bit signed integer.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DefaultRNG.UInt16">
+            <summary>
+            Obtains a random 16 bit unsigned integer.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DefaultRNG.Int32">
+            <summary>
+            Obtains a random 32 bit signed integer.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DefaultRNG.UInt32">
+            <summary>
+            Obtains a random 32 bit unsigned integer.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DefaultRNG.Int64">
+            <summary>
+            Obtains a random 64 bit signed integer.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.DefaultRNG.UInt64">
+            <summary>
+            Obtains a random 64 bit unsigned integer.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DefaultRNG.GetPassword(System.Int32,System.String)">
+            <summary>Creates a random password using ascii printable characters.</summary>
+            <param name="count">Length of the desired password.</param>
+            <param name="characters">The characters.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cave.IO.DoubleStruct">
+            <summary>
+            Provides an easy way to access the bits of a double value.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DoubleStruct.op_Equality(Cave.IO.DoubleStruct,Cave.IO.DoubleStruct)">
+            <summary>Implements the operator ==.</summary>
+            <param name="value1">The value1.</param>
+            <param name="value2">The value2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.DoubleStruct.op_Inequality(Cave.IO.DoubleStruct,Cave.IO.DoubleStruct)">
+            <summary>Implements the operator !=.</summary>
+            <param name="value1">The value1.</param>
+            <param name="value2">The value2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.DoubleStruct.ToDouble(System.UInt64)">
+            <summary>
+            Converts a <see cref="T:System.UInt64"/> to a <see cref="T:System.Double"/>.
+            </summary>
+            <param name="value">The value to convert.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.DoubleStruct.ToDouble(System.Int64)">
+            <summary>
+            Converts a <see cref="T:System.Int64"/> to a <see cref="T:System.Double"/>.
+            </summary>
+            <param name="value">The value to convert.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.DoubleStruct.ToInt64(System.Double)">
+            <summary>
+            Converts a <see cref="T:System.Double"/> to a <see cref="T:System.Int64"/>.
+            </summary>
+            <param name="value">The value to convert.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.DoubleStruct.ToUInt64(System.Double)">
+            <summary>
+            Converts a <see cref="T:System.Double"/> to a <see cref="T:System.UInt64"/>.
+            </summary>
+            <param name="value">The value to convert.</param>
+            <returns></returns>
+        </member>
+        <member name="F:Cave.IO.DoubleStruct.UInt64">
+            <summary>
+            The value as UInt64.
+            </summary>
+        </member>
+        <member name="F:Cave.IO.DoubleStruct.Int64">
+            <summary>
+            The value as Int64.
+            </summary>
+        </member>
+        <member name="F:Cave.IO.DoubleStruct.Double">
+            <summary>
+            The value as Double.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.DoubleStruct.GetHashCode">
+            <summary>Returns a hash code for this instance.</summary>
+            <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. </returns>
+        </member>
+        <member name="M:Cave.IO.DoubleStruct.Equals(System.Object)">
+            <summary>Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.</summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns><c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Cave.IO.DoubleStruct.Equals(Cave.IO.DoubleStruct)">
+            <summary>Determines whether the specified <see cref="T:Cave.IO.DoubleStruct" />, is equal to this instance.</summary>
+            <param name="other">The <see cref="T:Cave.IO.DoubleStruct" /> to compare with this instance.</param>
+            <returns><c>true</c> if the specified <see cref="T:Cave.IO.DoubleStruct" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="T:Cave.IO.Endian">
+            <summary>
+            Provides Endian Tools.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.Endian.Swap(System.Byte[],System.Int32)">
+            <summary>Swaps the endian type of the specified data.</summary>
+            <param name="data">The data.</param>
+            <param name="bytes">The bytes to swap (2..x).</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.Endian.Swap(System.UInt16)">
+            <summary>Swaps the byte order of a value.</summary>
+            <param name="value">Value to swap the byte order of.</param>
+            <returns>Byte order-swapped value.</returns>
+        </member>
+        <member name="M:Cave.IO.Endian.Swap(System.UInt32)">
+            <summary>Swaps the byte order of a value.</summary>
+            <param name="value">Value to swap the byte order of.</param>
+            <returns>Byte order-swapped value.</returns>
+        </member>
+        <member name="M:Cave.IO.Endian.Swap(System.UInt64)">
+            <summary>Swaps the byte order of a value.</summary>
+            <param name="value">Value to swap the byte order of.</param>
+            <returns>Byte order-swapped value.</returns>
+        </member>
+        <member name="P:Cave.IO.Endian.MachineType">
+            <summary>
+            Obtains the machine endian type.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:Cave.IO.EndianType">
+            <summary>
+            Available endian types.
+            </summary>
+        </member>
+        <member name="F:Cave.IO.EndianType.None">
+            <summary>Unknown endian type</summary>
+        </member>
+        <member name="F:Cave.IO.EndianType.LittleEndian">
+            <summary>
+            little endian byte order
+            </summary>
+        </member>
+        <member name="F:Cave.IO.EndianType.BigEndian">
+            <summary>
+            big endian byte order
+            </summary>
+        </member>
+        <member name="T:Cave.IO.ExceptionEventArgs">
+            <summary>
+            Provides <see cref="T:System.EventArgs"/> for <see cref="P:Cave.IO.ExceptionEventArgs.Exception"/>handling of background threads using an <see cref="T:System.EventHandler"/>.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.ExceptionEventArgs.Exception">
+            <summary>
+            The <see cref="P:Cave.IO.ExceptionEventArgs.Exception"/> that was encountered.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.ExceptionEventArgs.#ctor(System.Exception)">
+            <summary>
+            Creates new <see cref="T:Cave.IO.ExceptionEventArgs"/>.
+            </summary>
+            <param name="ex">The <see cref="P:Cave.IO.ExceptionEventArgs.Exception"/> that was encountered.</param>
+        </member>
+        <member name="T:Cave.IO.FifoBuffer">
+            <summary>
+            Provides a simple byte[] buffer queue able to work with buffers of any size.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.FifoBuffer.Read(System.IntPtr,System.Int32,System.Int32)">
+            <summary>
+            Reads a byte array of specified length from the source pointer starting at the specified byte offset.
+            </summary>
+            <param name="source">The source pointer.</param>
+            <param name="offset">The byte offset for the read position.</param>
+            <param name="count">The number of bytes to read.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.FifoBuffer.Prepend(System.Byte[])">
+            <summary>
+            Directly prepends the specified byte buffer (without copying).
+            </summary>
+            <param name="buffer">The buffer to add (will not be copied).</param>
+        </member>
+        <member name="M:Cave.IO.FifoBuffer.Enqueue(System.IO.Stream,System.Int32)">
+            <summary>
+            Enqueues a number of bytes from the specified stream.
+            </summary>
+            <param name="stream">The stream to read from.</param>
+            <param name="count">The number of bytes to enqueue.</param>
+        </member>
+        <member name="M:Cave.IO.FifoBuffer.Enqueue(System.Byte[])">
+            <summary>
+            Directly enqueues the specified byte buffer (without copying).
+            </summary>
+            <param name="buffer">The buffer to add (will not be copied).</param>
+        </member>
+        <member name="M:Cave.IO.FifoBuffer.Enqueue(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Enqueues datas from the specified buffer (will be copied).
+            </summary>
+            <param name="buffer">The buffer.</param>
+            <param name="offset">The byte offset to start reading from.</param>
+            <param name="count">The number of bytes to copy.</param>
+        </member>
+        <member name="M:Cave.IO.FifoBuffer.Enqueue(System.IntPtr,System.Int32)">
+            <summary>
+            Enqueues data from the specified pointer.
+            </summary>
+            <param name="ptr">The location to start reading at.</param>
+            <param name="count">The number of bytes to copy.</param>
+        </member>
+        <member name="M:Cave.IO.FifoBuffer.Enqueue(System.IntPtr,System.Int32,System.Int32)">
+            <summary>
+            Enqueues data from the specified pointer.
+            </summary>
+            <param name="ptr">The location to start reading at.</param>
+            <param name="offset">The byte offset to start reading from.</param>
+            <param name="count">The number of bytes to copy.</param>
+        </member>
+        <member name="M:Cave.IO.FifoBuffer.Peek">
+            <summary>
+            Peeks at the first buffer (may be of any size &gt; 0).
+            </summary>
+            <returns>Returns the first buffer (may be of any size &gt; 0).</returns>
+        </member>
+        <member name="M:Cave.IO.FifoBuffer.Peek(System.Int32)">
+            <summary>
+            Peeks at the buffer returning the specified number of bytes as new byte[] buffer.
+            </summary>
+            <param name="size">The number of bytes to peek at.</param>
+            <returns>Returns a new buffer of the specified size.</returns>
+        </member>
+        <member name="M:Cave.IO.FifoBuffer.Peek(System.Int32,System.IntPtr)">
+            <summary>
+            Peeks at the buffer and writes the data to the specified location.
+            </summary>
+            <param name="size">The number of bytes to peek at.</param>
+            <param name="ptr">The location to start writing at.</param>
+        </member>
+        <member name="M:Cave.IO.FifoBuffer.Dequeue">
+            <summary>
+            Dequeues the first buffer (may be of any size &gt; 0).
+            </summary>
+            <returns>Returns a dequeued buffer (may be of any size &gt; 0).</returns>
+        </member>
+        <member name="M:Cave.IO.FifoBuffer.Dequeue(System.Int32)">
+            <summary>
+            Dequeues the specified number of bytes as new byte[] buffer.
+            </summary>
+            <param name="size">The number of bytes to dequeue.</param>
+            <returns>Returns a dequeued buffer of the specified size.</returns>
+        </member>
+        <member name="M:Cave.IO.FifoBuffer.Dequeue(System.Int32,System.IntPtr)">
+            <summary>
+            Dequeues the specified number of bytes and writes them to the specified location.
+            </summary>
+            <param name="size">The number of bytes to dequeue.</param>
+            <param name="ptr">The location to start writing at.</param>
+        </member>
+        <member name="M:Cave.IO.FifoBuffer.ToArray">
+            <summary>
+            Obtains a byte[] array containing all currently buffered bytes.
+            </summary>
+            <returns>Returns a byte[] array size = <see cref="P:Cave.IO.FifoBuffer.Length"/>.</returns>
+        </member>
+        <member name="M:Cave.IO.FifoBuffer.Clear">
+            <summary>
+            Clears the buffer.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.FifoBuffer.Length">
+            <summary>
+            Obtains number of bytes currently buffered.
+            </summary>
+        </member>
+        <member name="T:Cave.IO.FifoStream">
+            <summary>
+            Provides a fifo buffer for byte[] blocks readable as stream.
+            New buffers can be appended to the end of the stream and read like a stream.
+            The performance of this class is best with medium sized buffers (1kiB - 64kiB).
+            </summary>
+        </member>
+        <member name="M:Cave.IO.FifoStream.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Cave.IO.FifoStream"/> class.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.FifoStream.CanRead">
+            <summary>
+            This stream can always be read.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.FifoStream.CanSeek">
+            <summary>
+            This stream can seek.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.FifoStream.CanWrite">
+            <summary>
+            This stream can not be written.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.FifoStream.Flush">
+            <summary>
+            Does nothing.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.FifoStream.Length">
+            <summary>
+            provides the current length of the stream.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.FifoStream.Position">
+            <summary>
+            provides the current read/write position.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.FifoStream.Available">
+            <summary>
+            Provides the number of bytes available from the current read position to the end of the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.FifoStream.IndexOf(System.Byte)">
+            <summary>Determines whether the buffer contains the specified byte.</summary>
+            <param name="b">The byte.</param>
+            <returns>the index (a value &gt;=0) if the buffer contains the specified byte; otherwise, -1.</returns>
+        </member>
+        <member name="M:Cave.IO.FifoStream.Contains(System.Byte)">
+            <summary>Determines whether the buffer contains the specified byte.</summary>
+            <param name="b">The byte.</param>
+            <returns><c>true</c> if the buffer contains the specified byte; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Cave.IO.FifoStream.IndexOf(System.Byte[])">
+            <summary>Determines whether the buffer contains the specified data.</summary>
+            <param name="data">The data.</param>
+            <returns>the index (a value &gt;=0) if the buffer contains the specified bytes; otherwise, -1.</returns>
+        </member>
+        <member name="M:Cave.IO.FifoStream.Contains(System.Byte[])">
+            <summary>Determines whether the buffer contains the specified data.</summary>
+            <param name="data">The data.</param>
+            <returns><c>true</c> if the buffer contains the specified data; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Cave.IO.FifoStream.PeekByte">
+            <summary>
+            Peeks at the next byte in the buffer. Returns -1 if no more data available.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.FifoStream.ReadByte">
+            <summary>
+            Reads the next byte in the buffer (much faster than <see cref="M:Cave.IO.FifoStream.Read(System.Byte[],System.Int32,System.Int32)"/>). Returns -1 if no more data available.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.FifoStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads some bytes at the current position from the stream.
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.FifoStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Throws a NotSupportedException.
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+        </member>
+        <member name="M:Cave.IO.FifoStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            Moves the read / write position in the stream.
+            </summary>
+            <param name="offset"></param>
+            <param name="origin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.FifoStream.SetLength(System.Int64)">
+            <summary>
+            Throws new NotSupportedException().
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="P:Cave.IO.FifoStream.BufferCount">
+            <summary>
+            Obtains the number of buffers in the stream.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.FifoStream.FreeBuffers">
+            <summary>
+            Removes all buffers in front of the current position.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.FifoStream.FreeBuffers(System.Int32)">
+            <summary>
+            removes all buffers in front of the current position but keeps at least the specified number of bytes.
+            </summary>
+            <param name="sizeToKeep">The number of bytes to keep at the buffer.</param>
+        </member>
+        <member name="M:Cave.IO.FifoStream.AppendStream(System.IO.Stream,System.Int32)">
+            <summary>
+            Appends a byte buffer of the specified length from the specified Source stream to the end of the stream.
+            </summary>
+            <param name="source"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.FifoStream.AppendStream(System.IO.Stream)">
+            <summary>
+            Appends a whole stream to the end of the stream.
+            </summary>
+            <param name="source"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.FifoStream.PutBuffer(System.Byte[])">
+            <summary>
+            Puts a buffer to the end of the stream without copying.
+            </summary>
+            <param name="buffer"></param>
+        </member>
+        <member name="M:Cave.IO.FifoStream.AppendBuffer(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            appends a buffer at the end of the stream (always copies the buffer).
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+        </member>
+        <member name="M:Cave.IO.FifoStream.ToArray">
+            <summary>Retrieves all data at the buffer as array (peek).</summary>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.FifoStream.Clear">
+            <summary>
+            Clears the buffer.
+            </summary>
+        </member>
+        <member name="T:Cave.IO.FourCC">
+            <summary>
+            A FourCC (literally, four-character code) is a sequence of four bytes used to uniquely identify data formats.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.FourCC.op_Implicit(Cave.IO.FourCC)~System.String">
+            <summary>
+            Implicit conversion from <see cref="T:Cave.IO.FourCC"/> to string[4].
+            </summary>
+            <param name="val">Value to convert.</param>
+        </member>
+        <member name="M:Cave.IO.FourCC.op_Implicit(Cave.IO.FourCC)~System.Int32">
+            <summary>
+            Implicit conversion from <see cref="T:Cave.IO.FourCC"/> to int.
+            </summary>
+            <param name="val">Value to convert.</param>
+        </member>
+        <member name="M:Cave.IO.FourCC.op_Implicit(Cave.IO.FourCC)~System.UInt32">
+            <summary>
+            Implicit conversion from <see cref="T:Cave.IO.FourCC"/> to uint.
+            </summary>
+            <param name="val">Value to convert.</param>
+        </member>
+        <member name="M:Cave.IO.FourCC.op_Implicit(System.String)~Cave.IO.FourCC">
+            <summary>
+            Implicit conversion from string[4] to <see cref="T:Cave.IO.FourCC"/>.
+            </summary>
+            <param name="val">Value to convert.</param>
+        </member>
+        <member name="M:Cave.IO.FourCC.op_Implicit(System.Int32)~Cave.IO.FourCC">
+            <summary>
+            Implicit conversion from int to <see cref="T:Cave.IO.FourCC"/>.
+            </summary>
+            <param name="val">Value to convert.</param>
+        </member>
+        <member name="M:Cave.IO.FourCC.op_Implicit(System.UInt32)~Cave.IO.FourCC">
+            <summary>
+            Implicit conversion from uint to <see cref="T:Cave.IO.FourCC"/>.
+            </summary>
+            <param name="val">Value to convert.</param>
+        </member>
+        <member name="M:Cave.IO.FourCC.Create(System.String)">
+            <summary>
+            Creates a new <see cref="T:Cave.IO.FourCC"/> instance with the specified string[4].
+            </summary>
+            <param name="str">String to set.</param>
+            <returns>Returns a new <see cref="T:Cave.IO.FourCC"/> instance.</returns>
+        </member>
+        <member name="M:Cave.IO.FourCC.Create(System.UInt32)">
+            <summary>
+            Creates a new <see cref="T:Cave.IO.FourCC"/> instance with the specified content.
+            </summary>
+            <param name="val">The value to set.</param>
+            <returns>Returns a new <see cref="T:Cave.IO.FourCC"/> instance.</returns>
+        </member>
+        <member name="M:Cave.IO.FourCC.ToString">
+            <summary>
+            Retrieves the 4 character string this value represents.
+            </summary>
+            <returns>Returns a string[4].</returns>
+        </member>
+        <member name="M:Cave.IO.FourCC.Equals(System.Object)">
+            <summary>
+            Checks for equality with the <see cref="M:System.Object.ToString"/> method of the specified <paramref name="obj"/>.
+            </summary>
+            <param name="obj">The object to compare to.</param>
+            <returns>Returns true if the specified object is equal to the current object; otherwise, false.</returns>
+        </member>
+        <member name="M:Cave.IO.FourCC.GetHashCode">
+            <summary>
+            Serves as the default hash function.
+            </summary>
+            <returns>Returns a hash code for the current object.</returns>
+        </member>
+        <member name="T:Cave.IO.IBitConverter">
+            <summary>
+            Provides an interface for bit converter implementations.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.Get7BitEncodedBytes(System.UInt64)">
+            <summary>Obtains the bytes of a 7 bit encoded integer.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.Get7BitEncodedBytes(System.Int64)">
+            <summary>Obtains the bytes of a 7 bit encoded integer.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.GetBytes(System.Double)">
+            <summary>Retrieves the specified value as byte array with the specified endiantype.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.GetBytes(System.Int32)">
+            <summary>Retrieves the specified value as byte array with the specified endiantype.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.GetBytes(System.SByte)">
+            <summary>Retrieves the specified value as byte array with the specified endiantype.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.GetBytes(System.TimeSpan)">
+            <summary>Retrieves the specified value as byte array with the specified endiantype.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.GetBytes(System.UInt64)">
+            <summary>Retrieves the specified value as byte array with the specified endiantype.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.GetBytes(System.UInt16)">
+            <summary>Retrieves the specified value as byte array with the specified endiantype.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.GetBytes(System.UInt32)">
+            <summary>Retrieves the specified value as byte array with the specified endiantype.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.GetBytes(System.Int16)">
+            <summary>Retrieves the specified value as byte array with the specified endiantype.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.GetBytes(System.Int64)">
+            <summary>Retrieves the specified value as byte array with the specified endiantype.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.GetBytes(System.Single)">
+            <summary>Retrieves the specified value as byte array with the specified endiantype.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.GetBytes(System.Decimal)">
+            <summary>Retrieves the specified value as byte array with the specified endiantype.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.GetBytes(System.DateTime)">
+            <summary>Retrieves the specified value as byte array with the specified endiantype.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.GetBytes(System.Byte)">
+            <summary>Retrieves the specified value as byte array with the specified endiantype.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.GetBytes(System.Boolean)">
+            <summary>Retrieves the specified value as byte array with the specified endiantype.</summary>
+            <param name="value">The value.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.ToBoolean(System.Byte[],System.Int32)">
+            <summary>Returns a value converted from the specified data at a specified index.</summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">data.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.ToByte(System.Byte[],System.Int32)">
+            <summary>Returns a value converted from the specified data at a specified index.</summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">data.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.ToDateTime(System.Byte[],System.Int32)">
+            <summary>Returns a value converted from the specified data at a specified index.</summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">data.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.ToDecimal(System.Byte[],System.Int32)">
+            <summary>Returns a value converted from the specified data at a specified index.</summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">data.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.ToDouble(System.Byte[],System.Int32)">
+            <summary>Returns a value converted from the specified data at a specified index.</summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">data.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.ToInt16(System.Byte[],System.Int32)">
+            <summary>Returns a value converted from the specified data at a specified index.</summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">data.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.ToInt32(System.Byte[],System.Int32)">
+            <summary>Returns a value converted from the specified data at a specified index.</summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">data.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.ToInt64(System.Byte[],System.Int32)">
+            <summary>Returns a value converted from the specified data at a specified index.</summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">data.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.ToSByte(System.Byte[],System.Int32)">
+            <summary>Returns a value converted from the specified data at a specified index.</summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">data.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.ToSingle(System.Byte[],System.Int32)">
+            <summary>Returns a value converted from the specified data at a specified index.</summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">data.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.ToTimeSpan(System.Byte[],System.Int32)">
+            <summary>Returns a value converted from the specified data at a specified index.</summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">data.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.ToUInt16(System.Byte[],System.Int32)">
+            <summary>Returns a value converted from the specified data at a specified index.</summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">data.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.ToUInt32(System.Byte[],System.Int32)">
+            <summary>Returns a value converted from the specified data at a specified index.</summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">data.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="M:Cave.IO.IBitConverter.ToUInt64(System.Byte[],System.Int32)">
+            <summary>Returns a value converted from the specified data at a specified index.</summary>
+            <param name="data"></param>
+            <param name="index"></param>
+            <returns></returns>
+            <exception cref="T:System.ArgumentNullException">data.</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException"></exception>
+        </member>
+        <member name="T:Cave.IO.MarshalStruct">
+            <summary>
+            Provides tools for manual struct mashalling.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.MarshalStruct.SizeOf``1">
+            <summary>
+            Gets the size of the specified structure.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.MarshalStruct.Copy``1(System.Byte[],``0@)">
+            <summary>
+            Marshalls the specified buffer to a new structure instance.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="buffer">Buffer to copy.</param>
+            <param name="result"></param>
+        </member>
+        <member name="M:Cave.IO.MarshalStruct.Copy``1(System.Byte[],System.Int32,``0@)">
+            <summary>
+            Marshalls the specified buffer to a new structure instance.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="buffer">Buffer to copy.</param>
+            <param name="offset">Offset to start reading the byte buffer at.</param>
+            <param name="result"></param>
+        </member>
+        <member name="M:Cave.IO.MarshalStruct.Copy``1(``0,System.Byte[]@)">
+            <summary>
+            Marshalls the specified structure to a new byte[] instance.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="item"></param>
+            <param name="data"></param>
+        </member>
+        <member name="M:Cave.IO.MarshalStruct.Read``1(System.IO.Stream)">
+            <summary>
+            Reads a struct from a stream (see <see cref="T:Cave.IO.DataReader"/> for a comfortable reader class supporting this, too).
+            </summary>
+            <typeparam name="T">struct type.</typeparam>
+            <param name="stream">Stream to read from.</param>
+            <returns>Returns a new struct instance.</returns>
+        </member>
+        <member name="M:Cave.IO.MarshalStruct.Write``1(System.IO.Stream,``0)">
+            <summary>
+            Writes a struct to a stream (see <see cref="T:Cave.IO.DataWriter"/> for a comfortable reader class supporting this, too).
+            </summary>
+            <typeparam name="T">struct type.</typeparam>
+            <param name="stream">Stream to write to.</param>
+            <param name="item">the struct to write.</param>
+        </member>
+        <member name="M:Cave.IO.MarshalStruct.Read``1(System.Byte[],System.Int32)">
+            <summary>
+            Reads a struct from a byte buffer.
+            </summary>
+            <typeparam name="T">struct type.</typeparam>
+            <param name="data">byte buffer.</param>
+            <param name="offset">Offset at the byte buffer to start reading.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.MarshalStruct.Write``1(``0,System.Byte[],System.Int32)">
+            <summary>
+            Writes a struct to a byte buffer.
+            </summary>
+            <typeparam name="T">struct type.</typeparam>
+            <param name="item">the struct to write.</param>
+            <param name="buffer">byte buffer.</param>
+            <param name="offset">Offset at the byte buffer to start writing.</param>
+        </member>
+        <member name="M:Cave.IO.MarshalStruct.GetBytes``1(``0)">
+            <summary>
+            Obtains a new byte buffer containing the data of the struct.
+            </summary>
+            <typeparam name="T">struct type.</typeparam>
+            <param name="item">the struct to read.</param>
+            <returns>returns a new byte buffer.</returns>
+        </member>
+        <member name="M:Cave.IO.MarshalStruct.GetStruct``1(System.Byte[])">
+            <summary>
+            Obtains a new struct instance containing the data of the buffer.
+            </summary>
+            <typeparam name="T">struct type.</typeparam>
+            <param name="data">byte buffer.</param>
+            <returns>returns a new struct.</returns>
+        </member>
+        <member name="M:Cave.IO.MarshalStruct.ReadUtf8(System.IntPtr)">
+            <summary>Reads a native UTF8 string.</summary>
+            <param name="ptr">The pointer.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.MarshalStruct.ReadUtf8Strings(System.IntPtr)">
+            <summary>Reads a native UTF8 strings array.</summary>
+            <remarks>utf8 string arrays are a memory reagon containing null terminated utf8 strings terminated by an empty utf8 string.</remarks>
+            <param name="ptr">The pointer.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Cave.IO.NewLineMode">
+            <summary>
+            Available NewLine modes for DataReader and DataWriter.
+            </summary>
+        </member>
+        <member name="F:Cave.IO.NewLineMode.Undefined">
+            <summary>undefined</summary>
+        </member>
+        <member name="F:Cave.IO.NewLineMode.CR">
+            <summary>
+            carriage return only
+            </summary>
+        </member>
+        <member name="F:Cave.IO.NewLineMode.LF">
+            <summary>
+            line feed only
+            </summary>
+        </member>
+        <member name="F:Cave.IO.NewLineMode.CRLF">
+            <summary>
+            carriage return followed by line feed
+            </summary>
+        </member>
+        <member name="T:Cave.IO.ResistantFileStream">
+            <summary>
+            Provides a error resistant file stream for read operations.
+            </summary>
+            <seealso cref="T:System.IO.Stream" />
+        </member>
+        <member name="M:Cave.IO.ResistantFileStream.OpenSequentialRead(System.String)">
+            <summary>Opens a new <see cref="T:Cave.IO.ResistantFileStream"/> for sequential reading with a buffer of 128kib.</summary>
+            <param name="filename">The filename.</param>
+            <returns>Returns a new <see cref="T:Cave.IO.ResistantFileStream"/> instance.</returns>
+        </member>
+        <member name="P:Cave.IO.ResistantFileStream.FileName">
+            <summary>Gets the name of the file.</summary>
+            <value>The name of the file.</value>
+        </member>
+        <member name="P:Cave.IO.ResistantFileStream.FileMode">
+            <summary>Gets the file mode.</summary>
+            <value>The file mode.</value>
+        </member>
+        <member name="P:Cave.IO.ResistantFileStream.FileAccess">
+            <summary>Gets the file access.</summary>
+            <value>The file access.</value>
+        </member>
+        <member name="P:Cave.IO.ResistantFileStream.FileShare">
+            <summary>Gets the file share.</summary>
+            <value>The file share.</value>
+        </member>
+        <member name="P:Cave.IO.ResistantFileStream.FileOptions">
+            <summary>Gets the file options.</summary>
+            <value>The file options.</value>
+        </member>
+        <member name="P:Cave.IO.ResistantFileStream.FileMaxErrors">
+            <summary>Gets or sets the file access maximum error rate.</summary>
+            <remarks>Any operation needing more than <see cref="P:Cave.IO.ResistantFileStream.FileMaxErrors"/> retries will fail with the original exception.</remarks>
+            <value>The file maximum error rate.</value>
+        </member>
+        <member name="P:Cave.IO.ResistantFileStream.BaseStream">
+            <summary>Gets the file stream.</summary>
+            <value>The file stream.</value>
+            <exception cref="T:System.ObjectDisposedException"></exception>
+        </member>
+        <member name="M:Cave.IO.ResistantFileStream.#ctor(System.String,System.IO.FileMode,System.IO.FileAccess,System.IO.FileShare,System.IO.FileOptions)">
+            <summary>Initializes a new instance of the <see cref="T:Cave.IO.ResistantFileStream"/> class.</summary>
+            <param name="filename">The filename.</param>
+            <param name="mode">The mode.</param>
+            <param name="access">The access.</param>
+            <param name="share">The share.</param>
+            <param name="options">The options.</param>
+        </member>
+        <member name="M:Cave.IO.ResistantFileStream.Dispose(System.Boolean)">
+            <summary>
+            Gibt die vom <see cref="T:System.IO.Stream" /> verwendeten nicht verwalteten Ressourcen und optional auch die verwalteten Ressourcen frei.
+            </summary>
+            <param name="disposing">true, um sowohl verwaltete als auch nicht verwaltete Ressourcen freizugeben. false, um ausschließlich nicht verwaltete Ressourcen freizugeben.</param>
+        </member>
+        <member name="P:Cave.IO.ResistantFileStream.CanRead">
+            <summary>
+            Ruft beim Überschreiben in einer abgeleiteten Klasse einen Wert ab, der angibt, ob der aktuelle Stream Lesevorgänge unterstützt.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.ResistantFileStream.CanSeek">
+            <summary>
+            Ruft beim Überschreiben in einer abgeleiteten Klasse einen Wert ab, der angibt, ob der aktuelle Stream Suchvorgänge unterstützt.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.ResistantFileStream.CanWrite">
+            <summary>
+            Ruft beim Überschreiben in einer abgeleiteten Klasse einen Wert ab, der angibt, ob der aktuelle Stream Schreibvorgänge unterstützt.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.ResistantFileStream.Length">
+            <summary>Ruft beim Überschreiben in einer abgeleiteten Klasse die Länge des Streams in Bytes ab.</summary>
+        </member>
+        <member name="P:Cave.IO.ResistantFileStream.Position">
+            <summary>Ruft beim Überschreiben in einer abgeleiteten Klasse die Position im aktuellen Stream ab oder legt diese fest.</summary>
+        </member>
+        <member name="M:Cave.IO.ResistantFileStream.Flush">
+            <summary>
+            Löscht beim Überschreiben in einer abgeleiteten Klasse alle Puffer für diesen Stream und veranlasst die Ausgabe aller gepufferten Daten an das zugrunde liegende Gerät.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.ResistantFileStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Liest beim Überschreiben in einer abgeleiteten Klasse eine Folge von Bytes aus dem aktuellen Stream und erhöht die Position im Stream um die Anzahl der gelesenen Bytes.
+            </summary>
+            <param name="buffer">Ein Bytearray.Nach dem Beenden dieser Methode enthält der Puffer das angegebene Bytearray mit den Werten zwischen <paramref name="offset" /> und (<paramref name="offset" /> + <paramref name="count" /> - 1), die durch aus der aktuellen Quelle gelesene Bytes ersetzt wurden.</param>
+            <param name="offset">Der nullbasierte Byteoffset im <paramref name="buffer" />, ab dem die aus dem aktuellen Stream gelesenen Daten gespeichert werden.</param>
+            <param name="count">Die maximale Anzahl an Bytes, die aus dem aktuellen Stream gelesen werden sollen.</param>
+            <returns>
+            Die Gesamtanzahl der in den Puffer gelesenen Bytes.Dies kann weniger als die Anzahl der angeforderten Bytes sein, wenn diese Anzahl an Bytes derzeit nicht verfügbar ist, oder 0, wenn das Ende des Streams erreicht ist.
+            </returns>
+        </member>
+        <member name="M:Cave.IO.ResistantFileStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>Legt beim Überschreiben in einer abgeleiteten Klasse die Position im aktuellen Stream fest.</summary>
+            <param name="offset">Ein Byteoffset relativ zum <paramref name="origin" />-Parameter.</param>
+            <param name="origin">Ein Wert vom Typ <see cref="T:System.IO.SeekOrigin" />, der den Bezugspunkt angibt, von dem aus die neue Position ermittelt wird.</param>
+            <returns>Die neue Position innerhalb des aktuellen Streams.</returns>
+        </member>
+        <member name="M:Cave.IO.ResistantFileStream.SetLength(System.Int64)">
+            <summary>Legt beim Überschreiben in einer abgeleiteten Klasse die Länge des aktuellen Streams fest.</summary>
+            <param name="value">Die gewünschte Länge des aktuellen Streams in Bytes.</param>
+        </member>
+        <member name="M:Cave.IO.ResistantFileStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Schreibt beim Überschreiben in einer abgeleiteten Klasse eine Folge von Bytes in den aktuellen Stream und erhöht die aktuelle Position im Stream um die Anzahl der geschriebenen Bytes.
+            </summary>
+            <param name="buffer">Ein Bytearray.Diese Methode kopiert <paramref name="count" /> Bytes aus dem <paramref name="buffer" /> in den aktuellen Stream.</param>
+            <param name="offset">Der nullbasierte Byteoffset im <paramref name="buffer" />, ab dem Bytes in den aktuellen Stream kopiert werden.</param>
+            <param name="count">Die Anzahl an Bytes, die in den aktuellen Stream geschrieben werden sollen.</param>
+        </member>
+        <member name="T:Cave.IO.SingleStruct">
+            <summary>
+            Provides an easy way to access the bits of a single value.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.SingleStruct.op_Equality(Cave.IO.SingleStruct,Cave.IO.SingleStruct)">
+            <summary>Implements the operator ==.</summary>
+            <param name="value1">The value1.</param>
+            <param name="value2">The value2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.SingleStruct.op_Inequality(Cave.IO.SingleStruct,Cave.IO.SingleStruct)">
+            <summary>Implements the operator !=.</summary>
+            <param name="value1">The value1.</param>
+            <param name="value2">The value2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.SingleStruct.ToSingle(System.UInt32)">
+            <summary>
+            Converts a <see cref="T:System.UInt32"/> to a <see cref="T:System.Single"/>.
+            </summary>
+            <param name="value">The value to convert.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.SingleStruct.ToSingle(System.Int32)">
+            <summary>
+            Converts a <see cref="T:System.Int32"/> to a <see cref="T:System.Single"/>.
+            </summary>
+            <param name="value">The value to convert.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.SingleStruct.ToInt32(System.Single)">
+            <summary>
+            Converts a <see cref="T:System.Single"/> to a <see cref="T:System.Int32"/>.
+            </summary>
+            <param name="value">The value to convert.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.SingleStruct.ToUInt32(System.Single)">
+            <summary>
+            Converts a <see cref="T:System.Single"/> to a <see cref="T:System.UInt32"/>.
+            </summary>
+            <param name="value">The value to convert.</param>
+            <returns></returns>
+        </member>
+        <member name="F:Cave.IO.SingleStruct.UInt32">
+            <summary>
+            The value as UInt32.
+            </summary>
+        </member>
+        <member name="F:Cave.IO.SingleStruct.Int32">
+            <summary>
+            The value as UInt32.
+            </summary>
+        </member>
+        <member name="F:Cave.IO.SingleStruct.Single">
+            <summary>
+            The value as Single.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.SingleStruct.GetHashCode">
+            <summary>Returns a hash code for this instance.</summary>
+            <returns>A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table. </returns>
+        </member>
+        <member name="M:Cave.IO.SingleStruct.Equals(System.Object)">
+            <summary>Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.</summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns><c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="M:Cave.IO.SingleStruct.Equals(Cave.IO.SingleStruct)">
+            <summary>Determines whether the specified <see cref="T:Cave.IO.SingleStruct" />, is equal to this instance.</summary>
+            <param name="other">The <see cref="T:Cave.IO.SingleStruct" /> to compare with this instance.</param>
+            <returns><c>true</c> if the specified <see cref="T:Cave.IO.SingleStruct" /> is equal to this instance; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="T:Cave.IO.StringEncoding">
+            <summary>
+            Provides supported string encodings.
+            </summary>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.Undefined">
+            <summary>Character set not defined</summary>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ASCII">
+            <summary>
+            7 Bit per Character
+            </summary>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.UTF8">
+            <summary>
+            8 Bit per Character Unicode
+            </summary>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.UTF16">
+            <summary>
+            Little Endian 16 Bit per Character Unicode
+            </summary>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.UTF32">
+            <summary>
+            Little Endian 32 Bit per Character Unicode
+            </summary>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ASMO_708">
+            <summary>Arabisch (ASMO 708)</summary>
+            <remarks>Codepage: 708, Windows Codepage: 1256</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.BIG5">
+            <summary>Chinesisch traditionell (Big5)</summary>
+            <remarks>Codepage: 950, Windows Codepage: 950</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.CP1025">
+            <summary>IBM EBCDIC (Kyrillisch, Serbisch-Bulgarisch)</summary>
+            <remarks>Codepage: 21025, Windows Codepage: 1251</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.CP866">
+            <summary>Kyrillisch (DOS)</summary>
+            <remarks>Codepage: 866, Windows Codepage: 1251</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.CP875">
+            <summary>IBM EBCDIC (Griechisch, modern)</summary>
+            <remarks>Codepage: 875, Windows Codepage: 1253</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.DOS_720">
+            <summary>Arabisch (DOS)</summary>
+            <remarks>Codepage: 720, Windows Codepage: 1256</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.DOS_862">
+            <summary>Hebräisch (DOS)</summary>
+            <remarks>Codepage: 862, Windows Codepage: 1255</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.EUC_CN">
+            <summary>Chinesisch vereinfacht (EUC)</summary>
+            <remarks>Codepage: 51936, Windows Codepage: 936</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.EUC_JP">
+            <summary>Japanisch (EUC)</summary>
+            <remarks>Codepage: 51932, Windows Codepage: 932</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.EUC_KR">
+            <summary>Koreanisch (EUC)</summary>
+            <remarks>Codepage: 51949, Windows Codepage: 949</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.GB18030">
+            <summary>Chinesisch vereinfacht (GB18030)</summary>
+            <remarks>Codepage: 54936, Windows Codepage: 936</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.GB2312">
+            <summary>Chinesisch vereinfacht (GB2312)</summary>
+            <remarks>Codepage: 936, Windows Codepage: 936</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.HZ_GB_2312">
+            <summary>Chinesisch vereinfacht (HZ)</summary>
+            <remarks>Codepage: 52936, Windows Codepage: 936</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM_THAI">
+            <summary>IBM EBCDIC (Thailändisch)</summary>
+            <remarks>Codepage: 20838, Windows Codepage: 874</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM00858">
+            <summary>OEM Multilingual Lateinisch 1</summary>
+            <remarks>Codepage: 858, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM00924">
+            <summary>IBM Lateinisch-1</summary>
+            <remarks>Codepage: 20924, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM01047">
+            <summary>IBM Lateinisch-1</summary>
+            <remarks>Codepage: 1047, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM01140">
+            <summary>IBM EBCDIC (USA-Kanada-Europäisch)</summary>
+            <remarks>Codepage: 1140, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM01141">
+            <summary>IBM EBCDIC (Deutschland-Europäisch)</summary>
+            <remarks>Codepage: 1141, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM01142">
+            <summary>IBM EBCDIC (Dänemark-Norwegen-Europäisch)</summary>
+            <remarks>Codepage: 1142, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM01143">
+            <summary>IBM EBCDIC (Finnland-Schweden-Europäisch)</summary>
+            <remarks>Codepage: 1143, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM01144">
+            <summary>IBM EBCDIC (Italien-Europäisch)</summary>
+            <remarks>Codepage: 1144, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM01145">
+            <summary>IBM EBCDIC (Spanisch-Europäisch)</summary>
+            <remarks>Codepage: 1145, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM01146">
+            <summary>IBM EBCDIC (Großbritannien-Europäisch)</summary>
+            <remarks>Codepage: 1146, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM01147">
+            <summary>IBM EBCDIC (Frankreich-Europäisch)</summary>
+            <remarks>Codepage: 1147, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM01148">
+            <summary>IBM EBCDIC (International-Europäisch)</summary>
+            <remarks>Codepage: 1148, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM01149">
+            <summary>IBM EBCDIC (Isländisch-Europäisch)</summary>
+            <remarks>Codepage: 1149, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM037">
+            <summary>IBM EBCDIC (USA-Kanada)</summary>
+            <remarks>Codepage: 37, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM1026">
+            <summary>IBM EBCDIC (Türkisch, Lateinisch-5)</summary>
+            <remarks>Codepage: 1026, Windows Codepage: 1254</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM273">
+            <summary>IBM EBCDIC (Deutschland)</summary>
+            <remarks>Codepage: 20273, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM277">
+            <summary>IBM EBCDIC (Dänemark-Norwegen)</summary>
+            <remarks>Codepage: 20277, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM278">
+            <summary>IBM EBCDIC (Finnland-Schweden)</summary>
+            <remarks>Codepage: 20278, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM280">
+            <summary>IBM EBCDIC (Italien)</summary>
+            <remarks>Codepage: 20280, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM284">
+            <summary>IBM EBCDIC (Spanien)</summary>
+            <remarks>Codepage: 20284, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM285">
+            <summary>IBM EBCDIC (UK)</summary>
+            <remarks>Codepage: 20285, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM290">
+            <summary>IBM EBCDIC (Japanisch Katakana)</summary>
+            <remarks>Codepage: 20290, Windows Codepage: 932</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM297">
+            <summary>IBM EBCDIC (Frankreich)</summary>
+            <remarks>Codepage: 20297, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM420">
+            <summary>IBM EBCDIC (Arabisch)</summary>
+            <remarks>Codepage: 20420, Windows Codepage: 1256</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM423">
+            <summary>IBM EBCDIC (Griechisch)</summary>
+            <remarks>Codepage: 20423, Windows Codepage: 1253</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM424">
+            <summary>IBM EBCDIC (Hebräisch)</summary>
+            <remarks>Codepage: 20424, Windows Codepage: 1255</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM437">
+            <summary>OEM USA</summary>
+            <remarks>Codepage: 437, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM500">
+            <summary>IBM EBCDIC (International)</summary>
+            <remarks>Codepage: 500, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM737">
+            <summary>Griechisch (DOS)</summary>
+            <remarks>Codepage: 737, Windows Codepage: 1253</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM775">
+            <summary>Baltisch (DOS)</summary>
+            <remarks>Codepage: 775, Windows Codepage: 1257</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM850">
+            <summary>Westeuropäisch (DOS)</summary>
+            <remarks>Codepage: 850, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM852">
+            <summary>Mitteleuropäisch (DOS)</summary>
+            <remarks>Codepage: 852, Windows Codepage: 1250</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM855">
+            <summary>OEM Kyrillisch</summary>
+            <remarks>Codepage: 855, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM857">
+            <summary>Türkisch (DOS)</summary>
+            <remarks>Codepage: 857, Windows Codepage: 1254</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM860">
+            <summary>Portugiesisch (DOS)</summary>
+            <remarks>Codepage: 860, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM861">
+            <summary>Isländisch (DOS)</summary>
+            <remarks>Codepage: 861, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM863">
+            <summary>Französisch, Kanada (DOS)</summary>
+            <remarks>Codepage: 863, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM864">
+            <summary>Arabisch (864)</summary>
+            <remarks>Codepage: 864, Windows Codepage: 1256</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM865">
+            <summary>Nordisch (DOS)</summary>
+            <remarks>Codepage: 865, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM869">
+            <summary>Griechisch, modern (DOS)</summary>
+            <remarks>Codepage: 869, Windows Codepage: 1253</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM870">
+            <summary>IBM EBCDIC (Multilingual Lateinisch-2)</summary>
+            <remarks>Codepage: 870, Windows Codepage: 1250</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM871">
+            <summary>IBM EBCDIC (Isländisch)</summary>
+            <remarks>Codepage: 20871, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM880">
+            <summary>IBM EBCDIC (Kyrillisch, Russisch)</summary>
+            <remarks>Codepage: 20880, Windows Codepage: 1251</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.IBM905">
+            <summary>IBM EBCDIC (Türkisch)</summary>
+            <remarks>Codepage: 20905, Windows Codepage: 1254</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ISO_2022_JP">
+            <summary>Japanisch (JIS, 1 Byte Kana erlaubt - SO/SI)</summary>
+            <remarks>Codepage: 50222, Windows Codepage: 932</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ISO_2022_KR">
+            <summary>Koreanisch (ISO)</summary>
+            <remarks>Codepage: 50225, Windows Codepage: 949</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ISO_8859_1">
+            <summary>Westeuropäisch (ISO)</summary>
+            <remarks>Codepage: 28591, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ISO_8859_13">
+            <summary>Estnisch (ISO)</summary>
+            <remarks>Codepage: 28603, Windows Codepage: 1257</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ISO_8859_15">
+            <summary>Lateinisch 9 (ISO)</summary>
+            <remarks>Codepage: 28605, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ISO_8859_2">
+            <summary>Mitteleuropäisch (ISO)</summary>
+            <remarks>Codepage: 28592, Windows Codepage: 1250</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ISO_8859_3">
+            <summary>Lateinisch 3 (ISO)</summary>
+            <remarks>Codepage: 28593, Windows Codepage: 1254</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ISO_8859_4">
+            <summary>Baltisch (ISO)</summary>
+            <remarks>Codepage: 28594, Windows Codepage: 1257</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ISO_8859_5">
+            <summary>Kyrillisch (ISO)</summary>
+            <remarks>Codepage: 28595, Windows Codepage: 1251</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ISO_8859_6">
+            <summary>Arabisch (ISO)</summary>
+            <remarks>Codepage: 28596, Windows Codepage: 1256</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ISO_8859_7">
+            <summary>Griechisch (ISO)</summary>
+            <remarks>Codepage: 28597, Windows Codepage: 1253</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ISO_8859_8">
+            <summary>Hebräisch (ISO-Visual)</summary>
+            <remarks>Codepage: 28598, Windows Codepage: 1255</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ISO_8859_8_I">
+            <summary>Hebräisch (ISO-Logical)</summary>
+            <remarks>Codepage: 38598, Windows Codepage: 1255</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.ISO_8859_9">
+            <summary>Türkisch (ISO)</summary>
+            <remarks>Codepage: 28599, Windows Codepage: 1254</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.JOHAB">
+            <summary>Koreanisch (Johab)</summary>
+            <remarks>Codepage: 1361, Windows Codepage: 949</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.KOI8_R">
+            <summary>Kyrillisch (KOI8-R)</summary>
+            <remarks>Codepage: 20866, Windows Codepage: 1251</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.KOI8_U">
+            <summary>Kyrillisch (KOI8-U)</summary>
+            <remarks>Codepage: 21866, Windows Codepage: 1251</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.KS_C_5601_1987">
+            <summary>Koreanisch</summary>
+            <remarks>Codepage: 949, Windows Codepage: 949</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.MACINTOSH">
+            <summary>Westeuropäisch (Mac)</summary>
+            <remarks>Codepage: 10000, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.US_ASCII">
+            <summary>US-ASCII</summary>
+            <remarks>Codepage: 20127, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.UTF_16">
+            <summary>Unicode</summary>
+            <remarks>Codepage: 1200, Windows Codepage: 1200</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.UTF_16BE">
+            <summary>Unicode (Big-Endian)</summary>
+            <remarks>Codepage: 1201, Windows Codepage: 1200</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.UTF_32">
+            <summary>Unicode (UTF-32)</summary>
+            <remarks>Codepage: 12000, Windows Codepage: 1200</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.UTF_32BE">
+            <summary>Unicode (UTF-32 Big-Endian)</summary>
+            <remarks>Codepage: 12001, Windows Codepage: 1200</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.UTF_7">
+            <summary>Unicode (UTF-7)</summary>
+            <remarks>Codepage: 65000, Windows Codepage: 1200</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.UTF_8">
+            <summary>Unicode (UTF-8)</summary>
+            <remarks>Codepage: 65001, Windows Codepage: 1200</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.WINDOWS_1255">
+            <summary>Hebräisch (Windows)</summary>
+            <remarks>Codepage: 1255, Windows Codepage: 1255</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.WINDOWS_1256">
+            <summary>Arabisch (Windows)</summary>
+            <remarks>Codepage: 1256, Windows Codepage: 1256</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.WINDOWS_1257">
+            <summary>Baltisch (Windows)</summary>
+            <remarks>Codepage: 1257, Windows Codepage: 1257</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.WINDOWS_1258">
+            <summary>Vietnamesisch (Windows)</summary>
+            <remarks>Codepage: 1258, Windows Codepage: 1258</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.WINDOWS_874">
+            <summary>Thailändisch (Windows)</summary>
+            <remarks>Codepage: 874, Windows Codepage: 874</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_CHINESE_CNS">
+            <summary>Chinesisch traditionell (CNS)</summary>
+            <remarks>Codepage: 20000, Windows Codepage: 950</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_CHINESE_ETEN">
+            <summary>Chinesisch traditionell (Eten)</summary>
+            <remarks>Codepage: 20002, Windows Codepage: 950</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_CP20001">
+            <summary>TCA Taiwan</summary>
+            <remarks>Codepage: 20001, Windows Codepage: 950</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_CP20003">
+            <summary>IBM5550 Taiwan</summary>
+            <remarks>Codepage: 20003, Windows Codepage: 950</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_CP20004">
+            <summary>TeleText Taiwan</summary>
+            <remarks>Codepage: 20004, Windows Codepage: 950</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_CP20005">
+            <summary>Wang Taiwan</summary>
+            <remarks>Codepage: 20005, Windows Codepage: 950</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_CP20261">
+            <summary>T.61</summary>
+            <remarks>Codepage: 20261, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_CP20269">
+            <summary>ISO-6937</summary>
+            <remarks>Codepage: 20269, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_CP20936">
+            <summary>GB2312-80 Chinesisch (vereinfacht)</summary>
+            <remarks>Codepage: 20936, Windows Codepage: 936</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_CP20949">
+            <summary>Koreanisch Wansung</summary>
+            <remarks>Codepage: 20949, Windows Codepage: 949</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_CP50227">
+            <summary>Chinesisch vereinfacht (ISO-2022)</summary>
+            <remarks>Codepage: 50227, Windows Codepage: 936</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_EBCDIC_KOREANEXTENDED">
+            <summary>IBM EBCDIC (Koreanisch, erweitert)</summary>
+            <remarks>Codepage: 20833, Windows Codepage: 949</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_EUROPA">
+            <summary>Europa</summary>
+            <remarks>Codepage: 29001, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_IA5">
+            <summary>Westeuropäisch (IA5)</summary>
+            <remarks>Codepage: 20105, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_IA5_GERMAN">
+            <summary>Deutsch (IA5)</summary>
+            <remarks>Codepage: 20106, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_IA5_NORWEGIAN">
+            <summary>Norwegisch (IA5)</summary>
+            <remarks>Codepage: 20108, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_IA5_SWEDISH">
+            <summary>Schwedisch (IA5)</summary>
+            <remarks>Codepage: 20107, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_ISCII_AS">
+            <summary>ISCII Assamesisch</summary>
+            <remarks>Codepage: 57006, Windows Codepage: 57006</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_ISCII_BE">
+            <summary>ISCII Bangla</summary>
+            <remarks>Codepage: 57003, Windows Codepage: 57003</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_ISCII_DE">
+            <summary>ISCII Devanagari</summary>
+            <remarks>Codepage: 57002, Windows Codepage: 57002</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_ISCII_GU">
+            <summary>ISCII Gujarati</summary>
+            <remarks>Codepage: 57010, Windows Codepage: 57010</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_ISCII_KA">
+            <summary>ISCII Kannada</summary>
+            <remarks>Codepage: 57008, Windows Codepage: 57008</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_ISCII_MA">
+            <summary>ISCII Malayalam</summary>
+            <remarks>Codepage: 57009, Windows Codepage: 57009</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_ISCII_OR">
+            <summary>ISCII Odia</summary>
+            <remarks>Codepage: 57007, Windows Codepage: 57007</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_ISCII_PA">
+            <summary>ISCII Punjabi</summary>
+            <remarks>Codepage: 57011, Windows Codepage: 57011</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_ISCII_TA">
+            <summary>ISCII Tamil</summary>
+            <remarks>Codepage: 57004, Windows Codepage: 57004</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_ISCII_TE">
+            <summary>ISCII Telugu</summary>
+            <remarks>Codepage: 57005, Windows Codepage: 57005</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_MAC_ARABIC">
+            <summary>Arabisch (Mac)</summary>
+            <remarks>Codepage: 10004, Windows Codepage: 1256</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_MAC_CE">
+            <summary>Mitteleuropäisch (Mac)</summary>
+            <remarks>Codepage: 10029, Windows Codepage: 1250</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_MAC_CHINESESIMP">
+            <summary>Chinesisch vereinfacht (Mac)</summary>
+            <remarks>Codepage: 10008, Windows Codepage: 936</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_MAC_CHINESETRAD">
+            <summary>Chinesisch traditionell (Mac)</summary>
+            <remarks>Codepage: 10002, Windows Codepage: 950</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_MAC_CROATIAN">
+            <summary>Kroatisch (Mac)</summary>
+            <remarks>Codepage: 10082, Windows Codepage: 1250</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_MAC_CYRILLIC">
+            <summary>Kyrillisch (Mac)</summary>
+            <remarks>Codepage: 10007, Windows Codepage: 1251</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_MAC_GREEK">
+            <summary>Griechisch (Mac)</summary>
+            <remarks>Codepage: 10006, Windows Codepage: 1253</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_MAC_HEBREW">
+            <summary>Hebräisch (Mac)</summary>
+            <remarks>Codepage: 10005, Windows Codepage: 1255</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_MAC_ICELANDIC">
+            <summary>Isländisch (Mac)</summary>
+            <remarks>Codepage: 10079, Windows Codepage: 1252</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_MAC_JAPANESE">
+            <summary>Japanisch (Mac)</summary>
+            <remarks>Codepage: 10001, Windows Codepage: 932</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_MAC_KOREAN">
+            <summary>Koreanisch (Mac)</summary>
+            <remarks>Codepage: 10003, Windows Codepage: 949</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_MAC_ROMANIAN">
+            <summary>Rumänisch (Mac)</summary>
+            <remarks>Codepage: 10010, Windows Codepage: 1250</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_MAC_THAI">
+            <summary>Thailändisch (Mac)</summary>
+            <remarks>Codepage: 10021, Windows Codepage: 874</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_MAC_TURKISH">
+            <summary>Türkisch (Mac)</summary>
+            <remarks>Codepage: 10081, Windows Codepage: 1254</remarks>
+        </member>
+        <member name="F:Cave.IO.StringEncoding.X_MAC_UKRAINIAN">
+            <summary>Ukrainisch (Mac)</summary>
+            <remarks>Codepage: 10017, Windows Codepage: 1251</remarks>
+        </member>
+        <member name="T:Cave.IO.StringEncodingExtensions">
+            <summary>
+            Extensions to the <see cref="T:Cave.IO.StringEncoding"/> enum.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.StringEncodingExtensions.IsDead(System.Text.Encoding)">
+            <summary>
+            Returns whether the encoding is dead (true) or not (false).
+            </summary>
+            <param name="encoding">Encoding to check.</param>
+            <returns>Returns true for dead encodings.</returns>
+        </member>
+        <member name="M:Cave.IO.StringEncodingExtensions.ToStringEncoding(System.Text.Encoding)">
+            <summary>
+            Converts an encoding instance by codepage to the corresponding <see cref="T:Cave.IO.StringEncoding"/> enum value.
+            </summary>
+            <param name="encoding">The encoding to convert.</param>
+            <returns>Returns an enum value for the <see cref="P:System.Text.Encoding.CodePage"/>.</returns>
+        </member>
+        <member name="T:Cave.IO.SubStream">
+            <summary>
+            Provides a sub stream implementation.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.SubStream.#ctor(System.IO.Stream)">
+            <summary>
+            Creates a new SubStream from the specified stream at its current read/write position.
+            </summary>
+            <param name="stream">The stream to create the substream from.</param>
+        </member>
+        <member name="M:Cave.IO.SubStream.#ctor(System.IO.Stream,System.Int32)">
+            <summary>
+            Creates a new SubStream from the specified stream at the specified read/write position.
+            </summary>
+            <param name="stream">The stream to create the substream from.</param>
+            <param name="seek">The start position of the substream relative to the current stream position.</param>
+        </member>
+        <member name="P:Cave.IO.SubStream.BaseStream">
+            <summary>
+            Gets the BaseStream.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.SubStream.CanRead">
+            <summary>
+            Obtains whether the stream can be read or not.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.SubStream.CanSeek">
+            <summary>
+            Obtains whether the stream can seek or not.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.SubStream.CanWrite">
+            <summary>
+            Obtains whether the stream can be written or not.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.SubStream.Flush">
+            <summary>
+            flushes the stream.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.SubStream.Length">
+            <summary>
+            Obtains the length of the stream.
+            </summary>
+        </member>
+        <member name="P:Cave.IO.SubStream.Position">
+            <summary>
+            Gets/sets the current read/write position.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.SubStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads a byte buffer from the stream at the current position.
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.SubStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            seeks the stream.
+            </summary>
+            <param name="offset"></param>
+            <param name="origin"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Cave.IO.SubStream.SetLength(System.Int64)">
+            <summary>
+            not supported.
+            </summary>
+            <param name="value"></param>
+        </member>
+        <member name="M:Cave.IO.SubStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes a byte buffer to the stream at the current position.
+            </summary>
+            <param name="buffer"></param>
+            <param name="offset"></param>
+            <param name="count"></param>
+        </member>
+        <member name="T:Cave.IO.Utf8string">
+            <summary>
+            Provides a string encoded on the heap using utf8. This will reduce the memory usage by about 40-50% on most western languages / ascii based
+            character sets.
+            </summary>
+        </member>
+        <member name="M:Cave.IO.Utf8string.op_Implicit(Cave.IO.Utf8string)~System.String">
+            <summary>Performs an implicit conversion from <see cref="T:Cave.IO.Utf8string"/> to <see cref="T:System.String"/>.</summary>
+            <param name="s">The string.</param>
+            <returns>The result of the conversion.</returns>
+        </member>
+        <member name="M:Cave.IO.Utf8string.op_Implicit(System.String)~Cave.IO.Utf8string">
+            <summary>Performs an implicit conversion from <see cref="T:System.String"/> to <see cref="T:Cave.IO.Utf8string"/>.</summary>
+            <param name="s">The string.</param>
+            <returns>The result of the conversion.</returns>
+        </member>
+        <member name="M:Cave.IO.Utf8string.op_Equality(Cave.IO.Utf8string,Cave.IO.Utf8string)">
+            <summary>Implements the operator ==.</summary>
+            <param name="s1">The s1.</param>
+            <param name="s2">The s2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.Utf8string.op_Inequality(Cave.IO.Utf8string,Cave.IO.Utf8string)">
+            <summary>Implements the operator !=.</summary>
+            <param name="s1">The s1.</param>
+            <param name="s2">The s2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.Utf8string.op_Equality(System.String,Cave.IO.Utf8string)">
+            <summary>Implements the operator ==.</summary>
+            <param name="s1">The s1.</param>
+            <param name="s2">The s2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.Utf8string.op_Inequality(System.String,Cave.IO.Utf8string)">
+            <summary>Implements the operator !=.</summary>
+            <param name="s1">The s1.</param>
+            <param name="s2">The s2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.Utf8string.op_Equality(Cave.IO.Utf8string,System.String)">
+            <summary>Implements the operator ==.</summary>
+            <param name="s1">The s1.</param>
+            <param name="s2">The s2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.Utf8string.op_Inequality(Cave.IO.Utf8string,System.String)">
+            <summary>Implements the operator !=.</summary>
+            <param name="s1">The s1.</param>
+            <param name="s2">The s2.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:Cave.IO.Utf8string.Parse(System.String)">
+            <summary>Parses the specified text.</summary>
+            <param name="text">The text.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Cave.IO.Utf8string.Length">
+            <summary>Gets the length.</summary>
+            <value>The length.</value>
+        </member>
+        <member name="M:Cave.IO.Utf8string.ToString">
+            <summary>Returns a <see cref="T:System.String" /> that represents this instance.</summary>
+            <returns>A <see cref="T:System.String" /> that represents this instance.</returns>
+        </member>
+        <member name="M:Cave.IO.Utf8string.GetHashCode">
+            <summary>Returns a hash code for this instance.</summary>
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+            </returns>
+        </member>
+        <member name="M:Cave.IO.Utf8string.Equals(System.Object)">
+            <summary>Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.</summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Cave.IO.Utf8string.CompareTo(System.Object)">
+            <summary>
+            Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
+            </summary>
+            <param name="obj">An object to compare with this instance.</param>
+            <returns>
+            A value that indicates the relative order of the objects being compared. The return value has these meanings: Value Meaning Less than zero This instance precedes <paramref name="obj" /> in the sort order. Zero This instance occurs in the same position in the sort order as <paramref name="obj" />. Greater than zero This instance follows <paramref name="obj" /> in the sort order.
+            </returns>
+        </member>
+    </members>
+</doc>

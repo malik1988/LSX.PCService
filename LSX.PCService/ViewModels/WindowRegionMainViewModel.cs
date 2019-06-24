@@ -11,7 +11,8 @@ using Prism.Interactivity.InteractionRequest;
 
 using LSX.PCService.Views;
 using LSX.PCService.Notifications;
-using LSX.PCService.Data;
+using LSX.PCService.Controllers;
+using System.Windows;
 namespace LSX.PCService.ViewModels
 {
     class WindowRegionMainViewModel : BindableBase
@@ -78,7 +79,12 @@ namespace LSX.PCService.ViewModels
 
         public WindowRegionMainViewModel(IRegionManager regionManager)
         {
+
             _regionManager = regionManager;
+            var newRegion = regionManager.CreateRegionManager();
+            var shell = new ShellWindow(newRegion);
+            shell.Show();
+
             regionManager.RequestNavigate("ContentRegion", "PageImportRawData");
             NavigateCommand = new DelegateCommand<string>((a) =>
             {
@@ -93,7 +99,8 @@ namespace LSX.PCService.ViewModels
                 PopupScanPalletRequest.Raise(new Notification { Title = "扫描托盘号" });
             });
             PopupBindingLpnRequest = new InteractionRequest<INotification>();
-            PopupBindingLpnCommand = new DelegateCommand(() => {
+            PopupBindingLpnCommand = new DelegateCommand(() =>
+            {
                 PopupBindingLpnRequest.Raise(new Notification { Title = "绑定LPN 09码" });
             });
         }

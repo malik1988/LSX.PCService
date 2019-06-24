@@ -35,6 +35,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cave.IO, Version=1.0.2.0, Culture=neutral, PublicKeyToken=9c6246ce3e4f0673, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.IO.1.0.2\lib\net45\Cave.IO.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Cave.TcpServer, Version=1.0.6.0, Culture=neutral, PublicKeyToken=4bb20f2792e00284, processorArchitecture=MSIL">
+      <HintPath>..\packages\Cave.TcpServer.1.0.6\lib\net46\Cave.TcpServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Chloe, Version=3.8.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Chloe.3.8.1\lib\net40\Chloe.dll</HintPath>
       <Private>True</Private>
@@ -149,21 +157,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Data\AgvController.cs" />
-    <Compile Include="Data\CwmsOrderHelper.cs" />
-    <Compile Include="Data\MainEntry.cs" />
-    <Compile Include="Data\LightSender.cs" />
-    <Compile Include="Data\OrderRawDataAnalyze.cs" />
+    <Compile Include="Controllers\CustomTcpClient.cs" />
+    <Compile Include="Controllers\CwmsOrderHelper.cs" />
+    <Compile Include="Controllers\LightController.cs" />
+    <Compile Include="Data\DBHelper.cs" />
     <Compile Include="Interfaces\CallAgvApi.cs" />
-    <Compile Include="Models\AwmsRawData.cs" />
-    <Compile Include="Models\InputDataModel.cs" />
-    <Compile Include="Models\ItemCheck.cs" />
-    <Compile Include="Models\LpnC09.cs" />
-    <Compile Include="Models\OrderRawAnalyzed.cs" />
-    <Compile Include="Models\RawAnalyze.cs" />
-    <Compile Include="Models\ViewRawAnalyzed.cs" />
     <Compile Include="Notifications\INotificationTraffic.cs" />
-    <Compile Include="Notifications\ObservableCollection.cs" />
     <Compile Include="Notifications\TrafficOrderNotification.cs" />
     <Compile Include="Service\ProcessService.cs" />
     <Compile Include="SingletonBase.cs" />
@@ -172,36 +171,25 @@
     <Compile Include="ViewModels\ConverterIsSinglePalletText.cs" />
     <Compile Include="ViewModels\ConverterNeedCheckText.cs" />
     <Compile Include="ViewModels\ConverterProgress.cs" />
-    <Compile Include="ViewModels\PageImportRawDataViewModel.cs" />
-    <Compile Include="ViewModels\PageLpnBindingC09ViewModel.cs" />
-    <Compile Include="ViewModels\PagePalletInputViewModel.cs" />
-    <Compile Include="ViewModels\PageScanCarIdViewModel.cs" />
     <Compile Include="ViewModels\PopupBindingLpnViewModel.cs" />
+    <Compile Include="ViewModels\PopupErrorHandlerViewModel.cs" />
+    <Compile Include="ViewModels\PopupImportDataViewModel.cs" />
     <Compile Include="ViewModels\PopupScanPalletViewModel.cs" />
     <Compile Include="ViewModels\PopupScanTrafficOrderViewModel.cs" />
-    <Compile Include="ViewModels\WindowMainViewModel.cs" />
+    <Compile Include="ViewModels\ShellWindow.cs" />
+    <Compile Include="ViewModels\WindowDispatchViewModel.cs" />
+    <Compile Include="ViewModels\WindowErrorViewModel.cs" />
+    <Compile Include="ViewModels\WindowOnlineViewModel.cs" />
     <Compile Include="ViewModels\WindowRegionMainViewModel.cs" />
     <Compile Include="ViewModels\WindowStartupViewModel.cs" />
-    <Compile Include="Views\PageChannelControl.xaml.cs">
-      <DependentUpon>PageChannelControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PageImportRawData.xaml.cs">
-      <DependentUpon>PageImportRawData.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PageLpnBindingC09.xaml.cs">
-      <DependentUpon>PageLpnBindingC09.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PageOnline.xaml.cs">
-      <DependentUpon>PageOnline.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PagePalletInput.xaml.cs">
-      <DependentUpon>PagePalletInput.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\PageScanCarId.xaml.cs">
-      <DependentUpon>PageScanCarId.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\PopupBindingLpn.xaml.cs">
       <DependentUpon>PopupBindingLpn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopupErrorHandler.xaml.cs">
+      <DependentUpon>PopupErrorHandler.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopupImportData.xaml.cs">
+      <DependentUpon>PopupImportData.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PopupScanPallet.xaml.cs">
       <DependentUpon>PopupScanPallet.xaml</DependentUpon>
@@ -218,9 +206,6 @@
     <Compile Include="Views\WindowError.xaml.cs">
       <DependentUpon>WindowError.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\WindowMain.xaml.cs">
-      <DependentUpon>WindowMain.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\WindowOnline.xaml.cs">
       <DependentUpon>WindowOnline.xaml</DependentUpon>
     </Compile>
@@ -230,66 +215,26 @@
     <Compile Include="Views\WindowStartup.xaml.cs">
       <DependentUpon>WindowStartup.xaml</DependentUpon>
     </Compile>
-    <Page Include="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Data\CameraController.cs" />
-    <Compile Include="Data\ChannelController.cs" />
+    <Compile Include="Controllers\CameraController.cs" />
+    <Compile Include="Controllers\ChannelController.cs" />
     <Compile Include="Data\Config.cs" />
-    <Compile Include="Data\DbHelper.cs" />
-    <Compile Include="Data\InputDataTypeCamera.cs" />
-    <Compile Include="Data\InputJob.cs" />
-    <Compile Include="Data\InputMessage.cs" />
-    <Compile Include="Data\InputMessageQueueBase.cs" />
-    <Compile Include="Data\LightManager.cs" />
-    <Compile Include="Data\MainThread.cs" />
-    <Compile Include="Data\Db.cs" />
+    <Compile Include="Controllers\InputMessageQueues.cs" />
+    <Compile Include="Controllers\InputMessageQueueBase.cs" />
+    <Compile Include="Controllers\LightManager.cs" />
     <Compile Include="Data\ErrorCode.cs" />
-    <Compile Include="Data\Excel.cs" />
-    <Compile Include="Data\ExcelToMysql.cs" />
-    <Compile Include="Models\Channel.cs" />
-    <Compile Include="Models\Light.cs" />
-    <Compile Include="Models\LightHistory.cs" />
-    <Compile Include="Models\LightLog.cs" />
-    <Compile Include="Models\OrderLog.cs" />
-    <Compile Include="Models\OrderRunning.cs" />
-    <Compile Include="Models\OrderStatus.cs" />
-    <Compile Include="Models\OrderRaw.cs" />
-    <Compile Include="Data\User.cs" />
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
-    <Page Include="Views\PageChannelControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PageImportRawData.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PageLpnBindingC09.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PageOnline.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PagePalletInput.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PageScanCarId.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\PopupBindingLpn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PopupErrorHandler.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PopupImportData.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -310,10 +255,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\WindowError.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\WindowMain.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -352,6 +293,8 @@
     <Resource Include="images\maximise.png" />
     <Resource Include="images\min1.png" />
     <Resource Include="images\quit1.png" />
+    <Resource Include="images\green_light.png" />
+    <Resource Include="images\red_light.png" />
     <Content Include="NLog.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

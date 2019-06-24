@@ -7,7 +7,8 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              xmlns:viewmodels="clr-namespace:LSX.PCService.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="800">
+             d:DesignHeight="300" 
+             MinWidth="500">
     <UserControl.Resources>
         <viewmodels:ConverterIsSinglePalletText x:Key="ConverterIsSinglePalletText"/>
         <viewmodels:ConverterIsSinglePalletColor x:Key="ConverterIsSinglePalletColor"/>
@@ -16,11 +17,17 @@
     <Border BorderBrush="Black" BorderThickness="2" CornerRadius="5">
         <StackPanel>
             <Label Content="扫描托盘（栈板）号" FontSize="20"  HorizontalAlignment="Center"/>
-            <Border BorderBrush="Beige" BorderThickness="3" CornerRadius="4" Margin="5">
+            <Border BorderBrush="Orange" BorderThickness="3" CornerRadius="5" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="当前可用灯数" />
+                    <TextBlock Text="{Binding AvaliableLights}" MinWidth="50"/>
+                </StackPanel>
+            </Border>
+            <Border BorderBrush="Aqua" BorderThickness="3" CornerRadius="4" Margin="5">
                 <Border.Background>
                     <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF9BD87D"/>
-                        <GradientStop Color="White" Offset="1"/>
+                        <GradientStop Color="#FFF0F1E8"/>
+                        <GradientStop Color="#FFE2AF50" Offset="1"/>
                     </LinearGradientBrush>
                 </Border.Background>
                 <Grid >
@@ -28,21 +35,26 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition  Height="auto"/>
                         <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="栈板号" Margin="5" Grid.Column="0" Grid.Row="0" FontSize="20"/>
-                    <TextBox  Margin="5" Text="{Binding PalletId,UpdateSourceTrigger=PropertyChanged}" FontSize="30" Grid.Column="1" ToolTip="Pallet Id" >
+                    <TextBox  Margin="5" Text="{Binding PalletId,UpdateSourceTrigger=PropertyChanged}" FontSize="20" Grid.Column="1" ToolTip="Pallet Id" >
                         <TextBox.InputBindings>
                             <KeyBinding Key="Enter" Command="{Binding PalletIdKeyEnter}"/>
                         </TextBox.InputBindings>
                     </TextBox>
                     <TextBlock Text="是否整托"  FontSize="20" Width="auto" Grid.Column="0" Grid.Row="1" Margin="5"/>
-                    <TextBlock Text="{Binding IsSinglePallet,Converter={StaticResource ResourceKey=ConverterIsSinglePalletText}}" FontSize="30" Background="{Binding IsSinglePallet,Converter={StaticResource ResourceKey=ConverterIsSinglePalletColor}}" Grid.Column="1" Grid.Row="1"  Margin="5"/>
+                    <TextBlock Text="{Binding IsSinglePallet,Converter={StaticResource ResourceKey=ConverterIsSinglePalletText}}" FontSize="20" Foreground="{Binding IsSinglePallet,Converter={StaticResource ResourceKey=ConverterIsSinglePalletColor}}" Grid.Column="1" Grid.Row="1"  Margin="5"/>
                     <TextBlock Text="是否检验"  FontSize="20" Width="auto" Grid.Column="0" Grid.Row="2" Margin="5"/>
-                    <TextBlock Text="{Binding NeedCheck,Converter={StaticResource ResourceKey=ConverterNeedCheckText}}" FontSize="30" Background="{Binding NeedCheck,Converter={StaticResource ResourceKey=ConverterIsSinglePalletColor}}" Grid.Column="1" Grid.Row="2"  Margin="5"/>
+                    <TextBlock Text="{Binding NeedCheck,Converter={StaticResource ResourceKey=ConverterNeedCheckText}}" FontSize="20" Foreground="{Binding NeedCheck,Converter={StaticResource ResourceKey=ConverterIsSinglePalletColor}}" Grid.Column="1" Grid.Row="2"  Margin="5"/>
+                    <TextBlock Text="需求灯数"  FontSize="20" Width="auto" Grid.Column="0" Grid.Row="3" Margin="5"/>
+                    <TextBlock Text="{Binding NeedLightsCount,Converter={StaticResource ResourceKey=ConverterNeedCheckText}}" FontSize="20" Foreground="{Binding NeedCheck,Converter={StaticResource ResourceKey=ConverterIsSinglePalletColor}}" Grid.Column="1" Grid.Row="3"  Margin="5" ToolTip="可用灯数量16"/>
+                    <Button Content="开启当前栈板流水线分拣" Command="{Binding BeginPalletTask}" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="18"/>
                 </Grid>
             </Border>
         </StackPanel>

@@ -1,0 +1,118 @@
+﻿<Window x:Class="LSX.PCService.Views.WindowOnline"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:Views="clr-namespace:LSX.PCService.Views"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="主窗口-上料窗口" Height="400
+        " Width="800">
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding ImportAwmsDataRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowContent >
+                    <Views:PopupImportData/>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding CustomPopupRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowContent >
+                    <Views:PopupScanTrafficOrder/>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding PopupScanPalletRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowContent >
+                    <Views:PopupScanPallet/>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding PopupBindingLpnRequest}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowContent >
+                    <Views:PopupBindingLpn/>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding PopupErrorOrder}">
+            <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True">
+                <prism:PopupWindowAction.WindowContent >
+                    <Views:PopupBindingLpn/>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding OpenAllWindowsRequest}">
+            <prism:PopupWindowAction IsModal="False">
+                <prism:PopupWindowAction.WindowStyle>
+                    <Style TargetType="Window">
+                        <Setter Property="ShowInTaskbar" Value="False"/>
+                        <Setter Property="Topmost" Value="False"/>
+                    </Style>
+                </prism:PopupWindowAction.WindowStyle>
+                <prism:PopupWindowAction.WindowContent >
+                    <Views:WindowDispatch/>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding OpenAllWindowsRequest}">
+            <prism:PopupWindowAction IsModal="False" >
+                <prism:PopupWindowAction.WindowStyle>
+                    <Style TargetType="Window">
+                        <Setter Property="ShowInTaskbar" Value="False"/>
+                        <Setter Property="Topmost" Value="False"/>
+                    </Style>
+                </prism:PopupWindowAction.WindowStyle>
+                <prism:PopupWindowAction.WindowContent >
+                    <Views:WindowError/>
+                </prism:PopupWindowAction.WindowContent>
+            </prism:PopupWindowAction>
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ToolBar Grid.Row="0" >
+            <ToolBar.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFF1F4E3" Offset="0"/>
+                    <GradientStop Color="#FFF69308" Offset="1"/>
+                </LinearGradientBrush>
+            </ToolBar.Background>
+            <Button Content="导入发车明细表" Command="{Binding ImportAwmsDataCommand}" Margin="2" BorderThickness="2" BorderBrush="Black" />
+            <Button Content="打开所有窗口" Command="{Binding OpenAllWindowsCommand}" Margin="2" BorderThickness="2" BorderBrush="Black" />
+            <Button Content="扫描发货单号" Command="{Binding CustomPopupCommand}" Margin="2" BorderThickness="2" BorderBrush="Black" />
+            <Button Content="扫描栈板号" Command="{Binding PopupScanPalletCommand}" Margin="2" BorderThickness="2" BorderBrush="Black" />
+            <Button Content="绑定LPN" Command="{Binding PopupBindingLpnCommand}" Margin="2" BorderThickness="2" BorderBrush="Black" />
+        </ToolBar>
+        <Border Grid.Row="1" BorderBrush="Orange" CornerRadius="5" BorderThickness="2" Margin="5" >
+            <WrapPanel>
+                <DataGrid ItemsSource="{Binding CurrentBoxInfo}"/>
+            </WrapPanel>
+        </Border>
+        <Border Grid.Row="2" BorderBrush="Blue" BorderThickness="2" CornerRadius="5" Margin="2">
+            <WrapPanel Orientation="Horizontal" >
+                <!--发货单号-->
+                <ListBox ItemsSource="{Binding TrafficOrderList}" MinWidth="100" ToolTip="发货单号"/>
+                <ListBox ItemsSource="{Binding PalletList}" MinWidth="100" ToolTip="栈板号"/>
+                <DataGrid ItemsSource="{Binding CurrentOrderInfo}" MinWidth="200" ToolTip="当前订单详细信息"/>
+                
+            </WrapPanel>
+        </Border>
+        <StatusBar Grid.Row="3">
+            <Label Content="状态："/>
+            
+            <Label Content="{Binding ChannelControllerState.IP}" ToolTip="通道状态"/>
+            <Label Content="{Binding CameraControllerState}" ToolTip="相机状态"/>
+            <Label Content="{Binding LightManagerState}" ToolTip="灯光服务器状态"/>
+        </StatusBar>
+    </Grid>
+</Window>

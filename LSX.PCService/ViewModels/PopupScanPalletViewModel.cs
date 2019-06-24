@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Prism.Mvvm;
 using Prism.Commands;
+using LSX.PCService.Controllers;
 using LSX.PCService.Data;
 
 namespace LSX.PCService.ViewModels
@@ -43,12 +44,44 @@ namespace LSX.PCService.ViewModels
             get { return _NeedCheck; }
             set { SetProperty(ref _NeedCheck, value); }
         }
+        private DelegateCommand _BeginPalletTask;
+
+        public DelegateCommand BeginPalletTask
+        {
+            get { return _BeginPalletTask; }
+            set { SetProperty(ref _BeginPalletTask, value); }
+        }
+
+        private int? _NeedLightsCount;
+
+        public int? NeedLightsCount
+        {
+            get { return _NeedLightsCount; }
+            set { SetProperty(ref _NeedLightsCount, value); }
+        }
+
 
         public PopupScanPalletViewModel()
         {
             PalletIdKeyEnter = new DelegateCommand(() =>
             {
-                // NeedCheck=DbHelper.
+                int num09 = DbHelper.GetPalletDistinct09Num(PalletId);
+                if (num09 == 0)
+                {
+                    IsSinglePallet = null;
+                }
+                else
+                    IsSinglePallet = num09 == 1 ? true : false;
+
+                NeedCheck = DbHelper.IsPalletNeedQuantityCheck(PalletId);
+                NeedLightsCount = DbHelper.GetPalletDistinct09Num(PalletId);
+            });
+            BeginPalletTask = new DelegateCommand(() =>
+            {
+                //开启Pallet对应的所有订单
+                //将Pallet添加到已开启栈板任务表中
+                
+
             });
         }
     }

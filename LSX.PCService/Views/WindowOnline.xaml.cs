@@ -23,5 +23,30 @@ namespace LSX.PCService.Views
         {
             InitializeComponent();
         }
+
+        private void xTitle_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
+
+        private void xMin_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void xMax_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.WindowState != WindowState.Maximized)
+                this.WindowState = WindowState.Maximized;
+            else
+                this.WindowState = WindowState.Normal;
+
+        }
+
+        private void xQuit_Click(object sender, RoutedEventArgs e)
+        {
+
+            this.Close();
+        }
     }
 }

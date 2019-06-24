@@ -1,10 +1,11 @@
 ﻿
 using Prism.Mvvm;
 using Prism.Commands;
-using LSX.PCService.Data;
+using LSX.PCService.Controllers;
 using LSX.PCService.Interfaces;
 using System.Windows;
 using System;
+using LSX.PCService.Data;
 namespace LSX.PCService.ViewModels
 {
     class PopupBindingLpnViewModel : BindableBase
@@ -77,6 +78,12 @@ namespace LSX.PCService.ViewModels
                 }
                 else
                 {
+                    //提示用户扫描输入目标库位
+
+                    DbHelper.SetTargetLocationByC09(C09);
+
+
+
                     string err = string.Format("09码({0})对应的目标库位为空!", C09);
                     //记录异常信息
                     MessageBox.Show(err,"呼叫失败");

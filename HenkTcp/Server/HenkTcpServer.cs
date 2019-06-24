@@ -98,11 +98,18 @@ namespace HenkTcp
 
             //void Event(object sender, Message e) { Reply = e; DataReceived -= Event; };
 
-            this.Reply = null;
-            DataReceived += HenkTcpServer_DataReceived;
+            //this.Reply = null;
+            //DataReceived += HenkTcpServer_DataReceived;
+            Message Reply = null;
+            var back = DataReceived;
+            DataReceived -= back;
+            DataReceived += new EventHandler<Message>((o, e) =>
+            {
+                Reply = e;
+                DataReceived -= DataReceived;
+            });
 
 
-            // DataReceived += new EventHandler<Message>((o, e) => { Reply = e; DataReceived -= (EventHandler<Message>)DataReceived.Target; });
             Write(Client, Data);
 
             var sw = new System.Diagnostics.Stopwatch();
@@ -111,7 +118,10 @@ namespace HenkTcp
             while (!(this.Reply != null && this.Reply.TcpClient == Client) && sw.Elapsed < Timeout)
             {
                 Task.Delay(1).Wait();
+
             }
+            DataReceived = null;
+            DataReceived += back;
             return this.Reply;
         }
 

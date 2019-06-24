@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9AFA72A4-7414-462C-9200-B316ACC8864E}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LSX.PCService</RootNamespace>
+    <AssemblyName>LSX.PCService</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\AgvController.cs" />
+    <Compile Include="Data\CustomTcpClient.cs" />
+    <Compile Include="Data\CwmsOrderHelper.cs" />
+    <Compile Include="Data\LightController.cs" />
+    <Compile Include="Interfaces\CallAgvApi.cs" />
+    <Compile Include="Notifications\INotificationTraffic.cs" />
+    <Compile Include="Notifications\TrafficOrderNotification.cs" />
+    <Compile Include="Service\ProcessService.cs" />
+    <Compile Include="SingletonBase.cs" />
+    <Compile Include="ViewModels\ConverterCurPageItems.cs" />
+    <Compile Include="ViewModels\ConverterIsSinglePalletColor.cs" />
+    <Compile Include="ViewModels\ConverterIsSinglePalletText.cs" />
+    <Compile Include="ViewModels\ConverterNeedCheckText.cs" />
+    <Compile Include="ViewModels\ConverterProgress.cs" />
+    <Compile Include="ViewModels\PopupBindingLpnViewModel.cs" />
+    <Compile Include="ViewModels\PopupImportDataViewModel.cs" />
+    <Compile Include="ViewModels\PopupScanPalletViewModel.cs" />
+    <Compile Include="ViewModels\PopupScanTrafficOrderViewModel.cs" />
+    <Compile Include="ViewModels\ShellWindow.cs" />
+    <Compile Include="ViewModels\WindowDispatchViewModel.cs" />
+    <Compile Include="ViewModels\WindowErrorViewModel.cs" />
+    <Compile Include="ViewModels\WindowOnlineViewModel.cs" />
+    <Compile Include="ViewModels\WindowRegionMainViewModel.cs" />
+    <Compile Include="ViewModels\WindowStartupViewModel.cs" />
+    <Compile Include="Views\PopupBindingLpn.xaml.cs">
+      <DependentUpon>PopupBindingLpn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopupImportData.xaml.cs">
+      <DependentUpon>PopupImportData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopupScanPallet.xaml.cs">
+      <DependentUpon>PopupScanPallet.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopupScanTrafficOrder.xaml.cs">
+      <DependentUpon>PopupScanTrafficOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopupWindowScan.xaml.cs">
+      <DependentUpon>PopupWindowScan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowError.xaml.cs">
+      <DependentUpon>WindowError.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowOnline.xaml.cs">
+      <DependentUpon>WindowOnline.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowRegionMain.xaml.cs">
+      <DependentUpon>WindowRegionMain.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WindowStartup.xaml.cs">
+      <DependentUpon>WindowStartup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\CameraController.cs" />
+    <Compile Include="Data\ChannelController.cs" />
+    <Compile Include="Data\Config.cs" />
+    <Compile Include="Data\DbHelper.cs" />
+    <Compile Include="Data\InputMessageQueues.cs" />
+    <Compile Include="Data\InputMessageQueueBase.cs" />
+    <Compile Include="Data\LightManager.cs" />
+    <Compile Include="Data\Db.cs" />
+    <Compile Include="Data\ErrorCode.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="README.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HenkTcp\HenkTcp.csproj">
+      <Project>{df5bc137-afcb-482f-8add-d3f0e99fe772}</Project>
+      <Name>HenkTcp</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ItemGroup>
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\Cave.IO.1.0.2\lib\net45\Cave.IO.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\Cave.TcpServer.1.0.6\lib\net46\Cave.TcpServer.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\Chloe.3.8.1\lib\net40\Chloe.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\Chloe.MySql.3.8.1\lib\net40\Chloe.MySql.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\CommonServiceLocator.2.0.4\lib\net46\CommonServiceLocator.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\Dos.Common.2.7.0\lib\net40\Dos.Common.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\Dos.ORM.1.15.0\lib\net40\Dos.ORM.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\Dos.ORM.MySql.2.1.0\lib\net40\Dos.ORM.MySql.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\ExcelDataReader.DataSet.3.5.0\lib\net35\ExcelDataReader.DataSet.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\ExcelDataReader.3.5.0\lib\net45\ExcelDataReader.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\HenkTcp\bin\Debug\HenkTcp.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\lcpi.data.oledb.1.7.0.3395\lib\net45\lcpi.data.oledb.net4_5.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\lcpi.lib.2.1.0.1660\lib\net45\lcpi.lib.net4_5.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\Microsoft.CSharp.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft SDKs\Expression\Blend\.NETFramework\v4.5\Libraries\Microsoft.Expression.Interactions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Microsoft Visual Studio 14.0\Visual Studio Tools for Office\PIA\Office15\Microsoft.Office.Interop.Excel.dll">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </ReferencePath>
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\mscorlib.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\MySql.Data.6.9.12\lib\net45\MySql.Data.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\NLog.4.6.2\lib\net45\NLog.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationCore.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\PresentationFramework.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\Prism.Core.7.1.0.431\lib\net45\Prism.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\Prism.Unity.7.1.0.431\lib\net45\Prism.Unity.Wpf.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\Prism.Wpf.7.1.0.431\lib\net45\Prism.Wpf.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Configuration.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Core.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Data.DataSetExtensions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Data.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Data.OracleClient.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.IO.Compression.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Messaging.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Runtime.Serialization.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.ServiceModel.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Transactions.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Web.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Web.Extensions.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\Prism.Wpf.7.1.0.431\lib\net45\System.Windows.Interactivity.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xaml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xml.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.Xml.Linq.dll" />
+    <ReferencePath Include="C:\Users\Administrator\Desktop\料架测试单机版程序\SMT\Server\Telerik.Windows.Controls.dll" />
+    <ReferencePath Include="C:\Users\Administrator\Desktop\料架测试单机版程序\SMT\Server\Telerik.Windows.Controls.Input.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\Unity.Abstractions.3.3.1\lib\net46\Unity.Abstractions.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\Unity.Container.5.8.11\lib\net46\Unity.Container.dll" />
+    <ReferencePath Include="D:\Project\LSX.PCService\packages\WebSocketSharp-netstandard.1.0.1\lib\net45\websocket-sharp.dll" />
+    <ReferencePath Include="C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\WindowsBase.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="D:\Project\LSX.PCService\LSX.PCService\obj\Debug\Views\PopupBindingLpn.g.cs" />
+    <Compile Include="D:\Project\LSX.PCService\LSX.PCService\obj\Debug\Views\PopupImportData.g.cs" />
+    <Compile Include="D:\Project\LSX.PCService\LSX.PCService\obj\Debug\Views\PopupScanPallet.g.cs" />
+    <Compile Include="D:\Project\LSX.PCService\LSX.PCService\obj\Debug\Views\PopupScanTrafficOrder.g.cs" />
+    <Compile Include="D:\Project\LSX.PCService\LSX.PCService\obj\Debug\Views\PopupWindowScan.g.cs" />
+    <Compile Include="D:\Project\LSX.PCService\LSX.PCService\obj\Debug\Views\WindowError.g.cs" />
+    <Compile Include="D:\Project\LSX.PCService\LSX.PCService\obj\Debug\Views\WindowOnline.g.cs" />
+    <Compile Include="D:\Project\LSX.PCService\LSX.PCService\obj\Debug\Views\WindowRegionMain.g.cs" />
+    <Compile Include="D:\Project\LSX.PCService\LSX.PCService\obj\Debug\Views\WindowStartup.g.cs" />
+    <Compile Include="D:\Project\LSX.PCService\LSX.PCService\obj\Debug\App.g.cs" />
+    <Compile Include="D:\Project\LSX.PCService\LSX.PCService\obj\Debug\LSX.PCService_Content.g.cs" />
+    <Compile Include="D:\Project\LSX.PCService\LSX.PCService\obj\Debug\GeneratedInternalTypeHelper.g.cs" />
+  </ItemGroup>
+</Project>

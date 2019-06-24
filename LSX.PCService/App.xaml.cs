@@ -26,18 +26,22 @@ namespace LSX.PCService
             main = ProcessService.Instance;
             main.Start();
         }
+
+
         protected override Window CreateShell()
         {
-            return Container.Resolve<WindowRegionMain>();
+            return Container.Resolve<WindowOnline>();
         }
+
+
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<PageImportRawData>();
-            containerRegistry.RegisterForNavigation<PagePalletInput>();
-            containerRegistry.RegisterForNavigation<PageChannelControl>();
-            containerRegistry.RegisterForNavigation<PageLpnBindingC09>();
-            containerRegistry.RegisterForNavigation<PageScanCarId>();
+            //containerRegistry.RegisterForNavigation<PageImportRawData>();
+            //containerRegistry.RegisterForNavigation<PagePalletInput>();
+            //containerRegistry.RegisterForNavigation<PageChannelControl>();
+            //containerRegistry.RegisterForNavigation<PageLpnBindingC09>();
+            //containerRegistry.RegisterForNavigation<PageScanCarId>();
         }
 
 

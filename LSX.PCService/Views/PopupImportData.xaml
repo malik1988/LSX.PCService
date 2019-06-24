@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="LSX.PCService.Views.PopupImportData"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             MinWidth="500"
+             MinHeight="100"
+             >
+    <Grid>
+        <StackPanel>
+            <Label Content="{Binding Title}" FontSize="25" HorizontalAlignment="Center" Margin="5"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Button Content="打开文件" Command="{Binding OpenFile}" Grid.ColumnSpan="2" MaxWidth="100" FontSize="18"/>
+                <WrapPanel Grid.Column="0" Grid.Row="1" VerticalAlignment="Center">
+                    <Label Content="进度："/>
+                    <Label Content="{Binding Value}"/>
+                    <Label Content="%"/>
+                </WrapPanel>
+                <ProgressBar Minimum="0" Maximum="100" MinHeight="12" Margin="10" Value="{Binding Value}" Grid.Column="1" Grid.Row="1" VerticalAlignment="Center"/>
+                <Border BorderBrush="{Binding ImportState}"  BorderThickness="3" CornerRadius="5" Grid.Row="2" Grid.ColumnSpan="2" >                    
+                    <Label Content="{Binding  ImportMsg}" HorizontalAlignment="Center" FontSize="18"/>
+                </Border>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>

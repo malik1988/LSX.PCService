@@ -3,6 +3,9 @@ using Prism.Commands;
 using System.Collections.ObjectModel;
 using Prism.Interactivity.InteractionRequest;
 using LSX.PCService.Notifications;
+using LSX.PCService.Controllers;
+using System.Windows;
+using LSX.PCService.Data;
 
 namespace LSX.PCService.ViewModels
 {
@@ -41,31 +44,6 @@ namespace LSX.PCService.ViewModels
             set { SetProperty(ref _Cancel, value); }
         }
 
-        public PopupScanTrafficOrderViewModel()
-        {
-            TrafficOrderCommand = new DelegateCommand(() =>
-            {
-                ((INotificationTraffic)Notification).Items.Add(TrafficOrder);
-                TrafficOrder = "";
-            });
-            TrafficOrderStart = new DelegateCommand(() =>
-            {
-                _TrafficeNotification.Confirmed = true;
-                if (null != FinishInteraction)
-                {
-                    FinishInteraction.Invoke();
-                }
-            });
-            Cancel = new DelegateCommand(() =>
-            {
-                _TrafficeNotification.Confirmed = false;
-                if (null != FinishInteraction)
-                {
-                    FinishInteraction.Invoke();
-                }
-            });
-
-        }
 
 
         #region IInteractionRequestAware 成员
@@ -91,5 +69,41 @@ namespace LSX.PCService.ViewModels
         }
 
         #endregion
+        public PopupScanTrafficOrderViewModel()
+        {
+            TrafficOrderCommand = new DelegateCommand(() =>
+            {
+                if (string.IsNullOrEmpty(TrafficOrder))
+                {//空字符串不处理
+                    return;
+                }
+                if (!DbHelper.CheckIsTrafficOrderExistInAwms(TrafficOrder))
+                {
+                    string err=string.Format("发车明细表中不存在发货单号：{0}",TrafficOrder);
+                    MessageBox.Show(err, "无效发货单号");
+                    return;
+                }
+               
+                ((INotificationTraffic)Notification).Items.Add(TrafficOrder);
+                TrafficOrder = "";
+            });
+            TrafficOrderStart = new DelegateCommand(() =>
+            {
+                _TrafficeNotification.Confirmed = true;
+                if (null != FinishInteraction)
+                {
+                    FinishInteraction.Invoke();
+                }
+            });
+            Cancel = new DelegateCommand(() =>
+            {
+                _TrafficeNotification.Confirmed = false;
+                if (null != FinishInteraction)
+                {
+                    FinishInteraction.Invoke();
+                }
+            });
+
+        }
     }
 }
