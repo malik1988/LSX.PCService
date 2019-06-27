@@ -7,7 +7,7 @@ using System.Net;
 using LSX.PCService.Data;
 namespace LSX.PCService.Controllers
 {
-    
+
     class LightController : IEquatable<LightController>
     {
         CustomTcpClient sender;
@@ -23,7 +23,7 @@ namespace LSX.PCService.Controllers
             get { return _State; }
             private set
             {
-               DbHelper.SetLightState(id, value);
+                DbHelper.SetLightState(id, value);
                 _State = value;
             }
         }
@@ -32,7 +32,11 @@ namespace LSX.PCService.Controllers
         public bool LowVoltage
         {
             get { return _LowVoltage; }
-            set { _LowVoltage = value; }
+            set
+            {
+                DbHelper.SetLightVoltage(this.id,value);
+                _LowVoltage = value;
+            }
         }
 
         private int id;

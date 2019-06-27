@@ -1,4 +1,5 @@
 ﻿using LSX.PCService.Controllers;
+using LSX.PCService.Data;
 using Prism.Interactivity.InteractionRequest;
 using Prism.Mvvm;
 using System;
@@ -69,6 +70,14 @@ namespace LSX.PCService.ViewModels
             set { SetProperty(ref _LightManagerErrList, value); }
         }
 
+        private ObservableCollection<object> _LightStates;
+
+        public ObservableCollection<object> LightStates
+        {
+            get { return _LightStates; }
+            set { SetProperty(ref _LightStates, value); }
+        }
+
         public WindowDispatchViewModel()
         {
             OkChannelOrderList = new ObservableCollection<object>(){
@@ -86,7 +95,11 @@ namespace LSX.PCService.ViewModels
             LightManagerErrList = new ObservableCollection<string>();
             LightManager.Instance.OnError = new EventHandler<string>((o, e) => { LightManagerErrMsg = e; });
 
-
+            LightStates = new ObservableCollection<object>();
+            for (int i = 0; i < 100;i++ )
+            {
+                LightStates.Add(new { Id = i, State = (LightState)(i % 5), Description = i+1 });
+            }
         }
 
         #region IInteractionRequestAware 成员
@@ -108,8 +121,6 @@ namespace LSX.PCService.ViewModels
 
         #endregion
 
-        private void CloseInteraction()
-        {
-        }
+    
     }
 }

@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using LSX.PCService.Controllers;
+using System.ComponentModel;
 
 namespace LSX.PCService.Data
 {
@@ -54,6 +55,7 @@ namespace LSX.PCService.Data
         ON_GREEN,
         BLINK_RED,
         BLINK_GREEN
+        
     }
 
     enum OrderState
@@ -572,7 +574,29 @@ namespace LSX.PCService.Data
         /// <returns>是/否</returns>
 
         public static bool IsAllOrdersFinished() { return true; }
-
+        /// <summary>
+        /// 获取数据表里特定页的所有数据
+        /// </summary>
+        /// <param name="curPageId">页编号</param>
+        /// <param name="pageSize">一页对应的数据行数</param>
+        /// <returns></returns>
+        public static ObservableCollection<object> GetDataByPage(string tableName,int curPageId, int pageSize) { return new ObservableCollection<object>(); }
+        public static int GetTabelRecordCount(string tableName,int pageSize=0)
+        {
+            if (pageSize==0)
+            {//获取所有记录行数
+            }
+            else
+            {//按照PageSize作为一页内容数量进行分页后的总页数
+                
+            }
+            return 1000;
+        }
+        /// <summary>
+        /// 设置灯电压状态
+        /// </summary>
+        /// <param name="lowVoltage">是否欠压</param>
+        public static void SetLightVoltage(int lightId,bool lowVoltage) { }
         #endregion
 
     }

@@ -152,6 +152,21 @@ namespace LSX.PCService.ViewModels
             get { return _LightManagerState; }
             set { SetProperty(ref _LightManagerState, value); }
         }
+        private DelegateCommand _PopupAllEvents;
+
+        public DelegateCommand PopupAllEvents
+        {
+            get { return _PopupAllEvents; }
+            set { SetProperty(ref _PopupAllEvents, value); }
+        }
+
+        private InteractionRequest<Notification> _OpenAllEventsRequest;
+
+        public InteractionRequest<Notification> OpenAllEventsRequest
+        {
+            get { return _OpenAllEventsRequest; }
+            set { SetProperty(ref _OpenAllEventsRequest, value); }
+        }
 
 
         Timer viewUpdateTimer;
@@ -188,13 +203,14 @@ namespace LSX.PCService.ViewModels
                 CurrentBoxInfo = new ObservableCollection<object> { new { 箱号 = box, C09 = c09 } };
             });
 
+            OpenAllEventsRequest = new InteractionRequest<Notification>();
+            PopupAllEvents = new DelegateCommand(() => { OpenAllEventsRequest.Raise(new Notification { Title = "事件记录" }); });
            
             //更新界面数据
             //viewUpdateTimer = new Timer(300);
             //viewUpdateTimer.Elapsed += viewUpdateTimer_Elapsed;
             //viewUpdateTimer.Start();
 
-            Test();
         }
 
         void Test()

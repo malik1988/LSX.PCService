@@ -169,6 +169,7 @@
     <Compile Include="ViewModels\ConverterCurPageItems.cs" />
     <Compile Include="ViewModels\ConverterIsSinglePalletColor.cs" />
     <Compile Include="ViewModels\ConverterIsSinglePalletText.cs" />
+    <Compile Include="ViewModels\ConverterLightStateColor.cs" />
     <Compile Include="ViewModels\ConverterNeedCheckText.cs" />
     <Compile Include="ViewModels\ConverterProgress.cs" />
     <Compile Include="ViewModels\PopupBindingLpnViewModel.cs" />
@@ -176,6 +177,7 @@
     <Compile Include="ViewModels\PopupImportDataViewModel.cs" />
     <Compile Include="ViewModels\PopupScanPalletViewModel.cs" />
     <Compile Include="ViewModels\PopupScanTrafficOrderViewModel.cs" />
+    <Compile Include="ViewModels\PopupWindowAllEventsViewModel.cs" />
     <Compile Include="ViewModels\ShellWindow.cs" />
     <Compile Include="ViewModels\WindowDispatchViewModel.cs" />
     <Compile Include="ViewModels\WindowErrorViewModel.cs" />
@@ -196,6 +198,9 @@
     </Compile>
     <Compile Include="Views\PopupScanTrafficOrder.xaml.cs">
       <DependentUpon>PopupScanTrafficOrder.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopupWindowAllEvents.xaml.cs">
+      <DependentUpon>PopupWindowAllEvents.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PopupWindowScan.xaml.cs">
       <DependentUpon>PopupWindowScan.xaml</DependentUpon>
@@ -243,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PopupScanTrafficOrder.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PopupWindowAllEvents.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
