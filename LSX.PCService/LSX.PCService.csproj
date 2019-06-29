@@ -169,6 +169,7 @@
     <Compile Include="ViewModels\ConverterCurPageItems.cs" />
     <Compile Include="ViewModels\ConverterIsSinglePalletColor.cs" />
     <Compile Include="ViewModels\ConverterIsSinglePalletText.cs" />
+    <Compile Include="ViewModels\ConverterDeviceStateColor.cs" />
     <Compile Include="ViewModels\ConverterLightStateColor.cs" />
     <Compile Include="ViewModels\ConverterNeedCheckText.cs" />
     <Compile Include="ViewModels\ConverterProgress.cs" />
@@ -325,12 +326,6 @@
   <ItemGroup />
   <ItemGroup>
     <None Include="README.md" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HenkTcp\HenkTcp.csproj">
-      <Project>{df5bc137-afcb-482f-8add-d3f0e99fe772}</Project>
-      <Name>HenkTcp</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

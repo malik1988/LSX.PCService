@@ -3,11 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:viewModels="clr-namespace:LSX.PCService.ViewModels"
         xmlns:Views="clr-namespace:LSX.PCService.Views"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="主窗口-上料窗口" Height="400" Width="800"
         WindowStyle="None" WindowState="Maximized"
         >
+    <Window.Resources>
+        <viewModels:ConverterDeviceStateColor x:Key="deviceStateColor"/>
+    </Window.Resources>
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding ImportAwmsDataRequest}">
             <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" >
@@ -158,16 +162,16 @@
                     <!--发货单号-->
                     <DataGrid ItemsSource="{Binding TrafficOrderList}" MinWidth="100" ToolTip="发货单号" Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Id}" Header="编号"/>
-                            <DataGridTextColumn Binding="{Binding Torder}" Header="发货单号"/>
-                            <DataGridTextColumn Binding="{Binding State}" Header="状态"/>
+                            <DataGridTextColumn Binding="{Binding id}" Header="编号"/>
+                            <DataGridTextColumn Binding="{Binding torder}" Header="发货单号"/>
+                            <DataGridTextColumn Binding="{Binding status}" Header="状态"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <DataGrid ItemsSource="{Binding PalletList}" MinWidth="100" ToolTip="栈板号" Grid.Column="1" AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Id}" Header="编号"/>
-                            <DataGridTextColumn Binding="{Binding Pallet}" Header="栈板号"/>
-                            <DataGridTextColumn Binding="{Binding State}" Header="状态"/>
+                            <DataGridTextColumn Binding="{Binding id}" Header="编号"/>
+                            <DataGridTextColumn Binding="{Binding pallet}" Header="栈板号"/>
+                            <DataGridTextColumn Binding="{Binding status}" Header="状态"/>
                         </DataGrid.Columns>
                     </DataGrid>
                     <DataGrid ItemsSource="{Binding CurrentOrderInfo}" MinWidth="200" ToolTip="当前订单详细信息" Grid.Column="2" AutoGenerateColumns="False" IsReadOnly="True">
@@ -186,9 +190,59 @@
             </Border>
             <StatusBar Grid.Row="3">
                 <Label Content="状态："/>
-                <Label Content="{Binding ChannelControllerState.IP}" ToolTip="通道状态"/>
-                <Label Content="{Binding CameraControllerState}" ToolTip="相机状态"/>
-                <Label Content="{Binding LightManagerState}" ToolTip="灯光服务器状态"/>
+                <ItemsControl Margin="3" ItemsSource="{Binding DeviceStatus}">
+                    <!--整个ItemsControl外边框-->
+                    <ItemsControl.Template>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <Border BorderBrush="BlanchedAlmond" BorderThickness="2" CornerRadius="13">
+                                <ItemsPresenter/>
+                            </Border>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <!--数据-->
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <DataTemplate.Resources>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="FontSize" Value="10"/>
+                                    <Setter Property="HorizontalAlignment" Value="Center"/>
+                                </Style>
+                            </DataTemplate.Resources>
+                            <Grid>
+                                <Ellipse Fill="{Binding Status,Converter={StaticResource deviceStateColor}}"/>
+                                <!--<Border BorderThickness="2" BorderBrush="Orange" CornerRadius="8"/>-->
+                                <StackPanel>
+                                    <TextBlock Margin="3,0,3,0"
+                     Text="{Binding Type}"/>
+                                    <TextBlock Margin="3,0,3,0"
+                     Text="{Binding Ip}"/>
+                                    <TextBlock Margin="3,0,3,0"
+                     Text="{Binding Status}"/>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <!--提示信息-->
+                    <ItemsControl.ItemContainerStyle>
+                        <Style>
+                            <Setter Property="Control.Width" Value="80"/>
+                            <Setter Property="Control.Margin" Value="5"/>
+                            <Style.Triggers>
+                                <Trigger Property="Control.IsMouseOver" Value="True">
+                                    <Setter Property="Control.ToolTip"
+                  Value="{Binding RelativeSource={x:Static RelativeSource.Self},
+                          Path=Content.UpdateTime}"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ItemsControl.ItemContainerStyle>
+                </ItemsControl>
+                
                 <Separator Margin="10,0"/>
                 <TextBlock Text="{Binding LightManagerErrMsg}" ToolTip="灯光服务器异常消息"/>
             </StatusBar>

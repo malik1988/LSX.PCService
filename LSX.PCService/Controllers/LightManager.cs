@@ -76,7 +76,7 @@ namespace LSX.PCService.Controllers
         int GetLightIdFromIpAddr(string ip)
         {
             string[] tmp = ip.Split(new char[] { '.' });
-            return int.Parse(tmp[3]);
+            return int.Parse(tmp[3])+100;
         }
         /// <summary>
         /// 点亮

@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Prism.Interactivity.InteractionRequest;
+using LSX.PCService.Data;
 
 namespace LSX.PCService.ViewModels
 {
@@ -56,9 +57,8 @@ namespace LSX.PCService.ViewModels
         private ChannelController channel;
         public WindowErrorViewModel()
         {
-            OkChannelOrderList = new ObservableCollection<object>(){
-                new {箱号="1dddhd",C09="09sxxs"}
-            };
+
+            OkChannelOrderList = DbHelper.GetOrderListByChannel(EnumChannel.异常道口);
             channel = ChannelController.Instance;
 
             channel.OnErrUpdate += (o, c) =>

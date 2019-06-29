@@ -53,10 +53,10 @@ namespace LSX.PCService.ViewModels
         {
             BindingLpn = new DelegateCommand(() =>
             {
-               
+
                 try
                 {
-                    if (string.IsNullOrEmpty(Lpn)||string.IsNullOrEmpty(C09)||string.IsNullOrEmpty(Loc))
+                    if (string.IsNullOrEmpty(Lpn) || string.IsNullOrEmpty(C09) || string.IsNullOrEmpty(Loc))
                     {
                         throw new Exception("LPN/09码/库位 不能为空");
                     }
@@ -79,14 +79,14 @@ namespace LSX.PCService.ViewModels
                 else
                 {
                     //提示用户扫描输入目标库位
-
-                    DbHelper.SetTargetLocationByC09(C09);
+                    targetLoc = "";
+                    DbHelper.SetTargetLocationByC09(C09, targetLoc);
 
 
 
                     string err = string.Format("09码({0})对应的目标库位为空!", C09);
                     //记录异常信息
-                    MessageBox.Show(err,"呼叫失败");
+                    MessageBox.Show(err, "呼叫失败");
                 }
             });
         }

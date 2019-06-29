@@ -62,24 +62,25 @@
                 </Border>
                 <DataGrid ItemsSource="{Binding OkChannelOrderList}" IsReadOnly="True" AutoGenerateColumns="False">
                     <DataGrid.Columns>
-                        <DataGridTextColumn Binding="{Binding 箱号}" Header="箱号" Width="2*"/>
-                        <DataGridTextColumn Binding="{Binding C09}" Header="09码" Width="2*"/>
-                        <DataGridTextColumn Binding="{Binding 箱号}" Header="当前箱数" Width="2*"/>
-                        <DataGridTextColumn Binding="{Binding 箱号}" Header="总箱数" Width="2*"/>
-                        <DataGridTextColumn Binding="{Binding 箱号}" Header="应分拣区域" Width="1*"/>
-                        <!--<DataGridTextColumn Binding="{Binding 箱号}" Header="颜色" Width="1*" />-->
+                        <DataGridTextColumn Binding="{Binding Order}" Header="订单编号" Width="3*"/>
+                        <DataGridTextColumn Binding="{Binding Carton}" Header="箱号" Width="2*"/>
+                        <DataGridTextColumn Binding="{Binding ZnCode}" Header="09码" Width="2*"/>
+                        <DataGridTextColumn Binding="{Binding CurCount}" Header="当前箱数" Width="1*"/>
+                        <DataGridTextColumn Binding="{Binding TotalCount}" Header="总箱数" Width="1*"/>
+                        <DataGridTextColumn Binding="{Binding LightId}" Header="灯ID" Width="1*"/>
                         <DataGridTemplateColumn Header="颜色">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <Image x:Name="xLightColor" Source="../images/red_light.png"/>
                                     <DataTemplate.Triggers>
-                                        <DataTrigger Binding="{Binding Color}" Value="False">
+                                        <DataTrigger Binding="{Binding LightColor}" Value="False">
                                             <Setter Property="Source" Value="../images/green_light.png" TargetName="xLightColor"/>
                                         </DataTrigger>
                                     </DataTemplate.Triggers>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
+                        <DataGridTextColumn Binding="{Binding Status}" Header="订单状态" Width="2*"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

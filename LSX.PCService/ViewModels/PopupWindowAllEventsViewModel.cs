@@ -15,10 +15,10 @@ namespace LSX.PCService.ViewModels
 {
     class PopupWindowAllEventsViewModel : BindableBase, IInteractionRequestAware
     {
-        private ObservableCollection<object> _AllEvents
+        private DataTable _AllEvents
             ;
 
-        public ObservableCollection<object> AllEvents
+        public DataTable AllEvents
         {
             get { return _AllEvents; }
             set { SetProperty(ref _AllEvents, value); }
@@ -98,8 +98,8 @@ namespace LSX.PCService.ViewModels
             {
                 {"事件记录表","awms_events_dhl"},
                 {"设备表","awms_device_dhl"},
-                {"灯信息表","awms_light_dhl"},
-                {"灯任务表","awms_light_tasks_dhl"},
+                {"灯信息表","awms_lights_dhl"},
+                {"灯任务表","awms_lights_tasks_dhl"},
                 {"LPN表","awms_lpn_dhl"},
                 {"订单表","awms_orders_dhl"},
                 {"发货单表","awms_orders_tasks_dhl"},
@@ -127,7 +127,13 @@ namespace LSX.PCService.ViewModels
                 CurrentPage = 1;
                 string tableName = _realTableNameDict[SelectedTableName];
                 TotalCount = DbHelper.GetTabelRecordCount(tableName);
-                AllEvents = DbHelper.GetDataByPage(tableName, CurrentPage, PageSize);
+                //AllEvents = DbHelper.GetDataByPage(tableName, CurrentPage, PageSize);     
+                if (null!=AllEvents)
+                {
+                    AllEvents.Dispose();
+                    AllEvents = null;
+                }
+                AllEvents = DbHelper.GetAllFromTableByName(tableName);
                 TotalPages = (TotalCount + PageSize - 1) / PageSize;
 
             });
@@ -142,7 +148,13 @@ namespace LSX.PCService.ViewModels
             }
             string tableName = _realTableNameDict[SelectedTableName];
             TotalCount = DbHelper.GetTabelRecordCount(tableName);
-            AllEvents = DbHelper.GetDataByPage(tableName,CurrentPage, PageSize);
+           // AllEvents = DbHelper.GetDataByPage(tableName,CurrentPage, PageSize);
+            if (null!=AllEvents)
+            {
+                AllEvents.Dispose();
+                AllEvents = null;
+            }
+            AllEvents = DbHelper.GetAllFromTableByName(tableName);
             TotalPages = (TotalCount + PageSize - 1) / PageSize;
 
         }

@@ -1,47 +1,116 @@
 ﻿using System;
 
-using HenkTcp;
 using LSX.PCService.Data;
+using Cave.Net;
+using System.Net;
+using System.Text;
 namespace LSX.PCService.Controllers
 {
 
     class CameraController : SingletonBase<CameraController>, IDisposable
     {
-        HenkTcpServer server = null;
-       public EventHandler<string> OnGetBoxId;
+        TcpServer server;
+        TcpAsyncClient client;
+        public EventHandler<string> OnGetBoxId;
+        NLog.Logger logger;
+
+        private string _Ip;
+
+        public string Ip
+        {
+            get { return _Ip; }
+            set
+            {
+                _Ip = value;
+                DbHelper.SetDeviceState(DeviceType.CAMERA, value);
+            }
+        }
+
+        private string _Status;
+
+        public string Status
+        {
+            get { return _Status; }
+            set
+            {
+                _Status = value;
+                DbHelper.SetDeviceState(DeviceType.CAMERA, Ip, value);
+            }
+        }
+
 
         private CameraController()
         {
-            server = new HenkTcpServer();
-            server.DataReceived += server_DataReceived;
-            server.Start(Config.CameraServerPort, 1);
-            NLog.LogManager.GetCurrentClassLogger().Info("Sever Start At " + Config.CameraServerPort.ToString());
+            logger = NLog.LogManager.GetCurrentClassLogger();
+            server = new TcpServer() { AcceptBacklog = 1, AcceptThreads = 1 };
+
+            server.ClientAccepted += server_ClientAccepted;
+            server.ClientException += server_ClientException;
+            
+            server.Listen(Config.CameraServerPort);
+
+            Ip = "-";
+            Status = DeviceState.初始化.ToString();
+
+            logger.Info("Sever Start At " + Config.CameraServerPort.ToString());
         }
 
-        void server_DataReceived(object sender, Message e)
+        void server_ClientException(object sender, TcpServerClientExceptionEventArgs<TcpAsyncClient> e)
         {
-            string str = e.MessageString;
-            NLog.LogManager.GetCurrentClassLogger().Info("recv:" + str);
-            if (null == str) return;
+            Status = DeviceState.断开.ToString();
+        }
+
+        void server_ClientAccepted(object sender, TcpServerClientEventArgs<TcpAsyncClient> e)
+        {
+            this.client = e.Client;
+            e.Client.Received += server_DataReceived;
+            e.Client.Disconnected += Client_Disconnected;
+
+            Ip = ((IPEndPoint)(e.Client.RemoteEndPoint)).Address.MapToIPv4().ToString();
+            Status = DeviceState.已连接.ToString();
+
+            logger.Info("Camera Client Connected:" + e.Client.RemoteEndPoint.ToString());
+        }
+
+        void Client_Disconnected(object sender, EventArgs e)
+        {
+
+            Status = DeviceState.断开.ToString();
+        }
+
+        private void server_DataReceived(object sender, BufferEventArgs e)
+        {
+            string cameraData = Encoding.ASCII.GetString(e.Buffer,0,e.Length).Trim();
+            //logger.Info("recv:" + str);
+            if (null == cameraData) return;
 
             //数据解析匹配箱号
 
-     
 
-            string[] tmp = str.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-            if (tmp.Length != 2) return;
+            string boxId = cameraData;
+            ///1.如果解析正常，则箱号为实际箱号
+            ///2.如果解析失败，则箱号为原始数据
+            if (cameraData.Contains(","))
+            {
+                string[] tmp = cameraData.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+                if (tmp.Length>=2)
+                {
+                    boxId = tmp[0];
+                }
+                else
+                {
+                    boxId = cameraData;
+                }
+            }
+            else
+            {
+                boxId = cameraData;
+            }
             
-            //////////////////////////////////////////////////////////////////////////
-            //1.如果扫描的数据无法解析 orders表创建一个以E为开始的订单，扫描的信息记录到箱号字段中
-            DbHelper.CreateErrorOrder(str);
+           
 
 
-            //2.如果解析正常
-            //////////////////////////////////////////////////////////////////////////
 
-
-            string boxId = tmp[0];
-            int count = int.Parse(tmp[1]);
             InputQueueCaseNum job = new InputQueueCaseNum();
             job.Send(new InputMessageCaseNum() { boxId = boxId });
             if (OnGetBoxId != null)
@@ -53,8 +122,8 @@ namespace LSX.PCService.Controllers
 
         public void Dispose()
         {
-            if (this.server.IsRunning)
-                this.server.Stop();
+            this.server.DisconnectAllClients();
+            this.server.Close();
         }
     }
 }

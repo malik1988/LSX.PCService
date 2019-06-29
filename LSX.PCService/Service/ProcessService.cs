@@ -123,33 +123,34 @@ namespace LSX.PCService.Service
                 //数据库中检查箱号是否为存在于 任务订单总表中
                 string orderId = DbHelper.CreateOrderIdByBoxId(msg.boxId);
 
-                if (orderId != null)
-                {
-                    bool finished = DbHelper.OrderIsFinished(orderId);
-                    if (finished)
-                    {
-                        ch.SendToChannel(EnumChannel.异常道口);
+                EnumChannel targetChannel = EnumChannel.异常道口;
+                
+                if (orderId != null && orderId.StartsWith("D"))
+                {//订单有效，且为正常订单
+                    
+                    if (DbHelper.OrderIsFinished(orderId))
+                    {//订单已完成，则返回失败
+                        targetChannel = EnumChannel.异常道口;
                     }
                     else
                     {
-
-                        //1. 发送订单消息
-                        orderOkQueue.Send(new OrderMessage() { orderId = orderId });
-                        //   是，流水线发送目标通道：正常
-                        //   
-                        ch.SendToChannel(EnumChannel.正常道口);
-                        // 创建09-灯记录，生成托盘ID，分配灯ID
-                        // 等待货物到达道口消息
-                        // 发送灯点亮消息
-                        // 等待用户灭灯消息
+                        targetChannel = EnumChannel.正常道口; //1. 发送订单消息
                     }
+                   
                 }
+                //   流水线发送目标通道
+                ch.SendToChannel(targetChannel);
+                //接受成功才设置这个值
+                //DbHelper.SetOrderRealChannel(orderId, targetChannel);
 
+                //发送订单队列
+                if (targetChannel == EnumChannel.正常道口)
+                {
+                    orderOkQueue.Send(new OrderMessage() { orderId = orderId });
+                }
                 else
                 {
                     //2. 否，不创建任务订单ID
-                    //   否，流水线发送目标通道：异常
-                    ch.SendToChannel(EnumChannel.异常道口);
                     orderErrQueue.Send(new OrderMessage() { orderId = orderId });
                 }
 

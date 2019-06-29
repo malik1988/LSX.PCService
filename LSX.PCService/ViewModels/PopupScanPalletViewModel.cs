@@ -8,10 +8,13 @@ using Prism.Mvvm;
 using Prism.Commands;
 using LSX.PCService.Controllers;
 using LSX.PCService.Data;
+using Prism.Interactivity.InteractionRequest;
+using System.Windows;
+using System.Windows;
 
 namespace LSX.PCService.ViewModels
 {
-    class PopupScanPalletViewModel : BindableBase
+    class PopupScanPalletViewModel : BindableBase, IInteractionRequestAware
     {
         private string _PalletId;
 
@@ -68,21 +71,47 @@ namespace LSX.PCService.ViewModels
                 int num09 = DbHelper.GetPalletDistinct09Num(PalletId);
                 if (num09 == 0)
                 {
-                    IsSinglePallet = null;
+                    IsSinglePallet = null;                     
                 }
                 else
                     IsSinglePallet = num09 == 1 ? true : false;
 
                 NeedCheck = DbHelper.IsPalletNeedQuantityCheck(PalletId);
                 NeedLightsCount = DbHelper.GetPalletDistinct09Num(PalletId);
+               
             });
             BeginPalletTask = new DelegateCommand(() =>
             {
+                int num09 = DbHelper.GetPalletDistinct09Num(PalletId);
+                if (num09==0)
+                {
+                    MessageBox.Show("无效栈板号", "错误");
+                    return;
+                }
                 //开启Pallet对应的所有订单
                 //将Pallet添加到已开启栈板任务表中
-                
-
+                ErrorCode ret = DbHelper.AddPalletToPalletTable(PalletId);
+                if (FinishInteraction != null)
+                {
+                    FinishInteraction.Invoke();
+                }
             });
         }
+
+        #region IInteractionRequestAware 成员
+
+        public Action FinishInteraction
+        {
+            get;
+            set;
+        }
+
+        public INotification Notification
+        {
+            get;
+            set;
+        }
+
+        #endregion
     }
 }

@@ -80,9 +80,9 @@ namespace LSX.PCService.ViewModels
 
         public WindowDispatchViewModel()
         {
-            OkChannelOrderList = new ObservableCollection<object>(){
-                new {箱号="1dddhd",C09="09sxxs"}
-            };
+
+
+            OkChannelOrderList = DbHelper.GetOrderListByChannel(EnumChannel.正常道口);
             channel = ChannelController.Instance;
 
             channel.OnOkUpdate += (o, c) =>
@@ -95,11 +95,13 @@ namespace LSX.PCService.ViewModels
             LightManagerErrList = new ObservableCollection<string>();
             LightManager.Instance.OnError = new EventHandler<string>((o, e) => { LightManagerErrMsg = e; });
 
-            LightStates = new ObservableCollection<object>();
-            for (int i = 0; i < 100;i++ )
-            {
-                LightStates.Add(new { Id = i, State = (LightState)(i % 5), Description = i+1 });
-            }
+            //LightStates = new ObservableCollection<object>();
+            //for (int i = 0; i < 100;i++ )
+            //{
+            //    LightStates.Add(new { Id = i, State = (LightState)(i % 5), Description = i+1 });
+            //}
+            LightStates = DbHelper.GetAllLightStates();
+
         }
 
         #region IInteractionRequestAware 成员

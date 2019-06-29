@@ -1,9 +1,5 @@
 ﻿using System;
 
-using System.Net.Sockets;
-using HenkTcp;
-using Cave.Net;
-using System.Net;
 using LSX.PCService.Data;
 namespace LSX.PCService.Controllers
 {
@@ -93,7 +89,7 @@ namespace LSX.PCService.Controllers
         int GetLightIdFromIpAddr(string ip)
         {
             string[] tmp = ip.Split(new char[] { '.' });
-            return int.Parse(tmp[3]);
+            return int.Parse(tmp[3])+100;//测试用100+Id
         }
 
         #region 消息指令

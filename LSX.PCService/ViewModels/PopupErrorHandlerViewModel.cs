@@ -33,7 +33,7 @@ namespace LSX.PCService.ViewModels
         {
             ResetBoxId = new DelegateCommand(() =>
             {
-                //查找
+                //根据箱号重置订单状态
                 DbHelper.ResetOrderByBoxId(BoxId);
             });
         }

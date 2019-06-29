@@ -76,7 +76,9 @@
                     <Button Content="刷新" Command="{Binding ViewRefreshCommand}" Margin="10,0"/>
                 </StackPanel>
             </Border>
-            <DataGrid ItemsSource="{Binding AllEvents}" IsReadOnly="True"></DataGrid>
+            <WrapPanel>
+                <DataGrid ItemsSource="{Binding AllEvents}" IsReadOnly="True" ColumnWidth="auto"/>
+            </WrapPanel>
         </StackPanel>
     </Grid>
 </UserControl>

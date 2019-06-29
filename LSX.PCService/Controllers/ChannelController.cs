@@ -1,6 +1,7 @@
 ﻿using System;
 using Cave.Net;
 using LSX.PCService.Data;
+using System.Net;
 namespace LSX.PCService.Controllers
 {
     class ChannelCount
@@ -31,13 +32,42 @@ namespace LSX.PCService.Controllers
         public EventHandler OnOkUpdate;
         public EventHandler OnErrUpdate;
         public EventHandler<string> OnEmergency;
+
+
+        private string _Ip;
+
+        public string Ip
+        {
+            get { return _Ip; }
+            set
+            {
+                _Ip = value;
+                DbHelper.SetDeviceState(DeviceType.CHANNEL, value);
+            }
+        }
+
+        private string _Status;
+
+        public string Status
+        {
+            get { return _Status; }
+            set
+            {
+                _Status = value;
+                DbHelper.SetDeviceState(DeviceType.CHANNEL, Ip, value);
+            }
+        }
         private ChannelController()
         {
             server = new TcpServer() { AcceptBacklog = 1, AcceptThreads = 1 };
-
+            
             server.ClientAccepted += server_ClientAccepted;
             server.ClientException += server_ClientException;
             server.Listen(Config.ChannelServerPort);
+
+            Ip = "-";
+            Status = DeviceState.初始化.ToString();
+
             NLog.LogManager.GetCurrentClassLogger().Info("Sever Start At " + Config.ChannelServerPort.ToString());
             orderOkQueue = new OrderMessageInputQueue(EnumChannel.正常道口);
             orderErrQueue = new OrderMessageInputQueue(EnumChannel.异常道口);
@@ -51,6 +81,7 @@ namespace LSX.PCService.Controllers
         void server_ClientException(object sender, TcpServerClientExceptionEventArgs<TcpAsyncClient> e)
         {
             this.client.Dispose();
+            Status = DeviceState.断开.ToString();
         }
 
         void server_ClientAccepted(object sender, TcpServerClientEventArgs<TcpAsyncClient> e)
@@ -58,8 +89,15 @@ namespace LSX.PCService.Controllers
 
             this.client = new CustomTcpClient(e.Client);
             this.client.OnReceived += client_Received;
-           
+            e.Client.Disconnected += Client_Disconnected;
+            Ip = ((IPEndPoint)(e.Client.RemoteEndPoint)).Address.MapToIPv4().ToString();
+            Status = DeviceState.已连接.ToString();      
             NLog.LogManager.GetCurrentClassLogger().Info("Channel Client Connected:" + e.Client.RemoteEndPoint.ToString());
+        }
+
+        void Client_Disconnected(object sender, EventArgs e)
+        {
+            Status = DeviceState.断开.ToString();
         }
 
 
@@ -183,9 +221,15 @@ namespace LSX.PCService.Controllers
         /// </summary>
         public void ResetCount()
         {
+            if (null==client)
+            {
+                //设备未连接
+                return;
+            }
             CountOkArrived = new ChannelCount();
             CountOkTake = new ChannelCount();
             CountErr = new ChannelCount();
+            
             client.WriteAndCheckResponse("AT+CLEARALL");
         }
         public void ResetCount(EnumChannel channel)
