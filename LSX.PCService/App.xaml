@@ -2,11 +2,21 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
-                    xmlns:local="clr-namespace:LSX.PCService.VeiwModels"
-                      
+             xmlns:converter="clr-namespace:LSX.PCService.Converters"
              >
-    
     <!--StartupUri="MainWindow.xaml"-->
     <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Themes/Theme.Light.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+            <converter:ConverterCurPageItems x:Key="ConverterCurPageItems"/>
+            <converter:ConverterDeviceStateColor x:Key="ConverterDeviceStateColor"/>
+            <converter:ConverterIsSinglePalletColor x:Key="ConverterIsSinglePalletColor"/>
+            <converter:ConverterIsSinglePalletText x:Key="ConverterIsSinglePalletText"/>
+            <converter:ConverterLightStateColor x:Key="ConverterLightStateColor"/>
+            <converter:ConverterNeedCheckText x:Key="ConverterNeedCheckText"/>
+            <converter:ConverterProgress x:Key="ConverterProgress"/>
+        </ResourceDictionary>
     </Application.Resources>
 </prism:PrismApplication>

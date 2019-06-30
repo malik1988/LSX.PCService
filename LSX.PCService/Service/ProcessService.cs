@@ -59,7 +59,7 @@ namespace LSX.PCService.Service
             LightMessageQueue lightGreenQueue = new LightMessageQueue(LightColor.GREEN.ToString("D"));
 
             LightManager lightManager = LightManager.Instance;
-            NLog.Logger logger = NLog.LogManager.GetCurrentClassLogger();
+            NLog.Logger logger = NLog.LogManager.GetLogger("ProcessOrderMain");
 
             while (!token.IsCancellationRequested)
             {
@@ -67,7 +67,7 @@ namespace LSX.PCService.Service
                 BoxInChannelMessage msg = boxQueue.Receive();
                 string orderId = msg.orderId;
                 // 是否正常道口
-                if (DbHelper.GetCurrentOrderChannel(orderId))
+                if (DbHelper.IsCurrentOrderOkChannel(orderId))
                 {
                     //绑定并获取灯ID
                     //绑定09-灯表
@@ -114,20 +114,18 @@ namespace LSX.PCService.Service
             InputQueueCaseNum que = new InputQueueCaseNum();
             OrderMessageInputQueue orderOkQueue = new OrderMessageInputQueue(EnumChannel.正常道口);
             OrderMessageInputQueue orderErrQueue = new OrderMessageInputQueue(EnumChannel.异常道口);
+            NLog.Logger logger = NLog.LogManager.GetLogger("ProcessChannelOrder");
             while (!token.IsCancellationRequested)
             {//获取箱号
                 InputMessageCaseNum msg = que.Receive();
+                logger.Info(msg.boxId.ToString());
 
-                NLog.LogManager.GetCurrentClassLogger().Info("ProcessChannelOrder " + msg.boxId.ToString());
-
-                //数据库中检查箱号是否为存在于 任务订单总表中
-                string orderId = DbHelper.CreateOrderIdByBoxId(msg.boxId);
-
+                string orderId = msg.orderId;
                 EnumChannel targetChannel = EnumChannel.异常道口;
-                
+
                 if (orderId != null && orderId.StartsWith("D"))
                 {//订单有效，且为正常订单
-                    
+
                     if (DbHelper.OrderIsFinished(orderId))
                     {//订单已完成，则返回失败
                         targetChannel = EnumChannel.异常道口;
@@ -136,7 +134,7 @@ namespace LSX.PCService.Service
                     {
                         targetChannel = EnumChannel.正常道口; //1. 发送订单消息
                     }
-                   
+
                 }
                 //   流水线发送目标通道
                 ch.SendToChannel(targetChannel);
@@ -165,6 +163,7 @@ namespace LSX.PCService.Service
             LightMessageQueue lightQueue = new LightMessageQueue(lightColor.ToString("D"));
             LightManager lightManager = LightManager.Instance;
             LightColor curLightColor = lightColor;
+            NLog.Logger logger = NLog.LogManager.GetLogger("ProcessLightOrder");
 
             while (!token.IsCancellationRequested)
             {
@@ -175,7 +174,7 @@ namespace LSX.PCService.Service
                 //点亮当前灯
                 ErrorCode err = lightManager.SetLight(msg.lightId, LightOnOffState.ON, lightColor);
 
-                NLog.LogManager.GetCurrentClassLogger().Info("ProcessLightOrder :" + err.ToString());
+                logger.Info(err.ToString());
                 //记录当前灯状态到数据库
                 if (err == ErrorCode.成功)
                 {
@@ -208,6 +207,7 @@ namespace LSX.PCService.Service
                     //日志记录
                     //TODO
                     //DbHelper.OrderErrorLogAdd(msg.orderId, err.ToString());
+             
                 }
 
             }

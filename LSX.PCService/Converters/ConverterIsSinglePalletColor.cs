@@ -4,22 +4,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
+using System.Windows.Media;
 
-namespace LSX.PCService.ViewModels
+namespace LSX.PCService.Converters
 {
-    class ConverterNeedCheckText : IValueConverter
+    class ConverterIsSinglePalletColor : IValueConverter
     {
         #region IValueConverter 成员
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            bool? needCheck = value as bool?;
-            if (null == needCheck)
+            bool? isSingle = value as bool?;
+            if (null == isSingle)
             {
-                return "空";
+                return Brushes.Red;
             }
             else
-                return needCheck == true ? "是" : "否";
+            {
+                return isSingle == true ? Brushes.Yellow : Brushes.Green;
+            }
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

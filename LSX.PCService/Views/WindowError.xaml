@@ -59,13 +59,9 @@
                 <Border>
                     <StackPanel Orientation="Horizontal">
                         <Label Content="到达-程序计数" />
-                        <Label Content="{Binding ProgramCountArrived}" Margin="5,0"/>
+                        <Label Content="{Binding ProgramCount}" Margin="5,0"/>
                         <Label Content="到达-通道硬件计数"/>
-                        <Label Content="{Binding ChannelCountArrived}" Margin="5,0"/>
-                        <Label Content="取走-程序计数" />
-                        <Label Content="{Binding ProgramCountTake}" Margin="5,0"/>
-                        <Label Content="取走-通道硬件计数"/>
-                        <Label Content="{Binding ChannelCountTake}" Margin="5,0"/>
+                        <Label Content="{Binding ChannelCount}" Margin="5,0"/>
                     </StackPanel>
                 </Border>
                 <DataGrid ItemsSource="{Binding OkChannelOrderList}" IsReadOnly="True" AutoGenerateColumns="False">

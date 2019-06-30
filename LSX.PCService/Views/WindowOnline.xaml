@@ -3,15 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:prism="http://prismlibrary.com/"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:viewModels="clr-namespace:LSX.PCService.ViewModels"
         xmlns:Views="clr-namespace:LSX.PCService.Views"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="主窗口-上料窗口" Height="400" Width="800"
         WindowStyle="None" WindowState="Maximized"
         >
-    <Window.Resources>
-        <viewModels:ConverterDeviceStateColor x:Key="deviceStateColor"/>
-    </Window.Resources>
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding ImportAwmsDataRequest}">
             <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True" >
@@ -92,6 +88,9 @@
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
     <Border BorderBrush="Black" BorderThickness="3" CornerRadius="5" >
+        <Border.Background>
+            <SolidColorBrush Color="{DynamicResource WindowBackgroundColor}"/>
+        </Border.Background>
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -145,44 +144,63 @@
                     <TextBlock Text="当前识别箱号信息" FontSize="30" HorizontalAlignment="Center"/>
                     <DataGrid ItemsSource="{Binding CurrentBoxInfo}" AutoGenerateColumns="False" Width="auto" FontSize="30" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding 箱号}" Header="箱号" Width="2*"/>
-                            <DataGridTextColumn Binding="{Binding C09}" Header="09码" Width="3*"/>
-                            <DataGridTextColumn Binding="{Binding 数量}" Header="数量" Width="1*"/>
+                            <DataGridTextColumn Binding="{Binding Carton}" Header="箱号" Width="2*"/>
+                            <DataGridTextColumn Binding="{Binding Zncode}" Header="09码" Width="2*"/>
+                            <DataGridTextColumn Binding="{Binding Order}" Header="任务单号" Width="3*"/>
+                            <DataGridTextColumn Binding="{Binding Num}" Header="数量" Width="1*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
             </Border>
             <Border Grid.Row="2" BorderBrush="Blue" BorderThickness="2" CornerRadius="5" Margin="2">
                 <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
+                    <Border Grid.Row="0" Grid.Column="0" BorderBrush="LightGray" BorderThickness="2" CornerRadius="3" >
+                        <TextBlock Text="发货单" HorizontalAlignment="Center"/>
+                    </Border>
+                    <Border Grid.Row="0" Grid.Column="1" BorderBrush="LightGray" BorderThickness="2" CornerRadius="3" >
+                        <TextBlock Text="栈板" HorizontalAlignment="Center"/>
+                    </Border>
+                    <Border Grid.Row="0" Grid.Column="2" BorderBrush="LightGray" BorderThickness="2" CornerRadius="3" >
+                        <TextBlock Text="总任务" HorizontalAlignment="Center"/>
+                    </Border>
+                    <Border Grid.Row="0" Grid.Column="3" BorderBrush="LightGray" BorderThickness="2" CornerRadius="3" >
+                        <TextBlock Text="实时订单" HorizontalAlignment="Center"/>
+                    </Border>
                     <!--发货单号-->
-                    <DataGrid ItemsSource="{Binding TrafficOrderList}" MinWidth="100" ToolTip="发货单号" Grid.Column="0" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid Grid.Column="0" Grid.Row="1" ItemsSource="{Binding TrafficOrderList}" MinWidth="100" ToolTip="发货单号"  AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding id}" Header="编号"/>
                             <DataGridTextColumn Binding="{Binding torder}" Header="发货单号"/>
                             <DataGridTextColumn Binding="{Binding status}" Header="状态"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <DataGrid ItemsSource="{Binding PalletList}" MinWidth="100" ToolTip="栈板号" Grid.Column="1" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding PalletList}" MinWidth="100" ToolTip="栈板号" Grid.Column="1" AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding id}" Header="编号"/>
                             <DataGridTextColumn Binding="{Binding pallet}" Header="栈板号"/>
                             <DataGridTextColumn Binding="{Binding status}" Header="状态"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <DataGrid ItemsSource="{Binding CurrentOrderInfo}" MinWidth="200" ToolTip="当前订单详细信息" Grid.Column="2" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid Grid.Row="1" Grid.Column="2" ItemsSource="{Binding AllOrderTasks}" IsReadOnly="True" />
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding CurrentOrderInfo}" MinWidth="200" ToolTip="当前订单详细信息" Grid.Column="3" AutoGenerateColumns="False" IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding id}" Header="编号" Width="1*"/>
-                            <DataGridTextColumn Binding="{Binding order}" Header="任务单号" Width="2*"/>
+                            <DataGridTextColumn Binding="{Binding id}" Header="编号" />
+                            <DataGridTextColumn Binding="{Binding carton}" Header="箱号" Width="2*"/>
                             <DataGridTextColumn Binding="{Binding zncode}" Header="09码" Width="2*"/>
+                            <DataGridTextColumn Binding="{Binding order}" Header="任务单号" Width="2*"/>
                             <DataGridTextColumn Binding="{Binding pallet}" Header="栈板号" Width="1*"/>
-                            <DataGridTextColumn Binding="{Binding carton}" Header="箱号" Width="1*"/>
-                            <DataGridTextColumn Binding="{Binding channel}" Header="通道" Width="1*"/>
-                            <DataGridTextColumn Binding="{Binding total}" Header="总数" Width="1*"/>
+                            <DataGridTextColumn Binding="{Binding channel}" Header="通道"/>
+                            <DataGridTextColumn Binding="{Binding total}" Header="总数" />
                             <DataGridTextColumn Binding="{Binding carton_status}" Header="订单状态" Width="1*"/>
                         </DataGrid.Columns>
                     </DataGrid>
@@ -214,7 +232,7 @@
                                 </Style>
                             </DataTemplate.Resources>
                             <Grid>
-                                <Ellipse Fill="{Binding Status,Converter={StaticResource deviceStateColor}}"/>
+                                <Ellipse Fill="{Binding Status,Converter={StaticResource ConverterDeviceStateColor}}"/>
                                 <!--<Border BorderThickness="2" BorderBrush="Orange" CornerRadius="8"/>-->
                                 <StackPanel>
                                     <TextBlock Margin="3,0,3,0"
@@ -242,7 +260,6 @@
                         </Style>
                     </ItemsControl.ItemContainerStyle>
                 </ItemsControl>
-                
                 <Separator Margin="10,0"/>
                 <TextBlock Text="{Binding LightManagerErrMsg}" ToolTip="灯光服务器异常消息"/>
             </StatusBar>

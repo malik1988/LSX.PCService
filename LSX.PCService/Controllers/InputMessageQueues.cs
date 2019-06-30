@@ -12,6 +12,7 @@ namespace LSX.PCService.Controllers
     class InputMessageCaseNum
     {
         public string boxId { get; set; }
+        public string orderId { get; set; }
     }
     class InputQueueCaseNum : InputMessageQueueBase
     {

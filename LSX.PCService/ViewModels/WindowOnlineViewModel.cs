@@ -175,7 +175,14 @@ namespace LSX.PCService.ViewModels
             get { return _DeviceStatus; }
             set { SetProperty(ref _DeviceStatus, value); }
         }
-        
+        private DataTable _AllOrderTasks;
+
+        public DataTable AllOrderTasks
+        {
+            get { return _AllOrderTasks; }
+            set { SetProperty(ref _AllOrderTasks, value); }
+        }
+
 
         Timer viewUpdateTimer;
         int count;
@@ -208,11 +215,9 @@ namespace LSX.PCService.ViewModels
                 OpenAllWindowsRequest.Raise(new Notification { Title="子窗口"});
             });
 
-            CameraController.Instance.OnGetBoxId = new EventHandler<string>((r, box) =>
-            {//TODO 
-                //箱号待完成
-                string c09 = DbHelper.GetC09ByBoxId(box);
-                CurrentBoxInfo = new ObservableCollection<object> { new { 箱号 =box, C09 =c09, 数量 = 1000} };
+            CameraController.Instance.OnGetBoxId = new EventHandler<string>((r, o) =>
+            {
+                CurrentBoxInfo = new ObservableCollection<object> { DbHelper.GetOrderByOrderId(o) };
             });
 
             OpenAllEventsRequest = new InteractionRequest<Notification>();
@@ -245,7 +250,7 @@ namespace LSX.PCService.ViewModels
             //清空所有通道计数器
             ChannelController.Instance.ResetCount();
 
-            CustomPopupRequest.Raise(new TrafficOrderNotification { Title = "扫描物料信息", Content = "msg" }, r =>
+            CustomPopupRequest.Raise(new TrafficOrderNotification { Title = "扫描物料信息" }, r =>
             {
                 if (r.Confirmed && r.Items != null)
                 {
@@ -267,7 +272,7 @@ namespace LSX.PCService.ViewModels
         {
             //获取生成的订单表数据
 
-
+            AllOrderTasks = DbHelper.GetAllFromTableByName("view_o_t_p");
             CurrentOrderInfo = DbHelper.GetAllFromTableByName("awms_orders_dhl");
 
             if (count++%3==0)
@@ -275,9 +280,6 @@ namespace LSX.PCService.ViewModels
                 DeviceStatus = DbHelper.GetAllDeviceState();
             }
 
-            //ChannelControllerState = DbHelper.GetDeviceState(DeviceType.CHANNEL.ToString());
-            //CameraControllerState = DbHelper.GetDeviceState(DeviceType.CAMERA.ToString());
-            //LightManagerState = DbHelper.GetDeviceState(DeviceType.LIGHT.ToString());
         }
 
     }

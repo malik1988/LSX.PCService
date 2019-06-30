@@ -91,6 +91,7 @@ namespace LSX.PCService.ViewModels
                 //开启Pallet对应的所有订单
                 //将Pallet添加到已开启栈板任务表中
                 ErrorCode ret = DbHelper.AddPalletToPalletTable(PalletId);
+                MessageBox.Show(ret.ToString());
                 if (FinishInteraction != null)
                 {
                     FinishInteraction.Invoke();

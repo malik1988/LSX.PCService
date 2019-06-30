@@ -3,15 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:viewModels="clr-namespace:LSX.PCService.ViewModels"
 			 xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              MinHeight="400" MinWidth="600">
-    <UserControl.Resources>
-        <viewModels:ConverterLightStateColor x:Key="lightStateColor"/>
-    </UserControl.Resources>
+   
     <Border BorderBrush="Orange" BorderThickness="3" CornerRadius="5">
         <Grid>
             <Grid.RowDefinitions>
@@ -111,7 +108,7 @@
                                     </Style>
                                 </DataTemplate.Resources>
                                 <Grid>
-                                    <Ellipse Fill="{Binding State,Converter={StaticResource lightStateColor}}"/>
+                                    <Ellipse Fill="{Binding State,Converter={StaticResource ConverterLightStateColor}}"/>
                                     <StackPanel>
                                         <TextBlock Margin="3,3,3,0"
                      Text="{Binding Id}"/>

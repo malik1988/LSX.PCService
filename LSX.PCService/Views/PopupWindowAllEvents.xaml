@@ -4,15 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:local="clr-namespace:LSX.PCService.VeiwModels"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
              MinHeight="400" MinWidth="800">
-    <UserControl.Resources>
-        <local:ConverterCurPageItems x:Key="converterCurPageItems"/>
-    </UserControl.Resources>
+ 
     <Grid>
         <StackPanel>
             <Border x:Name="xTitle"  MouseDown="xTitle_MouseDown">
@@ -64,7 +61,7 @@
                         </TextBox.InputBindings>
                     </TextBox>
                     <Label Content="当前页数"/>
-                    <ComboBox ItemsSource="{Binding TotalPages,Converter={StaticResource  ResourceKey=converterCurPageItems}}" SelectedItem="{Binding CurrentPage}">
+                    <ComboBox ItemsSource="{Binding TotalPages,Converter={StaticResource  ConverterCurPageItems}}" SelectedItem="{Binding CurrentPage}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding ViewRefreshCommand}"/>

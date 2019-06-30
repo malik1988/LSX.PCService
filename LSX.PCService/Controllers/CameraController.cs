@@ -46,7 +46,7 @@ namespace LSX.PCService.Controllers
 
             server.ClientAccepted += server_ClientAccepted;
             server.ClientException += server_ClientException;
-            
+
             server.Listen(Config.CameraServerPort);
 
             Ip = "-";
@@ -80,7 +80,7 @@ namespace LSX.PCService.Controllers
 
         private void server_DataReceived(object sender, BufferEventArgs e)
         {
-            string cameraData = Encoding.ASCII.GetString(e.Buffer,0,e.Length).Trim();
+            string cameraData = Encoding.ASCII.GetString(e.Buffer, 0, e.Length).Trim();
             //logger.Info("recv:" + str);
             if (null == cameraData) return;
 
@@ -93,7 +93,7 @@ namespace LSX.PCService.Controllers
             if (cameraData.Contains(","))
             {
                 string[] tmp = cameraData.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-                if (tmp.Length>=2)
+                if (tmp.Length >= 2)
                 {
                     boxId = tmp[0];
                 }
@@ -106,16 +106,18 @@ namespace LSX.PCService.Controllers
             {
                 boxId = cameraData;
             }
-            
-           
 
 
+
+
+            //数据库中检查箱号是否为存在于 任务订单总表中
+            string orderId = DbHelper.CreateOrderIdByBoxId(boxId);
 
             InputQueueCaseNum job = new InputQueueCaseNum();
-            job.Send(new InputMessageCaseNum() { boxId = boxId });
+            job.Send(new InputMessageCaseNum() { boxId = boxId, orderId = orderId });
             if (OnGetBoxId != null)
             {
-                OnGetBoxId.BeginInvoke(null, boxId, null, null);
+                OnGetBoxId.BeginInvoke(null, orderId, null, null);
             }
         }
 

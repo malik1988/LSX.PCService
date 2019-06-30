@@ -130,12 +130,6 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="Telerik.Windows.Controls">
-      <HintPath>C:\Users\Administrator\Desktop\料架测试单机版程序\SMT\Server\Telerik.Windows.Controls.dll</HintPath>
-    </Reference>
-    <Reference Include="Telerik.Windows.Controls.Input">
-      <HintPath>C:\Users\Administrator\Desktop\料架测试单机版程序\SMT\Server\Telerik.Windows.Controls.Input.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Abstractions, Version=3.3.1.0, Culture=neutral, PublicKeyToken=6d32ff45e0ccc69f, processorArchitecture=MSIL">
       <HintPath>..\packages\Unity.Abstractions.3.3.1\lib\net46\Unity.Abstractions.dll</HintPath>
       <Private>True</Private>
@@ -161,18 +155,19 @@
     <Compile Include="Controllers\CwmsOrderHelper.cs" />
     <Compile Include="Controllers\LightController.cs" />
     <Compile Include="Data\DBHelper.cs" />
+    <Compile Include="Data\RealTimeOrder.cs" />
     <Compile Include="Interfaces\CallAgvApi.cs" />
     <Compile Include="Notifications\INotificationTraffic.cs" />
     <Compile Include="Notifications\TrafficOrderNotification.cs" />
     <Compile Include="Service\ProcessService.cs" />
     <Compile Include="SingletonBase.cs" />
-    <Compile Include="ViewModels\ConverterCurPageItems.cs" />
-    <Compile Include="ViewModels\ConverterIsSinglePalletColor.cs" />
-    <Compile Include="ViewModels\ConverterIsSinglePalletText.cs" />
-    <Compile Include="ViewModels\ConverterDeviceStateColor.cs" />
-    <Compile Include="ViewModels\ConverterLightStateColor.cs" />
-    <Compile Include="ViewModels\ConverterNeedCheckText.cs" />
-    <Compile Include="ViewModels\ConverterProgress.cs" />
+    <Compile Include="Converters\ConverterCurPageItems.cs" />
+    <Compile Include="Converters\ConverterIsSinglePalletColor.cs" />
+    <Compile Include="Converters\ConverterIsSinglePalletText.cs" />
+    <Compile Include="Converters\ConverterDeviceStateColor.cs" />
+    <Compile Include="Converters\ConverterLightStateColor.cs" />
+    <Compile Include="Converters\ConverterNeedCheckText.cs" />
+    <Compile Include="Converters\ConverterProgress.cs" />
     <Compile Include="ViewModels\PopupBindingLpnViewModel.cs" />
     <Compile Include="ViewModels\PopupErrorHandlerViewModel.cs" />
     <Compile Include="ViewModels\PopupImportDataViewModel.cs" />
@@ -232,6 +227,10 @@
     <Compile Include="Controllers\InputMessageQueueBase.cs" />
     <Compile Include="Controllers\LightManager.cs" />
     <Compile Include="Data\ErrorCode.cs" />
+    <Page Include="Themes\Theme.Light.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\PopupBindingLpn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -295,7 +294,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Properties\Licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

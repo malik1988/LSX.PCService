@@ -307,11 +307,9 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+                cmd.Dispose();
+                conn.Close();
+
             }
 
             if (num != 1)
@@ -334,7 +332,7 @@ namespace LSX.PCService.Data
             MySqlConnection conn = new MySqlConnection(Config.SqlServerConn);
             MySqlCommand cmd = new MySqlCommand("SELECT inspection FROM awms_source_dhl WHERE pallet='" + palletId + "';", conn);
             MySqlDataReader reader = null;
-            string inspection = "Y";
+            string inspection = null;
             try
             {
                 conn.Open();
@@ -350,26 +348,20 @@ namespace LSX.PCService.Data
             }
             catch (System.Data.SqlClient.SqlException e)
             {
-                conn.Close();
                 throw new Exception(e.Message);
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
-            }
+                cmd.Dispose();
+                conn.Close();
 
-            if (inspection != "Y")
+            }
+            if (inspection == null)
             {
-                return false;
+                return null;
             }
             else
-            {
-                return true;
-            }
+                return inspection == "Y";
         }
         /// <summary>
         /// 从原始数据表+发货单表 中查找栈板号对应的09码数量
@@ -405,11 +397,9 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+                cmd.Dispose();
+                conn.Close();
+
             }
 
             return num;
@@ -444,11 +434,10 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
 
             if (num == 0)
@@ -470,27 +459,31 @@ namespace LSX.PCService.Data
         /// <param name="orders">发车单号列表</param>
         public static void AddTrafficOrderToTaskTable(Collection<string> orders)
         {
+            if (null == orders || orders.Count == 0)
+            {
+                return;
+            }
+
             MySqlConnection sqlConn = new MySqlConnection(Config.SqlServerConn);
             sqlConn.Open();
+            string sqlInsert = "INSERT INTO awms_orders_tasks_dhl(torder, `status`) VALUES ";
             for (int i = 0; i < orders.Count; i++)
             {
                 string torder = orders[i];
                 System.Diagnostics.Debug.WriteLine(torder);
-                string insertCmd = "INSERT INTO awms_orders_tasks_dhl(torder, `status`) VALUES ('" + torder + "'," + 0 + ");";
-                MySqlCommand insSqlComm = new MySqlCommand(insertCmd, sqlConn);
-                try
+                sqlInsert += "('" + torder + "'," + 0 + "),";
+            }
+            sqlInsert = sqlInsert.TrimEnd(new char[] { ',' });
+            try
+            {
+                using (MySqlCommand insSqlComm = new MySqlCommand(sqlInsert, sqlConn))
                 {
                     int val = insSqlComm.ExecuteNonQuery();
-                    if (val == 1)
-                    {
-                        System.Diagnostics.Debug.WriteLine("Insert data successfully");
-                    }
-
                 }
-                catch (Exception)
-                {
-                    System.Diagnostics.Debug.WriteLine("Insert data failed, maybe data already exists.");
-                }
+            }
+            catch (Exception)
+            {
+                System.Diagnostics.Debug.WriteLine("Insert data failed, maybe data already exists.");
             }
             sqlConn.Close();
         }
@@ -536,7 +529,10 @@ namespace LSX.PCService.Data
         /// <param name="pageId">当前页数</param>
         /// <param name="pageSize">每页显示的行数</param>
         /// <returns></returns>
-        public static DataTable GetAllFromTableByName(string tableName, int pageId, int pageSize) { return new DataTable(); }
+        public static DataTable GetAllFromTableByName(string tableName, int pageId, int pageSize)
+        {
+            return new DataTable();
+        }
         /// <summary>
         /// 获取设备状态（设备状态表）
         /// </summary>
@@ -547,43 +543,33 @@ namespace LSX.PCService.Data
 
             MySqlConnection conn = new MySqlConnection(Config.SqlServerConn);
             MySqlCommand cmd = new MySqlCommand("SELECT dtype,ip,`status`,`desc`,`update_time` FROM awms_device_dhl ", conn);
-            System.Diagnostics.Debug.WriteLine("SELECT `dtype,ip,status`,desc FROM awms_device_dhl ");
-            MySqlDataReader reader = null;
+
             ObservableCollection<object> result = null;
             try
             {
                 conn.Open();
-                System.Diagnostics.Debug.WriteLine("Connect Database successfully.");
-                reader = cmd.ExecuteReader();
-
-                int colNum = reader.FieldCount;
-
                 result = new ObservableCollection<object>();
-
-                while (reader.Read())
+                using (MySqlDataReader reader = cmd.ExecuteReader())
                 {
-                    string dType = reader["dtype"].ToString();
-                    string dIP = reader["ip"].ToString();
-                    string dStatus = reader["status"].ToString();
-                    string dDesc = reader["desc"].ToString();
-                    string dUpdateTime = reader["update_time"].ToString();
-                    result.Add(new { Type = dType, Ip = dIP, Status = dStatus, Description = dDesc, UpdateTime = dUpdateTime });
+                    while (reader.Read())
+                    {
+                        string dType = reader["dtype"].ToString();
+                        string dIP = reader["ip"].ToString();
+                        string dStatus = reader["status"].ToString();
+                        string dDesc = reader["desc"].ToString();
+                        string dUpdateTime = reader["update_time"].ToString();
+                        result.Add(new { Type = dType, Ip = dIP, Status = dStatus, Description = dDesc, UpdateTime = dUpdateTime });
 
+                    }
                 }
-                reader.Close();
             }
             catch (System.Data.SqlClient.SqlException e)
             {
-                conn.Close();
                 throw new Exception(e.Message);
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+                conn.Close();
             }
 
             return result;
@@ -605,7 +591,6 @@ namespace LSX.PCService.Data
             try
             {
                 conn.Open();
-                System.Diagnostics.Debug.WriteLine("Connect Database successfully.");
                 reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
@@ -623,40 +608,41 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
 
             return result;
 
         }
-
         /// <summary>
-        /// 通过箱号获取09码
+        /// 获取特定的订单信息
         /// </summary>
-        /// <param name="boxId"></param>
         /// <returns></returns>
-        public static string GetC09ByBoxId(string boxId)
+        public static RealTimeOrder GetOrderByOrderId(string orderId)
         {
             MySqlConnection conn = new MySqlConnection(Config.SqlServerConn);
-            MySqlCommand cmd = new MySqlCommand("SELECT zncode FROM awms_orders_dhl WHERE carton='" + boxId + "';", conn);
+            MySqlCommand cmd = new MySqlCommand("SELECT `order`,zncode,pallet,carton FROM awms_orders_dhl WHERE `order`='" + orderId + "';", conn);
 
             MySqlDataReader reader = null;
-            string zncode = null;
+            RealTimeOrder result = null;
             try
             {
                 conn.Open();
-                System.Diagnostics.Debug.WriteLine("Connect Database successfully.");
                 reader = cmd.ExecuteReader();
-
                 if (reader.Read())
                 {
-                    zncode = reader["zncode"].ToString();
-                    reader.Close();
+                    result = new RealTimeOrder()
+                    {
+                        Order = reader["order"].ToString(),
+                        Zncode = reader["zncode"].ToString(),
+                        Pallet = reader["pallet"].ToString(),
+                        Carton = reader["carton"].ToString()
+                    };
                 }
+
             }
             catch (System.Data.SqlClient.SqlException e)
             {
@@ -665,14 +651,13 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
 
-            return zncode;
+            return result;
         }
 
 
@@ -682,35 +667,61 @@ namespace LSX.PCService.Data
         /// - 如果箱号在当前任务总表（原始数据表+发货单号表+栈板表）中不存在
         ///     - 则创建异常订单（Exxx），并设置常订单初始 通道号为异常通道
         /// - 如果箱号在当前任务总表中存在
-        ///     - 如果箱号对应的实时任务表(orders)中订单已完成（重复扫描相同的箱号），返回已存在的箱号
-        ///     - 其他，创建并返回订单号（Dxxxx）
+        ///     - 如果箱号对应的实时任务表(orders)中已存在（重复扫描相同的箱号），则创建异常订单（Exxx），并设置常订单初始 通道号为异常通道
+        ///     - 其他，创建并返回新的订单号（Dxxxx）
         /// </summary>
         /// <param name="box">箱号</param>
         /// <returns></returns>
         public static string CreateOrderIdByBoxId(string box)
         {
             MySqlConnection conn = new MySqlConnection(Config.SqlServerConn);
-            MySqlCommand cmd = new MySqlCommand("SELECT id FROM awms_orders_dhl WHERE carton='" + box + "';", conn);
 
-            MySqlDataReader reader = null;
-            int bID = 0;
+            string sql = "SELECT o.id from awms_source_dhl as o INNER JOIN awms_orders_tasks_dhl as t on o.torder=t.torder INNER JOIN awms_pallets_dhl as p on o.pallet=p.pallet  WHERE o.carton='" + box + "';";
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+
             conn.Open();
             System.Diagnostics.Debug.WriteLine("Connect Database successfully.");
-            reader = cmd.ExecuteReader();
+            string orderID = null;
+            MySqlCommand cmd1 = new MySqlCommand("SELECT COUNT(0) FROM awms_orders_dhl;", conn);
+            int c = int.Parse(cmd1.ExecuteScalar().ToString());
 
-            if (reader.Read())
-            {
-                bID = reader.GetInt16(0);
-                reader.Close();
+
+            if (cmd.ExecuteScalar() == null)
+            {//不存在
+
+                orderID = string.Format("E{0}{1}", DateTime.Now.ToString("yyyyMMdd"), String.Format("{0:0000000}", c + 1));
             }
             else
             {
-                return null;
+                using (MySqlCommand cmd2 = new MySqlCommand("SELECT id from awms_orders_dhl as o WHERE o.carton='" + box + "';", conn))
+                {
+
+                    if (cmd2.ExecuteScalar() != null)
+                    {
+                        orderID = string.Format("E{0}{1}", DateTime.Now.ToString("yyyyMMdd"), String.Format("{0:0000000}", c + 1));
+                    }
+                    else
+                    {
+                        orderID = string.Format("D{0}{1}", DateTime.Now.ToString("yyyyMMdd"), String.Format("{0:0000000}", c + 1));
+                    }
+                }
+            }
+            string sqlInsert = "INSERT INTO awms_orders_dhl(`order`,zncode,pallet,carton,channel,total,carton_status) VALUES ('" + orderID + "','NULL','NULL','" + box + "',0,0,0);";
+            if (orderID.StartsWith("D"))
+            {
+                sqlInsert = "INSERT INTO awms_orders_dhl(`order`,zncode,pallet,carton,channel,total,carton_status) SELECT '" + orderID + "', zncode,pallet,carton ,0,0,0 FROM awms_source_dhl WHERE carton='" + box + "';";//插入
+            }
+
+            using (MySqlCommand cmdInsert = new MySqlCommand(sqlInsert, conn))
+            {
+                cmdInsert.ExecuteNonQuery();
             }
             cmd.Dispose();
+            cmd1.Dispose();
+
             conn.Close();
 
-            string orderID = string.Format("D{0}{1}", DateTime.Now.ToString("yyyyMMdd"), String.Format("{0:0000000}", bID));
             return orderID;
         }
         /// <summary>
@@ -722,48 +733,27 @@ namespace LSX.PCService.Data
         {
 
             MySqlConnection conn = new MySqlConnection(Config.SqlServerConn);
-            MySqlCommand cmd = new MySqlCommand("SELECT `status` FROM awms_orders_tasks_dhl WHERE torder='" + orderId + "';", conn);
 
-            MySqlDataReader reader = null;
             int oStatus = 0;
             try
             {
                 conn.Open();
-                System.Diagnostics.Debug.WriteLine("Connect Database successfully.");
-                reader = cmd.ExecuteReader();
 
-                if (reader.Read())
+                using (MySqlCommand cmd = new MySqlCommand("SELECT `status` FROM awms_orders_tasks_dhl WHERE torder='" + orderId + "';", conn))
                 {
-                    oStatus = reader.GetInt16(0);
-                    reader.Close();
-                }
-                else
-                {
-                    System.Diagnostics.Debug.WriteLine("Order not exists.");
+                    oStatus = int.Parse(cmd.ExecuteScalar().ToString());
                 }
 
             }
             catch (System.Data.SqlClient.SqlException e)
             {
-                conn.Close();
                 throw new Exception(e.Message);
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+                conn.Close();
             }
-            if (oStatus == 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return oStatus != 0;
         }
 
 
@@ -772,7 +762,7 @@ namespace LSX.PCService.Data
         /// </summary>
         /// <param name="orderId">订单号</param>
         /// <returns></returns>
-        public static bool GetCurrentOrderChannel(string orderId)
+        public static bool IsCurrentOrderOkChannel(string orderId)
         {
 
             MySqlConnection conn = new MySqlConnection(Config.SqlServerConn);
@@ -783,7 +773,6 @@ namespace LSX.PCService.Data
             try
             {
                 conn.Open();
-                System.Diagnostics.Debug.WriteLine("Connect Database successfully.");
                 reader = cmd.ExecuteReader();
 
                 if (reader.Read())
@@ -800,21 +789,13 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
 
-            if (channel == 0)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
+            return channel == (int)EnumChannel.正常道口 ? true : false;
 
         }
 
@@ -830,7 +811,7 @@ namespace LSX.PCService.Data
         /// </summary>
         /// <param name="orderId">订单编号</param>
         /// <returns>灯编号</returns>
-        public static int? GetBindedLightByOrder(string orderId) { return 123; }
+        public static int? GetBindedLightByOrder(string orderId) { return 101; }
         /// <summary>
         /// 设置当前灯为占用状态（inuse为1）
         /// </summary>
@@ -855,11 +836,10 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
         }
         /// <summary>
@@ -871,20 +851,13 @@ namespace LSX.PCService.Data
         {
 
             MySqlConnection conn = new MySqlConnection(Config.SqlServerConn);
-            MySqlCommand cmd = new MySqlCommand("SELECT color FROM awms_lights_dhl WHERE ip=" + lightId + ";", conn);
-            MySqlDataReader reader = null;
-
-            int color = 0;
+            LightColor color = LightColor.RED;
             try
             {
                 conn.Open();
-                System.Diagnostics.Debug.WriteLine("Connect Database successfully.");
-                reader = cmd.ExecuteReader();
-
-                if (reader.Read())
+                using (MySqlCommand cmd = new MySqlCommand("SELECT color FROM awms_lights_dhl WHERE ip=" + lightId + ";", conn))
                 {
-                    color = reader.GetInt16(0);
-                    reader.Close();
+                    color = (LightColor)cmd.ExecuteScalar();
                 }
 
             }
@@ -895,26 +868,13 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
-            }
-            System.Diagnostics.Debug.WriteLine(color);
+                conn.Close();
 
-            if (color >= 100 & color < 150)
-            {
-                return LightColor.RED;
             }
-            else if (color >= 150 & color <= 200)
-            {
-                return LightColor.GREEN;
-            }
-            else
-            {
-                throw new Exception("lightId is illegal.");
-            }
+
+            return color;
+
+
         }
 
         /// <summary>
@@ -928,7 +888,7 @@ namespace LSX.PCService.Data
 
             MySqlConnection conn = new MySqlConnection(Config.SqlServerConn);
             MySqlCommand cmd = new MySqlCommand("UPDATE awms_lights_dhl SET onoff='" + onOff + "' WHERE ip=" + lightId + ";", conn);
-            MySqlDataReader reader = null;
+
 
             try
             {
@@ -944,11 +904,10 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
         }
         /// <summary>
@@ -981,11 +940,10 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
         }
         /// <summary>
@@ -1027,11 +985,10 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
 
             return isFull;
@@ -1061,11 +1018,10 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
         }
         /// <summary>
@@ -1077,7 +1033,7 @@ namespace LSX.PCService.Data
         {
 
             MySqlConnection conn = new MySqlConnection(Config.SqlServerConn);
-            MySqlCommand cmd = new MySqlCommand("UPDATE awms_orders_dhl SET channel=" + channel + " WHERE `order`='" + orderId + "';", conn);
+            MySqlCommand cmd = new MySqlCommand("UPDATE awms_orders_dhl SET channel=" + channel.ToString("D") + " WHERE `order`='" + orderId + "';", conn);
             System.Diagnostics.Debug.WriteLine("UPDATE awms_orders_dhl SET channel=" + channel + " WHERE order='" + orderId + "';");
             MySqlDataReader reader = null;
 
@@ -1095,11 +1051,10 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
         }
         /// <summary>
@@ -1211,11 +1166,10 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
             return destination;
         }
@@ -1229,7 +1183,6 @@ namespace LSX.PCService.Data
             MySqlConnection conn = new MySqlConnection(Config.SqlServerConn);
             MySqlCommand cmd = new MySqlCommand("UPDATE awms_lpn_dhl SET end_storge='" + tarLoc + "' WHERE zncode='" + c09 + "';", conn);
             System.Diagnostics.Debug.WriteLine("UPDATE awms_lpn_dhl SET end_storge=" + tarLoc + " WHERE zncode='" + c09 + "';");
-            MySqlDataReader reader = null;
 
             try
             {
@@ -1245,11 +1198,10 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
         }
 
@@ -1288,11 +1240,10 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
         }
         /// <summary>
@@ -1321,11 +1272,10 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
         }
         /// <summary>
@@ -1356,11 +1306,10 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
 
         }
@@ -1381,15 +1330,15 @@ namespace LSX.PCService.Data
         }
         /// <summary>
         /// 灯表添加灯号
-        /// - 如果不存在则添加
+        /// - 如果不存在则添加，默认灯状态为Off
         /// - 如果存在则更新为可用（isgood 改为可用）
+        /// 
         /// </summary>
         /// <param name="lightId"></param>
         public static void AddLight(int lightId)
         {
 
             LightColor color = LightColorPaser(lightId);
-
 
             MySqlConnection conn = new MySqlConnection(Config.SqlServerConn);
 
@@ -1447,11 +1396,10 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
 
             if (num != 1)
@@ -1509,11 +1457,10 @@ namespace LSX.PCService.Data
             }
             finally
             {
-                if (reader == null)
-                {
-                    cmd.Dispose();
-                    conn.Close();
-                }
+
+                cmd.Dispose();
+                conn.Close();
+
             }
 
         }

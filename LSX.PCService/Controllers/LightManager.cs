@@ -48,7 +48,7 @@ namespace LSX.PCService.Controllers
             IPEndPoint ipEnd = (IPEndPoint)(e.Client.RemoteEndPoint);
             string ip = ipEnd.Address.ToString();
             int port = ipEnd.Port;
-            int lightId = GetLightIdFromIpAddr(ip);
+            int lightId = LightController.GetLightIdFromIpAddr(ip);
 
             logger.Info("Light Connected  IP=" + ip + " LightId: " + lightId.ToString());
             DbHelper.AddLight(lightId);
@@ -62,22 +62,17 @@ namespace LSX.PCService.Controllers
 
             IPEndPoint ipEnd = (IPEndPoint)(client.RemoteEndPoint);
             string ip = ipEnd.Address.ToString();
-            int lightId = GetLightIdFromIpAddr(ip);
+            int lightId = LightController.GetLightIdFromIpAddr(ip);
             //设置灯为不可用状态
             DbHelper.SetLightIsGood(lightId, false);
             lightSenders.Remove(lightId);
         }
 
+             
 
       
 
       
-
-        int GetLightIdFromIpAddr(string ip)
-        {
-            string[] tmp = ip.Split(new char[] { '.' });
-            return int.Parse(tmp[3])+100;
-        }
         /// <summary>
         /// 点亮
         /// </summary>

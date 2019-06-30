@@ -30,7 +30,7 @@ namespace LSX.PCService.Controllers
             get { return _LowVoltage; }
             set
             {
-                DbHelper.SetLightVoltage(this.id,value);
+                DbHelper.SetLightVoltage(this.id, value);
                 _LowVoltage = value;
             }
         }
@@ -86,10 +86,10 @@ namespace LSX.PCService.Controllers
             }
         }
 
-        int GetLightIdFromIpAddr(string ip)
+        public static int GetLightIdFromIpAddr(string ip)
         {
             string[] tmp = ip.Split(new char[] { '.' });
-            return int.Parse(tmp[3])+100;//测试用100+Id
+            return int.Parse(tmp[3]) + 100;//测试用100+Id
         }
 
         #region 消息指令

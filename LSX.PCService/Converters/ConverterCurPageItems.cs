@@ -4,30 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
-using System.Windows.Media;
 
-namespace LSX.PCService.ViewModels
+
+namespace LSX.PCService.Converters
 {
-    class ConverterIsSinglePalletColor : IValueConverter
+    class ConverterCurPageItems : IValueConverter
     {
         #region IValueConverter 成员
 
         public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            bool? isSingle = value as bool?;
-            if (null == isSingle)
+            List<int> l = new List<int>();
+            for(int i=1;i<=(int)value;i++)
             {
-                return Brushes.Red;
+                l.Add(i);
             }
-            else
-            {
-                return isSingle == true ? Brushes.Yellow : Brushes.Green;
-            }
+            return l;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            throw new NotImplementedException();
+            return null;
         }
 
         #endregion

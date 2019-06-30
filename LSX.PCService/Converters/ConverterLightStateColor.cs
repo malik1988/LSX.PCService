@@ -1,14 +1,9 @@
 ﻿using LSX.PCService.Data;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
-using System.Windows.Media;
 
-namespace LSX.PCService.ViewModels
+namespace LSX.PCService.Converters
 {
     class ConverterLightStateColor : IValueConverter
     {
