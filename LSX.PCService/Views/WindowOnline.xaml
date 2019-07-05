@@ -6,7 +6,7 @@
         xmlns:Views="clr-namespace:LSX.PCService.Views"
         prism:ViewModelLocator.AutoWireViewModel="True"
         Title="主窗口-上料窗口" Height="400" Width="800"
-        WindowStyle="None" WindowState="Maximized"
+        WindowStyle="None" WindowState="Normal"
         >
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding ImportAwmsDataRequest}">
@@ -142,7 +142,7 @@
             <Border Grid.Row="1" BorderBrush="Orange" CornerRadius="5" BorderThickness="2" Margin="5" >
                 <StackPanel>
                     <TextBlock Text="当前识别箱号信息" FontSize="30" HorizontalAlignment="Center"/>
-                    <DataGrid ItemsSource="{Binding CurrentBoxInfo}" AutoGenerateColumns="False" Width="auto" FontSize="30" IsReadOnly="True">
+                    <DataGrid ItemsSource="{Binding CurrentBoxInfo}" AutoGenerateColumns="False" Width="auto" FontSize="30" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Carton}" Header="箱号" Width="2*"/>
                             <DataGridTextColumn Binding="{Binding Zncode}" Header="09码" Width="2*"/>
@@ -177,28 +177,34 @@
                         <TextBlock Text="实时订单" HorizontalAlignment="Center"/>
                     </Border>
                     <!--发货单号-->
-                    <DataGrid Grid.Column="0" Grid.Row="1" ItemsSource="{Binding TrafficOrderList}" MinWidth="100" ToolTip="发货单号"  AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid Grid.Column="0" Grid.Row="1" ItemsSource="{Binding TrafficOrderList}" MinWidth="100" ToolTip="发货单号"  AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding id}" Header="编号"/>
                             <DataGridTextColumn Binding="{Binding torder}" Header="发货单号"/>
                             <DataGridTextColumn Binding="{Binding status}" Header="状态"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <DataGrid Grid.Row="1" ItemsSource="{Binding PalletList}" MinWidth="100" ToolTip="栈板号" Grid.Column="1" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding PalletList}" MinWidth="100" ToolTip="栈板号" Grid.Column="1" AutoGenerateColumns="False">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding id}" Header="编号"/>
                             <DataGridTextColumn Binding="{Binding pallet}" Header="栈板号"/>
                             <DataGridTextColumn Binding="{Binding status}" Header="状态"/>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <DataGrid Grid.Row="1" Grid.Column="2" ItemsSource="{Binding AllOrderTasks}" IsReadOnly="True" />
-                    <DataGrid Grid.Row="1" ItemsSource="{Binding CurrentOrderInfo}" MinWidth="200" ToolTip="当前订单详细信息" Grid.Column="3" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid Grid.Row="1" Grid.Column="2" ItemsSource="{Binding AllOrderTasks}" AutoGenerateColumns="False" ToolTip="总任务">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding torder}" Header="发货单号" />
+                            <DataGridTextColumn Binding="{Binding pallet}" Header="栈板号" />
+                            <DataGridTextColumn Binding="{Binding carton}" Header="箱号" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <DataGrid Grid.Row="1" ItemsSource="{Binding CurrentOrderInfo}" MinWidth="200" ToolTip="实时订单" Grid.Column="3" AutoGenerateColumns="False" >
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding id}" Header="编号" />
                             <DataGridTextColumn Binding="{Binding carton}" Header="箱号" Width="2*"/>
-                            <DataGridTextColumn Binding="{Binding zncode}" Header="09码" Width="2*"/>
+                            <DataGridTextColumn Binding="{Binding zncode}" Header="09码" />
                             <DataGridTextColumn Binding="{Binding order}" Header="任务单号" Width="2*"/>
-                            <DataGridTextColumn Binding="{Binding pallet}" Header="栈板号" Width="1*"/>
+                            <DataGridTextColumn Binding="{Binding pallet}" Header="栈板号" />
                             <DataGridTextColumn Binding="{Binding channel}" Header="通道"/>
                             <DataGridTextColumn Binding="{Binding total}" Header="总数" />
                             <DataGridTextColumn Binding="{Binding carton_status}" Header="订单状态" Width="1*"/>

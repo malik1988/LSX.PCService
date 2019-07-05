@@ -14,6 +14,9 @@ namespace LSX.PCService.Data
 
         栈板分析_同一个栈板号存在不同的质检标志=0x20,
 
+        LPN绑定_失败,
+        LPN绑定_09码未集齐,
+
         
 
         按灯控制_无效灯ID=0x30,

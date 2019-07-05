@@ -56,8 +56,10 @@
                 </Border>
                 <Label Content="异常窗口" HorizontalAlignment="Center" FontSize="30"/>
                 <Button  Content="异常处理" Command="{Binding ManualErrHandleCommand}"  HorizontalAlignment="Center"/>
-                <Border>
+                <Border BorderBrush="LightGray" BorderThickness="2" CornerRadius="5">
                     <StackPanel Orientation="Horizontal">
+                        <Label Content="发送计数" />
+                        <Label Content="{Binding CountSend}" Margin="5,0"/>
                         <Label Content="到达-程序计数" />
                         <Label Content="{Binding ProgramCount}" Margin="5,0"/>
                         <Label Content="到达-通道硬件计数"/>
@@ -65,6 +67,7 @@
                     </StackPanel>
                 </Border>
                 <DataGrid ItemsSource="{Binding OkChannelOrderList}" IsReadOnly="True" AutoGenerateColumns="False">
+                   
                     <DataGrid.Columns>
                         <DataGridTextColumn Binding="{Binding Order}" Header="订单编号" Width="3*"/>
                         <DataGridTextColumn Binding="{Binding Carton}" Header="箱号" Width="2*"/>

@@ -77,6 +77,13 @@ namespace LSX.PCService.ViewModels
             get { return _LightStates; }
             set { SetProperty(ref _LightStates, value); }
         }
+        private int _CountSend;
+
+        public int CountSend
+        {
+            get { return _CountSend; }
+            set { SetProperty(ref _CountSend, value); }
+        }
 
         public WindowDispatchViewModel()
         {
@@ -91,7 +98,9 @@ namespace LSX.PCService.ViewModels
                 ChannelCountArrived = channel.CountOkArrived.Hardware;
                 ProgramCountTake = channel.CountOkTake.Software;
                 ChannelCountTake = channel.CountOkTake.Hardware;
+                CountSend = channel.CountSendOK;
             };
+        
             LightManagerErrList = new ObservableCollection<string>();
             LightManager.Instance.OnError = new EventHandler<string>((o, e) => { LightManagerErrMsg = e; });
 
@@ -123,6 +132,6 @@ namespace LSX.PCService.ViewModels
 
         #endregion
 
-    
+
     }
 }

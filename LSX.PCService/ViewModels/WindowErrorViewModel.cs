@@ -53,7 +53,13 @@ namespace LSX.PCService.ViewModels
             set { SetProperty(ref _ManualErrHandleCommand, value); }
         }
 
+        private int _CountSend;
 
+        public int CountSend
+        {
+            get { return _CountSend; }
+            set { SetProperty(ref _CountSend, value); }
+        }
         private ChannelController channel;
         public WindowErrorViewModel()
         {
@@ -65,6 +71,7 @@ namespace LSX.PCService.ViewModels
             {
                 ProgramCount = channel.CountErr.Software;
                 ChannelCount = channel.CountErr.Hardware;
+                CountSend = channel.CountSendErr;
             };
             ManualErrHandleRequest = new InteractionRequest<INotification>();
             ManualErrHandleCommand = new DelegateCommand(() => { ManualErrHandleRequest.Raise(new Notification { Title = "异常复位处理" }); });

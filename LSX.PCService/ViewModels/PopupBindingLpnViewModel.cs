@@ -60,7 +60,7 @@ namespace LSX.PCService.ViewModels
                     {
                         throw new Exception("LPN/09码/库位 不能为空");
                     }
-                    DbHelper.BindingLpnAndC09(Lpn, C09, Loc);
+                   ErrorCode ret= DbHelper.BindingLpnAndC09(Lpn, C09, Loc);
                 }
                 catch (Exception ex)
                 {

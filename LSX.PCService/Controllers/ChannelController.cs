@@ -22,11 +22,26 @@ namespace LSX.PCService.Controllers
         OrderMessageInputQueue orderErrQueue;
         BoxInChannelInputQueue boxQueue;
         OrderMessageArrivedInputQueue orderArrivedOkQueue;
-        OrderMessageArrivedInputQueue orderArrivedErrQueue;
-
+        /// <summary>
+        /// 接收-正常货物到达计数
+        /// </summary>
         public ChannelCount CountOkArrived { get; private set; }
+        /// <summary>
+        /// 接收-正常货物取走计数
+        /// </summary>
         public ChannelCount CountOkTake { get; private set; }
+        /// <summary>
+        /// 接收-异常通道计数
+        /// </summary>
         public ChannelCount CountErr { get; private set; }
+        /// <summary>
+        /// 发送-正常通道计数
+        /// </summary>
+        public int CountSendOK { get; private set; }
+        /// <summary>
+        /// 发送-异常通道计数
+        /// </summary>
+        public int CountSendErr { get; private set; }
 
 
         public EventHandler OnOkUpdate;
@@ -60,7 +75,7 @@ namespace LSX.PCService.Controllers
         private ChannelController()
         {
             server = new TcpServer() { AcceptBacklog = 1, AcceptThreads = 1 };
-            
+
             server.ClientAccepted += server_ClientAccepted;
             server.ClientException += server_ClientException;
             server.Listen(Config.ChannelServerPort);
@@ -91,7 +106,7 @@ namespace LSX.PCService.Controllers
             this.client.OnReceived += client_Received;
             e.Client.Disconnected += Client_Disconnected;
             Ip = ((IPEndPoint)(e.Client.RemoteEndPoint)).Address.MapToIPv4().ToString();
-            Status = DeviceState.已连接.ToString();      
+            Status = DeviceState.已连接.ToString();
             NLog.LogManager.GetCurrentClassLogger().Info("Channel Client Connected:" + e.Client.RemoteEndPoint.ToString());
         }
 
@@ -173,6 +188,7 @@ namespace LSX.PCService.Controllers
                     DbHelper.SetOrderRealChannel(orderMsg.orderId, EnumChannel.异常道口);
 
                     boxQueue.Send(new BoxInChannelMessage() { orderId = orderMsg.orderId, channelId = (int)EnumChannel.异常道口 });
+
                     CountErr.Software++;
                     CountErr.Hardware = count;
                     if (OnErrUpdate != null)
@@ -221,7 +237,7 @@ namespace LSX.PCService.Controllers
         /// </summary>
         public void ResetCount()
         {
-            if (null==client)
+            if (null == client)
             {
                 //设备未连接
                 return;
@@ -229,7 +245,9 @@ namespace LSX.PCService.Controllers
             CountOkArrived = new ChannelCount();
             CountOkTake = new ChannelCount();
             CountErr = new ChannelCount();
-            
+            CountSendOK = 0;
+            CountSendErr = 0;
+
             client.WriteAndCheckResponse("AT+CLEARALL");
         }
         public void ResetCount(EnumChannel channel)
@@ -256,6 +274,23 @@ namespace LSX.PCService.Controllers
             {
                 return ErrorCode.通道控制_设备离线;
             }
+            switch (channelId)
+            {
+                case EnumChannel.异常道口:
+                    CountSendErr++;
+                    if (OnErrUpdate != null)
+                    {
+                        OnErrUpdate.BeginInvoke(null, null, null, null);
+                    }
+                    break;
+                case EnumChannel.正常道口:
+                    CountSendOK++;
+                    if (OnOkUpdate != null)
+                    {
+                        OnOkUpdate.BeginInvoke(null, null, null, null);
+                    }
+                    break;
+            }
             int retry = 3;
             while (!Send(channelId, 2000))
             {
@@ -267,6 +302,7 @@ namespace LSX.PCService.Controllers
                     return ErrorCode.通道控制_重试3次后发送失败或超时未收到应答;
                 }
             }
+
             return ErrorCode.成功;
         }
 
@@ -277,15 +313,15 @@ namespace LSX.PCService.Controllers
             switch (channel)
             {
                 case EnumChannel.正常道口:
-                    cmd = "AT+TOOKCHA";
+                    cmd = string.Format("AT+TOOKCHA_{0:00000}", CountSendOK);
                     OnOkUpdate.BeginInvoke(null, null, null, null);
                     break;
                 case EnumChannel.异常道口:
-                    cmd = "AT+TOOKCHA";
+                    cmd = string.Format("AT+TOERCHA_{0:00000}", CountSendErr);
                     OnErrUpdate.BeginInvoke(null, null, null, null);
                     break;
                 default:
-                    cmd = "AT+TOOKCHA";
+                    cmd = string.Format("AT+TOOKCHA_{0:00000}", CountSendOK);
                     break;
             }
             return client.WriteAndCheckResponse(cmd);

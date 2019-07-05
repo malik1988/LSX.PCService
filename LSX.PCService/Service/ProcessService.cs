@@ -188,6 +188,8 @@ namespace LSX.PCService.Service
                     //设置当前订单已完成
                     DbHelper.FinishOrderById(msg.orderId);
 
+                    //如果接收到人工集齐消息
+
                     //检查当前托盘是否集齐
                     //当前订单是否
                     if (DbHelper.CheckIsFullByLight(msg.lightId))
@@ -198,7 +200,12 @@ namespace LSX.PCService.Service
                         //设置为闪烁状态
                         lightManager.SetLight(msg.lightId, LightOnOffState.BLINK, lightColor);
                         DbHelper.SetLightState(msg.lightId, LightOnOffState.BLINK);
+
+                        //设置当前灯号为不可添加箱号的状态，当用户灭闪烁的灯时才能解锁该灯。
+                        DbHelper.SetLightLocked(msg.lightId);
                     }
+                    
+
 
                 }
 

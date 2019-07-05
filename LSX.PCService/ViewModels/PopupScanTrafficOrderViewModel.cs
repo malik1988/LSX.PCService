@@ -79,12 +79,23 @@ namespace LSX.PCService.ViewModels
                 }
                 if (!DbHelper.CheckIsTrafficOrderExistInAwms(TrafficOrder))
                 {
-                    string err=string.Format("发车明细表中不存在发货单号：{0}",TrafficOrder);
-                    MessageBox.Show(err, "无效发货单号");
+                    string err = string.Format("发车明细表中不存在发货单号：{0}", TrafficOrder);
+                    MessageBox.Show(err, "无效发货单号", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
-               
-                ((INotificationTraffic)Notification).Items.Add(TrafficOrder);
+                if (DbHelper.CheckIsTorderExistInTorderTable(TrafficOrder))
+                {
+                    string err = string.Format("现有发货单中已存在发货单号：{0}", TrafficOrder);
+                    MessageBox.Show(err, "禁止重复添加", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                var torderNotification = ((INotificationTraffic)Notification);
+                if (torderNotification.Items.Contains(TrafficOrder))
+                {
+                    MessageBox.Show("已存在相同的发货单", "禁止重复添加", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                torderNotification.Items.Add(TrafficOrder);
                 TrafficOrder = "";
             });
             TrafficOrderStart = new DelegateCommand(() =>

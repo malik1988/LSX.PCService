@@ -115,7 +115,11 @@ namespace LSX.PCService.Data
         #region 进行中的订单表
 
 
-
+        /// <summary>
+        /// 生成Excel文件
+        /// </summary>
+        /// <param name="tableName"></param>
+        /// <param name="savePath"></param>
         public static void ExportExcel(string tableName, string savePath)
         {
             System.Data.DataTable dt = GetAllFromTableByName(tableName);
@@ -166,12 +170,7 @@ namespace LSX.PCService.Data
         /// <returns></returns>
         public static ErrorCode ImportExcelToAwms(string filePath, EventHandler<int> processHandler)
         {
-            /// <summary>
-            /// 检查发货单号是否存在于原始AWMS数据中
-            /// - 原始数据中存在该发货单号，返回真
-            /// </summary>
-            /// <param name="order">发货单号</param>
-            /// <returns></returns>
+    
             if (!File.Exists(filePath))
             {
                 return ErrorCode.文件导入_无效的Excel文件;
@@ -276,7 +275,7 @@ namespace LSX.PCService.Data
         }
         /// <summary>
         /// 栈板是否整托，整托判定逻辑：
-        /// - 栈板号内只存在唯一09码物料，则为整托
+        /// - 发货单表+原始数据表->栈板号内只存在唯一09码物料，则为整托
         /// - 否则，为散托
         /// </summary>
         /// <param name="palletId">栈板编号</param>
@@ -405,7 +404,34 @@ namespace LSX.PCService.Data
             return num;
         }
         /// <summary>
-        /// 检查发货单号是否存在
+        /// 检查发货单表中是否已存在
+        /// </summary>
+        /// <param name="torder">发货单号</param>
+        /// <returns></returns>
+        public static bool CheckIsTorderExistInTorderTable(string torder)
+        {
+            MySqlConnection conn = new MySqlConnection(Config.SqlServerConn);
+            int num = 0;
+            try
+            {
+                conn.Open();
+                using (MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) FROM awms_orders_tasks_dhl WHERE torder='" + torder + "'",conn))
+                {
+                    num = int.Parse(cmd.ExecuteScalar().ToString());
+                }
+            }
+            catch (System.Exception ex)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return num != 0;
+        }
+        /// <summary>
+        /// 从原始数据表检查发货单号是否存在
         /// </summary>
         /// <param name="order">发货单号</param>
         /// <returns></returns>
@@ -501,6 +527,8 @@ namespace LSX.PCService.Data
             MySqlDataReader dataReader = null;
             DataTable dataTable = new DataTable();
 
+
+
             dataReader = dataCmd.ExecuteReader();
 
             int colNum = dataReader.FieldCount;
@@ -519,7 +547,10 @@ namespace LSX.PCService.Data
                 dataTable.LoadDataRow(values, true);
             }
             dataReader.Close();
+            dataReader.Dispose();
             dataTable.EndLoadData();
+            dataCmd.Dispose();
+            conn.Close();
             return dataTable;
         }
         /// <summary>
@@ -529,7 +560,7 @@ namespace LSX.PCService.Data
         /// <param name="pageId">当前页数</param>
         /// <param name="pageSize">每页显示的行数</param>
         /// <returns></returns>
-        public static DataTable GetAllFromTableByName(string tableName, int pageId, int pageSize)
+        public static DataTable GetAllFromTableByName(string tableName, int pageId, int pageSize, bool sortIdDec)
         {
             return new DataTable();
         }
@@ -1103,13 +1134,15 @@ namespace LSX.PCService.Data
 
         /// <summary>
         /// 绑定LPN 09码 库位
+        /// - 从09-灯表中查找09码是否集齐，如果集齐且该09码对应的状态为未绑定状态，则绑定该09码下所有的LPN
+        /// - 其他则不绑定
         /// </summary>
         /// <param name="lpn">LPN码</param>
         /// <param name="c09">09码</param>
         /// <param name="loc">库位</param>
-        public static void BindingLpnAndC09(string lpn, string c09, string loc)
+        public static ErrorCode BindingLpnAndC09(string lpn, string c09, string loc)
         {
-
+            ErrorCode ret = ErrorCode.LPN绑定_失败;
             MySqlConnection conn = new MySqlConnection(Config.SqlServerConn);
 
             string insertCmd = "INSERT INTO awms_lpn_dhl(end_storge,zncode,lpn) VALUES ('" + loc + "','" + c09 + "','" + lpn + "');";
@@ -1121,6 +1154,7 @@ namespace LSX.PCService.Data
                 int val = insSqlComm.ExecuteNonQuery();
                 if (val == 1)
                 {
+                    ret = ErrorCode.成功;
                     System.Diagnostics.Debug.WriteLine("Insert data successfully");
                 }
 
@@ -1131,6 +1165,8 @@ namespace LSX.PCService.Data
             }
 
             conn.Close();
+
+            return ret;
         }
         /// <summary>
         /// 通过09码获取目标库位
@@ -1515,6 +1551,11 @@ namespace LSX.PCService.Data
                 new {Order="111",Carton="carton",ZnCode="zncode",CurCount=1,TotalCount=12,LightId=101,LightColor=LightColor.RED,Status=OrderState.货物到达道口}
             };
 
+        }
+
+        internal static void SetLightLocked(int p)
+        {
+            throw new NotImplementedException();
         }
     }
 

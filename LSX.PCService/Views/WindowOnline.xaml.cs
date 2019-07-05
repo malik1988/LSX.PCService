@@ -36,10 +36,15 @@ namespace LSX.PCService.Views
 
         private void xMax_Click(object sender, RoutedEventArgs e)
         {
+
             if (this.WindowState != WindowState.Maximized)
+            {
                 this.WindowState = WindowState.Maximized;
+            }
             else
-                this.WindowState = WindowState.Normal;
+            {
+                this.WindowState = WindowState.Normal; 
+            }
 
         }
 

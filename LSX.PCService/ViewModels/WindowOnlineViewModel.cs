@@ -212,7 +212,7 @@ namespace LSX.PCService.ViewModels
             OpenAllWindowsRequest = new InteractionRequest<INotification>();
             OpenAllWindowsCommand = new DelegateCommand(() =>
             {
-                OpenAllWindowsRequest.Raise(new Notification { Title="子窗口"});
+                OpenAllWindowsRequest.Raise(new Notification { Title = "子窗口" });
             });
 
             CameraController.Instance.OnGetBoxId = new EventHandler<string>((r, o) =>
@@ -231,10 +231,10 @@ namespace LSX.PCService.ViewModels
             viewUpdateTimer = new Timer(300);
             viewUpdateTimer.Elapsed += viewUpdateTimer_Elapsed;
             viewUpdateTimer.Start();
-            
+
         }
 
-     
+
         /// <summary>
         /// 添加并开启发货单号
         /// </summary>
@@ -271,12 +271,24 @@ namespace LSX.PCService.ViewModels
         void UpdateCurrentOrderInfo()
         {
             //获取生成的订单表数据
-
+            if (_AllOrderTasks != null)
+            {
+                _AllOrderTasks.Dispose();
+            }
+            if (_CurrentOrderInfo != null)
+            {
+                _CurrentOrderInfo.Dispose();
+            }
             AllOrderTasks = DbHelper.GetAllFromTableByName("view_o_t_p");
             CurrentOrderInfo = DbHelper.GetAllFromTableByName("awms_orders_dhl");
 
-            if (count++%3==0)
+            if (count++ % 3 == 0)
             {
+                //if (_DeviceStatus != null)
+                //{
+                //    _DeviceStatus.Clear();
+                //}
+
                 DeviceStatus = DbHelper.GetAllDeviceState();
             }
 

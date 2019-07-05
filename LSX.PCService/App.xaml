@@ -9,6 +9,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Themes/Theme.Light.xaml"/>
+                <ResourceDictionary Source="Themes/DatagridViewStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
             <converter:ConverterCurPageItems x:Key="ConverterCurPageItems"/>
             <converter:ConverterDeviceStateColor x:Key="ConverterDeviceStateColor"/>
