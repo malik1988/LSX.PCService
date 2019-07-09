@@ -95,7 +95,7 @@ namespace LSX.PCService.Data
     {
         CHANNEL = 1,
         CAMERA,
-        LIGHT
+        TRAFFICLIGHT
     }
 
     enum DeviceState
@@ -1554,6 +1554,37 @@ namespace LSX.PCService.Data
         }
 
         internal static void SetLightLocked(int p)
+        {
+            throw new NotImplementedException();
+        }
+        /// <summary>
+        /// 判定当前箱号是否属于该托盘
+        /// </summary>
+        /// <param name="BoxId">箱号</param>
+        /// <param name="PalletId">托盘编号</param>
+        /// <returns></returns>
+        internal static bool IsBoxInPallet(string BoxId, string PalletId)
+        {
+            throw new NotImplementedException();
+        }
+        /// <summary>
+        /// 强制删除一个托盘
+        /// </summary>
+        /// <param name="p"></param>
+        internal static void RemovePallet(string p)
+        {
+            throw new NotImplementedException();
+        }
+        /// <summary>
+        /// 强制完成一个托盘的所有任务
+        /// </summary>
+        /// <param name="p"></param>
+        internal static void SetForcePallet(string p)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static void RemoveTorder(string p)
         {
             throw new NotImplementedException();
         }

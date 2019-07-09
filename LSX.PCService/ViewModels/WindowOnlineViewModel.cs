@@ -183,6 +183,44 @@ namespace LSX.PCService.ViewModels
             set { SetProperty(ref _AllOrderTasks, value); }
         }
 
+        private DelegateCommand _PopupForceFinishTask;
+
+        public DelegateCommand PopupForceFinishTask
+        {
+            get { return _PopupForceFinishTask; }
+            set { SetProperty(ref _PopupForceFinishTask, value); }
+        }
+        private DelegateCommand<object> _PalletSelectedCommand;
+
+        public DelegateCommand<object> PalletSelectedCommand
+        {
+            get { return _PalletSelectedCommand; }
+            set { SetProperty(ref _PalletSelectedCommand, value); }
+        }
+        private object _PalletSelectedItem;
+
+        public object PalletSelectedItem
+        {
+            get { return _PalletSelectedItem; }
+            set { SetProperty(ref _PalletSelectedItem, value); }
+        }
+
+        private object _TorderSelectedItem;
+
+        public object TorderSelectedItem
+        {
+            get { return _TorderSelectedItem; }
+            set { SetProperty(ref _TorderSelectedItem, value); }
+        }
+
+        private DelegateCommand<object> _TorderSelectedCommand;
+
+        public DelegateCommand<object> TorderSelectedCommand
+        {
+            get { return _TorderSelectedCommand; }
+            set { SetProperty(ref _TorderSelectedCommand, value); }
+        }
+
 
         Timer viewUpdateTimer;
         int count;
@@ -202,6 +240,7 @@ namespace LSX.PCService.ViewModels
                 PopupScanPalletRequest.Raise(new Notification { Title = "扫描托盘号" }, r =>
                 {
                     PalletList = DbHelper.GetAllFromTableByName("awms_pallets_dhl");
+                    AllOrderTasks = DbHelper.GetAllFromTableByName("view_o_t_p");
                 });
             });
             PopupBindingLpnRequest = new InteractionRequest<INotification>();
@@ -224,8 +263,58 @@ namespace LSX.PCService.ViewModels
             PopupAllEvents = new DelegateCommand(() => { OpenAllEventsRequest.Raise(new Notification { Title = "事件记录" }); });
 
 
+
+
             TrafficOrderList = DbHelper.GetAllFromTableByName("awms_orders_tasks_dhl");
             PalletList = DbHelper.GetAllFromTableByName("awms_pallets_dhl");
+            AllOrderTasks = DbHelper.GetAllFromTableByName("view_o_t_p");
+
+            PopupForceFinishTask = new DelegateCommand(() => { });
+            PalletSelectedCommand = new DelegateCommand<object>((o) =>
+            {
+                DataRowView row =PalletSelectedItem as DataRowView;
+                if (row==null)
+                {
+                    return;
+                }
+
+                string p = row[1].ToString();
+                string cmd=o.ToString();
+                switch(cmd)
+                {
+                    case "delete":
+                        DbHelper.RemovePallet(p);
+                        break;
+                    case "forceFinish":
+                        DbHelper.SetForcePallet(p);
+                        break;
+                    default:
+                        break;
+                }
+            });
+
+            TorderSelectedCommand = new DelegateCommand<object>((o) =>
+            {
+                DataRowView row = TorderSelectedItem as DataRowView;
+                if (row == null)
+                {
+                    return;
+                }
+
+                string p = row[1].ToString();
+                string cmd = o.ToString();
+                switch (cmd)
+                {
+                    case "delete":
+                        DbHelper.RemoveTorder(p);
+                        break;
+                    case "forceFinish":
+                        DbHelper.SetForceTOrderFinish(p);
+                        break;
+                    default:
+                        break;
+                }
+            });
 
             //更新界面数据
             viewUpdateTimer = new Timer(300);
@@ -260,6 +349,7 @@ namespace LSX.PCService.ViewModels
                     DbHelper.AddTrafficOrderToTaskTable(r.Items);
                     //显示更新
                     TrafficOrderList = DbHelper.GetAllFromTableByName("awms_orders_tasks_dhl");
+                    AllOrderTasks = DbHelper.GetAllFromTableByName("view_o_t_p");
                 }
             });
         }
@@ -271,15 +361,11 @@ namespace LSX.PCService.ViewModels
         void UpdateCurrentOrderInfo()
         {
             //获取生成的订单表数据
-            if (_AllOrderTasks != null)
-            {
-                _AllOrderTasks.Dispose();
-            }
+
             if (_CurrentOrderInfo != null)
             {
                 _CurrentOrderInfo.Dispose();
             }
-            AllOrderTasks = DbHelper.GetAllFromTableByName("view_o_t_p");
             CurrentOrderInfo = DbHelper.GetAllFromTableByName("awms_orders_dhl");
 
             if (count++ % 3 == 0)

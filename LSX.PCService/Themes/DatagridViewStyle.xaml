@@ -9,7 +9,7 @@
         <Setter Property="CanUserResizeRows" Value="False"/>
         <Setter Property="CanUserSortColumns" Value="False"/>
         <Setter Property="HeadersVisibility" Value="Column"/>
-        <Setter Property="BorderBrush" Value="LightYellow"/>
+        <Setter Property="BorderBrush" Value="Orange"/>
         <Setter Property="BorderThickness" Value="2"/>
     </Style>
 </ResourceDictionary>

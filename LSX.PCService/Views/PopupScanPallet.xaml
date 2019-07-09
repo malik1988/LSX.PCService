@@ -7,8 +7,7 @@
              prism:ViewModelLocator.AutoWireViewModel="True"
              mc:Ignorable="d" 
              d:DesignHeight="300" 
-             MinWidth="500">
-
+             MinWidth="500" MaxWidth="600">
     <Border BorderBrush="Black" BorderThickness="2" CornerRadius="5">
         <StackPanel>
             <Label Content="扫描托盘（栈板）号" FontSize="20"  HorizontalAlignment="Center"/>
@@ -32,6 +31,7 @@
                         <RowDefinition/>
                         <RowDefinition/>
                         <RowDefinition/>
+                        <RowDefinition/>
                     </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
@@ -49,7 +49,24 @@
                     <TextBlock Text="{Binding NeedCheck,Converter={StaticResource ConverterNeedCheckText}}" FontSize="20" Foreground="{Binding NeedCheck,Converter={StaticResource ConverterIsSinglePalletColor}}" Grid.Column="1" Grid.Row="2"  Margin="5"/>
                     <TextBlock Text="需求灯数"  FontSize="20" Width="auto" Grid.Column="0" Grid.Row="3" Margin="5"/>
                     <TextBlock Text="{Binding NeedLightsCount}" FontSize="20" Foreground="{Binding NeedLightsCount,Converter={StaticResource ConverterIsSinglePalletColor}}" Grid.Column="1" Grid.Row="3"  Margin="5"/>
-                    <Button Content="开启当前栈板流水线分拣" Command="{Binding BeginPalletTask}" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="18"/>
+                    <Button Content="开启当前栈板扫描" Command="{Binding BeginPalletTask}" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="18"/>
+                    <Expander Header="扫描" Grid.Row="5" Grid.ColumnSpan="2" IsEnabled="{Binding IsSinglePallet}">
+                        <StackPanel>
+                            <TextBlock Text="扫描箱号"/>
+                            <TextBox Text="{Binding BoxId,UpdateSourceTrigger=PropertyChanged}" ToolTip="箱号">
+                                <TextBox.InputBindings>
+                                    <KeyBinding Key="Enter" Command="{Binding ScanCartonCommand}"/>
+                                </TextBox.InputBindings>
+                            </TextBox>
+                            <TextBlock Text="已扫描箱数"/>
+                            <DataGrid ItemsSource="{Binding PalletDetails}">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Header="箱号" Binding="{Binding carton}" Width="2*"/>
+                                    <DataGridCheckBoxColumn Header="已扫描" Binding="{Binding carton_status}" Width="1*"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </StackPanel>
+                    </Expander>
                 </Grid>
             </Border>
         </StackPanel>

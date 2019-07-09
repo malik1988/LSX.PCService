@@ -60,7 +60,7 @@ namespace LSX.PCService.ViewModels
                     {
                         throw new Exception("LPN/09码/库位 不能为空");
                     }
-                   ErrorCode ret= DbHelper.BindingLpnAndC09(Lpn, C09, Loc);
+                    ErrorCode ret = DbHelper.BindingLpnAndC09(Lpn, C09, Loc);
                 }
                 catch (Exception ex)
                 {
@@ -72,9 +72,10 @@ namespace LSX.PCService.ViewModels
             CallAgv = new DelegateCommand(() =>
             {
                 string targetLoc = DbHelper.GetTargetLocationByC09(C09);
+                string palletId = "Ozzhddh";
                 if (!string.IsNullOrEmpty(targetLoc))
                 {
-                    CallAgvApi.CallAgv(Loc, targetLoc);
+                    CallAgvApi.AgvCreateTask(palletId, Loc, targetLoc);
                 }
                 else
                 {

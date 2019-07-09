@@ -177,6 +177,7 @@
     <Compile Include="Data\DBHelper.cs" />
     <Compile Include="Data\RealTimeOrder.cs" />
     <Compile Include="Interfaces\CallAgvApi.cs" />
+    <Compile Include="Interfaces\WebApi.cs" />
     <Compile Include="Notifications\INotificationTraffic.cs" />
     <Compile Include="Notifications\TrafficOrderNotification.cs" />
     <Compile Include="Service\ProcessService.cs" />
@@ -208,6 +209,9 @@
     </Compile>
     <Compile Include="Views\PopupImportData.xaml.cs">
       <DependentUpon>PopupImportData.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PopupScanBox.xaml.cs">
+      <DependentUpon>PopupScanBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PopupScanPallet.xaml.cs">
       <DependentUpon>PopupScanPallet.xaml</DependentUpon>
@@ -264,6 +268,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PopupImportData.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PopupScanBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
