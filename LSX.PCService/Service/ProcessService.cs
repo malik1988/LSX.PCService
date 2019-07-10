@@ -60,18 +60,28 @@ namespace LSX.PCService.Service
 
             LightManager lightManager = LightManager.Instance;
             NLog.Logger logger = NLog.LogManager.GetLogger("ProcessOrderMain");
+            LightColor nextColor=LightColor.RED;
 
             while (!token.IsCancellationRequested)
             {
                 //等待货物到达道口
                 BoxInChannelMessage msg = boxQueue.Receive();
                 string orderId = msg.orderId;
+                EnumChannel channelId = DbHelper.GetCurrentOrderChannel(orderId);
+                if ((int)channelId != msg.channelId)
+                {//当前到达通道与期望目标不一致，货物走错通道！
+                    string _err = string.Format("货物到达通道与目标不一致！ 到达通道：{0},目标通道：{1}", msg.channelId, (int)channelId);
+                    logger.Error(_err);
+                }
+
+
+
                 // 是否正常道口
-                if (DbHelper.IsCurrentOrderOkChannel(orderId))
+                if (msg.channelId==(int)EnumChannel.正常道口)
                 {
                     //绑定并获取灯ID
                     //绑定09-灯表
-                    int? lightId = DbHelper.GetBindedLightByOrder(orderId);
+                    int? lightId = DbHelper.GetBindedLightByOrder(orderId, ref nextColor);
                     if (null == lightId)
                     {
                         logger.Error("数据库中无可用的灯！");
@@ -86,9 +96,11 @@ namespace LSX.PCService.Service
                         {
                             case LightColor.RED:
                                 lightRedQueue.Send(new LightMessage() { orderId = orderId, lightId = (int)lightId });
+                                nextColor = LightColor.GREEN;
                                 break;
                             case LightColor.GREEN:
                                 lightGreenQueue.Send(new LightMessage() { orderId = orderId, lightId = (int)lightId });
+                                nextColor = LightColor.RED;
                                 break;
                         }
 
@@ -97,17 +109,18 @@ namespace LSX.PCService.Service
 
                 }
                 else
-                {
-                    // 2. 否，异常道口数据表添加一条记录
-                    // 记录所有操作
-                    //DbHelper.OrderErrorLogAdd(orderId, "异常口");
+                {//异常道口，货物到达
+                    DbHelper.SetOrderState(msg.orderId, (int)OrderState.已完成);
 
                 }
 
 
             }
         }
-
+        /// <summary>
+        /// 获取箱号（初始订单创建）
+        /// </summary>
+        /// <param name="token"></param>
         private static void ProcessChannelOrder(CancellationToken token)
         {
             ChannelController ch = ChannelController.Instance;
@@ -118,7 +131,8 @@ namespace LSX.PCService.Service
             while (!token.IsCancellationRequested)
             {//获取箱号
                 InputMessageCaseNum msg = que.Receive();
-                logger.Info(msg.boxId.ToString());
+                string _info = "获取箱号：" + msg.boxId + " 订单：" + msg.orderId;
+                logger.Info(_info);
 
                 string orderId = msg.orderId;
                 EnumChannel targetChannel = EnumChannel.异常道口;
@@ -204,9 +218,6 @@ namespace LSX.PCService.Service
                         //设置当前灯号为不可添加箱号的状态，当用户灭闪烁的灯时才能解锁该灯。
                         DbHelper.SetLightLocked(msg.lightId);
                     }
-                    
-
-
                 }
 
                 else
@@ -214,7 +225,7 @@ namespace LSX.PCService.Service
                     //日志记录
                     //TODO
                     //DbHelper.OrderErrorLogAdd(msg.orderId, err.ToString());
-             
+
                 }
 
             }

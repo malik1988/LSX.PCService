@@ -210,9 +210,6 @@
     <Compile Include="Views\PopupImportData.xaml.cs">
       <DependentUpon>PopupImportData.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\PopupScanBox.xaml.cs">
-      <DependentUpon>PopupScanBox.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\PopupScanPallet.xaml.cs">
       <DependentUpon>PopupScanPallet.xaml</DependentUpon>
     </Compile>
@@ -268,10 +265,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\PopupImportData.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\PopupScanBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

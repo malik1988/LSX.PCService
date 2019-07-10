@@ -99,16 +99,18 @@ namespace LSX.PCService.ViewModels
                 ProgramCountTake = channel.CountOkTake.Software;
                 ChannelCountTake = channel.CountOkTake.Hardware;
                 CountSend = channel.CountSendOK;
+                if (LightStates!=null)
+                {
+                    LightStates.Clear();
+                }
+                LightStates = DbHelper.GetAllLightStates();
+
             };
         
             LightManagerErrList = new ObservableCollection<string>();
             LightManager.Instance.OnError = new EventHandler<string>((o, e) => { LightManagerErrMsg = e; });
 
-            //LightStates = new ObservableCollection<object>();
-            //for (int i = 0; i < 100;i++ )
-            //{
-            //    LightStates.Add(new { Id = i, State = (LightState)(i % 5), Description = i+1 });
-            //}
+            
             LightStates = DbHelper.GetAllLightStates();
 
         }

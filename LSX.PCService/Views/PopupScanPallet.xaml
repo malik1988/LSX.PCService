@@ -50,7 +50,7 @@
                     <TextBlock Text="需求灯数"  FontSize="20" Width="auto" Grid.Column="0" Grid.Row="3" Margin="5"/>
                     <TextBlock Text="{Binding NeedLightsCount}" FontSize="20" Foreground="{Binding NeedLightsCount,Converter={StaticResource ConverterIsSinglePalletColor}}" Grid.Column="1" Grid.Row="3"  Margin="5"/>
                     <Button Content="开启当前栈板扫描" Command="{Binding BeginPalletTask}" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="18"/>
-                    <Expander Header="扫描" Grid.Row="5" Grid.ColumnSpan="2" IsEnabled="{Binding IsSinglePallet}">
+                    <Expander Header="整托箱号扫描" Grid.Row="5" Grid.ColumnSpan="2" IsEnabled="{Binding IsSinglePallet}">
                         <StackPanel>
                             <TextBlock Text="扫描箱号"/>
                             <TextBox Text="{Binding BoxId,UpdateSourceTrigger=PropertyChanged}" ToolTip="箱号">

@@ -841,8 +841,9 @@ namespace LSX.PCService.Data
         ///    - 如果一个09码只有个箱号，全部固定的某个灯（业务保留）
         /// </summary>
         /// <param name="orderId">订单编号</param>
+        /// <param name="color">建议灯颜色，优先按照建议颜色分配，无法满足才由系统分配颜色，并修改颜色为实际颜色</param>
         /// <returns>灯编号</returns>
-        public static int? GetBindedLightByOrder(string orderId) { return 101; }
+        public static int? GetBindedLightByOrder(string orderId,ref LightColor color) { return 101; }
         /// <summary>
         /// 设置当前灯为占用状态（inuse为1）
         /// </summary>
@@ -1525,6 +1526,7 @@ namespace LSX.PCService.Data
         /// </returns>
         internal static ObservableCollection<object> GetAllLightStates()
         {
+
             return new ObservableCollection<object>(){
                 new { Id = 1, State = LightState.ON_GREEN,Voltage="电压正常",IsGood=true, Description = "good" }
             };
@@ -1585,6 +1587,11 @@ namespace LSX.PCService.Data
         }
 
         internal static void RemoveTorder(string p)
+        {
+            throw new NotImplementedException();
+        }
+
+        internal static EnumChannel GetCurrentOrderChannel(string orderId)
         {
             throw new NotImplementedException();
         }
